@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="inactive_blue">#134C6D</color>
+    <color name="transparent">@android:color/transparent</color>
+    <color name="light_blue_gradient">#3f83dd</color>
+    <color name="dark_blue_gradient">#165074</color>
 </resources>

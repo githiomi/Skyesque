@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Skyesque</string>
+    <string name="br_app_name">Weather\nWise</string>
+    <string name="app_moto">Your weather partner and companion</string>
+    <string name="town_placeholder">Port Louis</string>
+    <string name="date_placeholder">12th March, 2024</string>
+    <string name="overview">Overview</string>
+    <string name="details">Details</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="current_temperature_placeholder">24°C</string>
+    <string name="current_state_placeholder">Slightly Cloudy</string>
 </resources>

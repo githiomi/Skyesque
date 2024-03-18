@@ -67,7 +67,7 @@ public class HomeActivity extends AppCompatActivity {
     /**
      * This method switches to the Overview Fragment
      */
-    private void switchToOverview() {
+    private void switchToDetails() {
         this.details.setBackground(getDrawable(R.drawable.active_tab_background));
         this.overview.setBackgroundColor(getColor(R.color.transparent));
 
@@ -79,7 +79,7 @@ public class HomeActivity extends AppCompatActivity {
     /**
      * This method switches to the Details Fragment
      */
-    private void switchToDetails() {
+    private void switchToOverview() {
         this.overview.setBackground(getDrawable(R.drawable.active_tab_background));
         this.details.setBackgroundColor(getColor(R.color.transparent));
 

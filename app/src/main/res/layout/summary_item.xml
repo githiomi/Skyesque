@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LL_summaryItem"
     android:layout_width="100dp"
     android:layout_height="150dp"
-    android:gravity="center"
-    android:layout_margin="10dp"
+    android:layout_marginVertical="10dp"
     android:background="@drawable/summary_item_background"
+    android:gravity="center"
     android:orientation="vertical">
 
     <TextView

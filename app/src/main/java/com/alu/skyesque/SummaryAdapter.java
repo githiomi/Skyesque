@@ -4,8 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHolder> {
@@ -24,6 +26,11 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+        if (position == 0){
+            holder.rootLayout.setBackground(ContextCompat.getDrawable(context, R.drawable.summary_item_active_background));
+        }
+
     }
 
     @Override
@@ -32,8 +39,13 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHold
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        LinearLayout rootLayout;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            rootLayout = itemView.findViewById(R.id.LL_summaryItem);
         }
     }
 }

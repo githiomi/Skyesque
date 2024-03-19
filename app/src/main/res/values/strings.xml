@@ -16,4 +16,5 @@
     <string name="sunshine_intensity_placeholder">4 of 10</string>
     <string name="today_s_summary">Today\'s Summary</string>
     <string name="view_full_week_forecast"><u>View Full Week Forecast</u></string>
+    <string name="time_placeholder">13:29</string>
 </resources>

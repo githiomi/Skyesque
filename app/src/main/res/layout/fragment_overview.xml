@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
     tools:context=".OverviewFragment">
 
     <RelativeLayout
@@ -165,13 +164,14 @@
             app:cardBackgroundColor="@color/dark_blue_card_background"
             app:cardCornerRadius="10dp">
 
-            <ListView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/LV_todaySummary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:elevation="10dp"
+                android:orientation="horizontal"
+                tools:listitem="@layout/summary_item"
                 android:padding="10dp" />
-            <!--                tools:listitem=""-->
 
         </androidx.cardview.widget.CardView>
 

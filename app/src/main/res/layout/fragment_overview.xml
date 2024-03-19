@@ -165,7 +165,7 @@
             app:cardCornerRadius="10dp">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/LV_todaySummary"
+                android:id="@+id/RV_todaySummary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:elevation="10dp"

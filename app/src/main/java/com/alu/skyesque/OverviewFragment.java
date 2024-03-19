@@ -6,13 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link OverviewFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class OverviewFragment extends Fragment {
+
+    // Views
+    RecyclerView summaryRecyclerView;
+
+    // Adapters
+    SummaryAdapter summaryAdapter;
 
     public OverviewFragment() {
         // Required empty public constructor
@@ -25,7 +28,15 @@ public class OverviewFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_overview, container, false);
+        View view = inflater.inflate(R.layout.fragment_overview, container, false);
+
+        summaryRecyclerView = view.findViewById(R.id.RV_todaySummary);
+
+        summaryAdapter = new SummaryAdapter(container.getContext());
+        summaryRecyclerView.setAdapter(summaryAdapter);
+        summaryRecyclerView.setLayoutManager(new LinearLayoutManager(container.getContext(), LinearLayoutManager.HORIZONTAL, false ));
+        summaryRecyclerView.setHasFixedSize(true);
+
+        return view;
     }
 }

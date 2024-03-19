@@ -52,8 +52,8 @@ public class HomeActivity extends AppCompatActivity {
         this.toProfile = binding.IVToProfile;
         this.townName = binding.TVTownName;
         this.currentDate = binding.TVCurrentDate;
-        this.overview = binding.TVOverview;
-        this.details = binding.TVDetails;
+        this.overview = findViewById(R.id.TV_overview);
+        this.details = findViewById(R.id.TV_details);
         this.overviewDetailsContainer = binding.FLOverviewDetails;
     }
 
@@ -63,9 +63,10 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**
-     * This method switches to the Overview Fragment
+     * This method switches to the Details Fragment
      */
     private void switchToDetails() {
+        Toast.makeText(this, "To Details", Toast.LENGTH_LONG).show();
         this.details.setBackground(getDrawable(R.drawable.active_tab_background));
         this.overview.setBackgroundColor(getColor(R.color.transparent));
         getSupportFragmentManager().beginTransaction()
@@ -74,9 +75,10 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**
-     * This method switches to the Details Fragment
+     * This method switches to the Overview Fragment
      */
     private void switchToOverview() {
+        Toast.makeText(this, "To Overview", Toast.LENGTH_LONG).show();
         this.overview.setBackground(getDrawable(R.drawable.active_tab_background));
         this.details.setBackgroundColor(getColor(R.color.transparent));
         getSupportFragmentManager().beginTransaction()

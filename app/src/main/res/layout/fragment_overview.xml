@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".OverviewFragment">
 
     <RelativeLayout
@@ -38,9 +40,151 @@
             android:layout_below="@id/TV_currentTemperature"
             android:text="@string/current_state_placeholder"
             android:textAlignment="center"
-            android:textSize="12sp"
+            android:textAllCaps="true"
             android:textColor="@color/white"
-            android:textAllCaps="true" />
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:id="@+id/LL_weatherSummary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/TV_currentState"
+            android:layout_marginVertical="20dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:id="@+id/LL_wind"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/wind_speed"
+                    android:src="@drawable/wind" />
+
+                <TextView
+                    android:id="@+id/TV_windSummary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wind_speed_placeholder"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LL_humidity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/wind_speed"
+                    android:padding="15dp"
+                    android:src="@drawable/humidity" />
+
+                <TextView
+                    android:id="@+id/TV_humiditySummary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/humidity_placeholder"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LL_sunshine"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/wind_speed"
+                    android:src="@drawable/sun" />
+
+                <TextView
+                    android:id="@+id/TV_sunSummary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sunshine_intensity_placeholder"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/TV_todaySummary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/LL_weatherSummary"
+            android:layout_marginVertical="10dp"
+            android:paddingHorizontal="35dp"
+            android:text="@string/today_s_summary"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/CV_todaySummary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/TV_todaySummary"
+            android:layout_margin="15dp"
+            app:cardBackgroundColor="@color/dark_blue_card_background"
+            app:cardCornerRadius="10dp">
+
+            <ListView
+                android:id="@+id/LV_todaySummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="10dp"
+                android:padding="10dp" />
+            <!--                tools:listitem=""-->
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/TV_toFullForecast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/CV_todaySummary"
+            android:text="@string/view_full_week_forecast"
+            android:textSize="20sp"
+            android:textColor="@color/light_blue_gradient"
+            android:clickable="true"
+            android:textAlignment="center" />
 
     </RelativeLayout>
 

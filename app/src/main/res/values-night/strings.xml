@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="wind_speed">Wind Speed</string>
+    <string name="wind_speed_placeholder">20 km/h</string>
+    <string name="humidity_placeholder">54%</string>
+    <string name="sunshine_intensity_placeholder">4 of 10</string>
+    <string name="today_s_summary">Today\'s Summary</string>
+    <string name="view_full_week_forecast"><u>View Full Week Forecast</u></string>
+</resources>

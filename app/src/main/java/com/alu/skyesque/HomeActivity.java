@@ -26,6 +26,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+
         setContentView(R.layout.activity_home);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -33,9 +34,8 @@ public class HomeActivity extends AppCompatActivity {
             return insets;
         });
 
-        ActivityHomeBinding homeBinding = ActivityHomeBinding.inflate(getLayoutInflater());
-
         // Initialize the views
+        ActivityHomeBinding homeBinding = ActivityHomeBinding.inflate(getLayoutInflater());
         initViews(homeBinding);
 
         this.toProfile.setOnClickListener(v -> Toast.makeText(this, "Redirecting to the profile page", Toast.LENGTH_LONG).show());
@@ -43,19 +43,17 @@ public class HomeActivity extends AppCompatActivity {
         this.currentDate.setText(getDate());
         this.details.setOnClickListener(v -> switchToDetails());
         this.overview.setOnClickListener(v -> switchToOverview());
-
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.FL_overviewDetails, new OverviewFragment())
                 .commit();
-
     }
 
     private void initViews(ActivityHomeBinding binding) {
-        this.toProfile = findViewById(R.id.IV_toProfile);
-        this.townName = findViewById(R.id.TV_townName);
-        this.currentDate = findViewById(R.id.TV_currentDate);
-        this.overview = findViewById(R.id.TV_overview);
-        this.details = findViewById(R.id.TV_details);
+        this.toProfile = binding.IVToProfile;
+        this.townName = binding.TVTownName;
+        this.currentDate = binding.TVCurrentDate;
+        this.overview = binding.TVOverview;
+        this.details = binding.TVDetails;
         this.overviewDetailsContainer = binding.FLOverviewDetails;
     }
 
@@ -70,7 +68,6 @@ public class HomeActivity extends AppCompatActivity {
     private void switchToDetails() {
         this.details.setBackground(getDrawable(R.drawable.active_tab_background));
         this.overview.setBackgroundColor(getColor(R.color.transparent));
-
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.FL_overviewDetails, new DetailsFragment())
                 .commit();
@@ -82,7 +79,6 @@ public class HomeActivity extends AppCompatActivity {
     private void switchToOverview() {
         this.overview.setBackground(getDrawable(R.drawable.active_tab_background));
         this.details.setBackgroundColor(getColor(R.color.transparent));
-
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.FL_overviewDetails, new OverviewFragment())
                 .commit();

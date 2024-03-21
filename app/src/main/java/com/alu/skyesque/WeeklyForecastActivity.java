@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.alu.skyesque.databinding.ActivityWeeklyForecastBinding;
 
@@ -15,6 +17,10 @@ public class WeeklyForecastActivity extends AppCompatActivity {
 
     // View Binding
     ImageButton backArrow;
+    RecyclerView weeklyForecastRecyclerView;
+
+    // Adapters
+    WeeklyForecastAdapter weeklyForecastAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +37,10 @@ public class WeeklyForecastActivity extends AppCompatActivity {
 
         // Click listeners
         this.backArrow.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
+
+        this.weeklyForecastRecyclerView.setAdapter(new WeeklyForecastAdapter(this));
+        this.weeklyForecastRecyclerView.setHasFixedSize(true);
+        this.weeklyForecastRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     /**
@@ -38,6 +48,7 @@ public class WeeklyForecastActivity extends AppCompatActivity {
      */
     private void initViews(){
         this.backArrow = findViewById(R.id.IB_backArrow);
+        this.weeklyForecastRecyclerView = findViewById(R.id.RV_weeklyForecast);
     }
 
 

@@ -1,5 +1,6 @@
 package com.alu.skyesque;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -38,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
         ActivityHomeBinding homeBinding = ActivityHomeBinding.inflate(getLayoutInflater());
         initViews(homeBinding);
 
-        this.toProfile.setOnClickListener(v -> Toast.makeText(this, "Redirecting to the profile page", Toast.LENGTH_LONG).show());
+        this.toProfile.setOnClickListener(v -> startActivity(new Intent(this, ProfileActivity.class)));
         this.townName.setText("Nairobi");
         this.currentDate.setText(getDate());
         this.details.setOnClickListener(v -> switchToDetails());
@@ -49,7 +50,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void initViews(ActivityHomeBinding binding) {
-        this.toProfile = binding.IVToProfile;
+        this.toProfile = findViewById(R.id.IV_toProfile);
         this.townName = binding.TVTownName;
         this.currentDate = binding.TVCurrentDate;
         this.overview = findViewById(R.id.TV_overview);

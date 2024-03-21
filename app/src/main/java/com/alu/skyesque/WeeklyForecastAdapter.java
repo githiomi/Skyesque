@@ -34,8 +34,10 @@ public class WeeklyForecastAdapter extends RecyclerView.Adapter<WeeklyForecastAd
     @Override
     public void onBindViewHolder(@NonNull WeeklyForecastAdapter.ViewHolder holder, int position) {
 
-        if(position == 0){
+        if (position == 0) {
             holder.weeklySummaryItem.setBackground(ContextCompat.getDrawable(this.context, R.drawable.summary_item_active_background));
+        } else {
+            holder.weeklySummaryItem.setAlpha(0.6F);
         }
 
         holder.dayOfWeek.setText(LocalDate.now().plusDays(position).getDayOfWeek().toString());

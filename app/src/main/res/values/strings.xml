@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Skyesque</string>
-    <string name="br_app_name">Weather\nWise</string>
+    <string name="br_app_name">Skyesque</string>
     <string name="app_moto">Your weather partner and companion</string>
     <string name="town_placeholder">Port Louis</string>
     <string name="date_placeholder">12th March, 2024</string>
@@ -19,7 +19,14 @@
     <string name="today_s_summary">Today\'s Summary</string>
     <string name="view_full_week_forecast"><u>View Full Week Forecast</u></string>
     <string name="time_placeholder">13:29</string>
-    <string name="content_description">Image Content Desription</string>
+    <string name="content_description">Image Content Description</string>
     <string name="day_of_week_placeholder">Wednesday</string>
     <string name="weekly_weather_summary">Weekly Weather Summary</string>
+    <string name="br_username">Daniel\nGithiomi</string>
+    <string name="user_details">User Details</string>
+    <string name="edit">Edit</string>
+    <string name="email_address_placeholder">Email Address</string>
+    <string name="password_placeholder">Password</string>
+    <string name="application_preferences">Application Preferences</string>
+    <string name="dark_mode_theme">Dark Mode Theme</string>
 </resources>

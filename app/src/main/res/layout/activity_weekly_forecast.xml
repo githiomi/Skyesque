@@ -7,13 +7,13 @@
     android:layout_height="match_parent"
     android:background="@drawable/activity_background"
     android:orientation="vertical"
-    android:paddingHorizontal="15dp"
     tools:context=".WeeklyForecastActivity">
 
     <ImageButton
         android:id="@+id/IB_backArrow"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_marginHorizontal="15dp"
         android:layout_marginVertical="15dp"
         android:background="@color/transparent"
         android:clickable="true"
@@ -23,6 +23,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="350dp"
+        android:layout_marginHorizontal="15dp"
         app:cardBackgroundColor="@color/transparent"
         app:cardCornerRadius="15dp">
 
@@ -110,12 +111,24 @@
 
     </androidx.cardview.widget.CardView>
 
+    <TextView
+        android:id="@+id/TV_todaySummary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="20dp"
+        android:paddingHorizontal="5dp"
+        android:text="@string/weekly_weather_summary"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RV_weeklyForecast"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:orientation="verticals"
-        tools:listitem="@layout/summary_item" />
+        android:layout_marginHorizontal="15dp"
+        android:orientation="vertical"
+        tools:listitem="@layout/weekly_forecast_item" />
 
 </LinearLayout>

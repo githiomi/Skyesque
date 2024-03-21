@@ -66,7 +66,6 @@ public class HomeActivity extends AppCompatActivity {
      * This method switches to the Details Fragment
      */
     private void switchToDetails() {
-        Toast.makeText(this, "To Details", Toast.LENGTH_LONG).show();
         this.details.setBackground(getDrawable(R.drawable.active_tab_background));
         this.overview.setBackgroundColor(getColor(R.color.transparent));
         getSupportFragmentManager().beginTransaction()
@@ -78,7 +77,6 @@ public class HomeActivity extends AppCompatActivity {
      * This method switches to the Overview Fragment
      */
     private void switchToOverview() {
-        Toast.makeText(this, "To Overview", Toast.LENGTH_LONG).show();
         this.overview.setBackground(getDrawable(R.drawable.active_tab_background));
         this.details.setBackgroundColor(getColor(R.color.transparent));
         getSupportFragmentManager().beginTransaction()

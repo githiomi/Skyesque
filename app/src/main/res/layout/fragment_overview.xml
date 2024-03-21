@@ -148,7 +148,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/LL_weatherSummary"
-            android:layout_marginVertical="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
             android:paddingHorizontal="35dp"
             android:text="@string/today_s_summary"
             android:textColor="@color/white"
@@ -170,8 +171,8 @@
                 android:layout_height="wrap_content"
                 android:elevation="10dp"
                 android:orientation="horizontal"
-                tools:listitem="@layout/summary_item"
-                android:padding="10dp" />
+                android:padding="10dp"
+                tools:listitem="@layout/summary_item" />
 
         </androidx.cardview.widget.CardView>
 
@@ -180,11 +181,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/CV_todaySummary"
-            android:text="@string/view_full_week_forecast"
-            android:textSize="20sp"
-            android:textColor="@color/light_blue_gradient"
             android:clickable="true"
-            android:textAlignment="center" />
+            android:text="@string/view_full_week_forecast"
+            android:textAlignment="center"
+            android:textColor="@color/light_blue_gradient"
+            android:textSize="20sp" />
 
     </RelativeLayout>
 

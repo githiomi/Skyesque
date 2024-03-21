@@ -10,4 +10,5 @@
     <string name="degrees_celsius">°C</string>
     <string name="time_placeholder">13:29</string>
     <string name="content_description">Image Content Description</string>
+    <string name="day_of_week_placeholder">Wednesday</string>
 </resources>

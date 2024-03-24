@@ -67,7 +67,7 @@
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:contentDescription="@string/wind_speed"
-                    android:src="@drawable/wind" />
+                    android:src="@drawable/windy" />
 
                 <TextView
                     android:id="@+id/TV_windSummary"

@@ -1,6 +1,7 @@
 package com.alu.skyesque;
 
 import android.os.Bundle;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,9 @@ import androidx.core.view.WindowInsetsCompat;
 */
 public class SettingsActivity extends AppCompatActivity {
 
+    // Views
+    ImageButton backButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,5 +29,16 @@ public class SettingsActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        initViews();
+
+        // Click Listeners
+        this.backButton.setOnClickListener(v -> super.getOnBackPressedDispatcher().onBackPressed());
+
+    }
+
+    // Method to assign views
+    private void initViews(){
+        this.backButton = findViewById(R.id.IB_backArrow);
     }
 }

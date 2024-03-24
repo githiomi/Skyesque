@@ -1,7 +1,9 @@
 package com.alu.skyesque;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -24,6 +26,7 @@ public class ProfileActivity extends AppCompatActivity {
     ImageButton backButton;
     AppCompatButton editButton, logoutButton;
     TextInputLayout emailInputLayout, passwordInputLayout;
+    TextView toSystemPreferences;
 
     String email = "daniel@gmail.com", password = "**********";
 
@@ -42,6 +45,8 @@ public class ProfileActivity extends AppCompatActivity {
         this.editButton = findViewById(R.id.BTN_editDetails);
         this.emailInputLayout = findViewById(R.id.IL_emailAddress);
         this.passwordInputLayout = findViewById(R.id.IL_password);
+        this.toSystemPreferences = findViewById(R.id.TV_toSystemPreferences);
+
         this.emailInputLayout.setHint(email);
         this.passwordInputLayout.setHint(password);
 
@@ -59,6 +64,7 @@ public class ProfileActivity extends AppCompatActivity {
                 this.passwordInputLayout.setEnabled(false);
             }
         });
+        this.toSystemPreferences.setOnClickListener(v -> startActivity(new Intent(this, SettingsActivity.class)));
 
     }
 }

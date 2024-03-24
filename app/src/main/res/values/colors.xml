@@ -8,5 +8,6 @@
     <color name="dark_blue_gradient">#165074</color>
     <color name="light_blue_card_background">#14395b</color>
     <color name="dark_blue_card_background">#031621</color>
+    <color name="hot_pink">#E91E63</color>
 
 </resources>

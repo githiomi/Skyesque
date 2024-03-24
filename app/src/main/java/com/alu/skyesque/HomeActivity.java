@@ -23,6 +23,11 @@ import java.time.LocalDate;
  */
 public class HomeActivity extends AppCompatActivity {
 
+    // Local Variables
+//    private final String urlSource="https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2643123";
+    private final String urlSource = "https://weather-broker-cdn.api.bbci.co.uk/en/observation/rss/2643123";
+
+    // Views
     ImageButton toProfile;
     TextView townName, currentDate, overview, details;
     FrameLayout overviewDetailsContainer;
@@ -43,6 +48,8 @@ public class HomeActivity extends AppCompatActivity {
         ActivityHomeBinding homeBinding = ActivityHomeBinding.inflate(getLayoutInflater());
         initViews(homeBinding);
 
+        getData();
+
         this.toProfile.setOnClickListener(v -> startActivity(new Intent(this, ProfileActivity.class)));
         this.townName.setText("Nairobi");
         this.currentDate.setText(getDate());
@@ -60,6 +67,10 @@ public class HomeActivity extends AppCompatActivity {
         this.overview = findViewById(R.id.TV_overview);
         this.details = findViewById(R.id.TV_details);
         this.overviewDetailsContainer = binding.FLOverviewDetails;
+    }
+
+    private void getData() {
+        new Thread(new BackgroundTask(this.urlSource)).start();
     }
 
     private String getDate() {

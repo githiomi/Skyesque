@@ -211,7 +211,7 @@
                     android:fontFamily="@font/libre_franklin"
                     android:paddingHorizontal="20dp"
                     android:paddingVertical="10dp"
-                    android:text="Celcius (°C)"
+                    android:text="Celsius (°C)"
                     android:textAllCaps="true"
                     android:textColor="@color/white"
                     android:textSize="15sp"

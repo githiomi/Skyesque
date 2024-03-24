@@ -13,6 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alu.skyesque.databinding.ActivityWeeklyForecastBinding;
 
+/**
+ * Name                 Daniel Githiomi
+ * Student ID           S2110911
+ * Programme of Study   Computing - ALU Mauritius
+ */
 public class WeeklyForecastActivity extends AppCompatActivity {
 
     // View Binding

@@ -10,6 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ * Name                 Daniel Githiomi
+ * Student ID           S2110911
+ * Programme of Study   Computing - ALU Mauritius
+ */
 public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHolder> {
 
     private final Context context;

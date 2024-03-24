@@ -17,6 +17,11 @@ import com.alu.skyesque.databinding.ActivityHomeBinding;
 
 import java.time.LocalDate;
 
+/**
+ * Name                 Daniel Githiomi
+ * Student ID           S2110911
+ * Programme of Study   Computing - ALU Mauritius
+ */
 public class HomeActivity extends AppCompatActivity {
 
     ImageView toProfile;

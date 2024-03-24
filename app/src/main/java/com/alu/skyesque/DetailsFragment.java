@@ -7,6 +7,11 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+/**
+ * Name                 Daniel Githiomi
+ * Student ID           S2110911
+ * Programme of Study   Computing - ALU Mauritius
+ */
 public class DetailsFragment extends Fragment {
 
     public DetailsFragment() {

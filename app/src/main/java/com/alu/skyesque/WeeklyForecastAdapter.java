@@ -14,6 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDate;
 
+/**
+ * Name                 Daniel Githiomi
+ * Student ID           S2110911
+ * Programme of Study   Computing - ALU Mauritius
+ */
 public class WeeklyForecastAdapter extends RecyclerView.Adapter<WeeklyForecastAdapter.ViewHolder> {
 
     // Adapter properties

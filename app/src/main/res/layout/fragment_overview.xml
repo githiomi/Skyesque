@@ -44,10 +44,22 @@
             android:textSize="60sp" />
 
         <TextView
-            android:id="@+id/TV_currentState"
+            android:id="@+id/TV_minMaxTemperature"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/TV_currentTemperature"
+            android:layout_margin="8dp"
+            android:fontFamily="@font/libre_franklin"
+            android:text="@string/min_max_temperature_placeholder"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/TV_currentState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/TV_minMaxTemperature"
             android:text="@string/current_state_placeholder"
             android:textAlignment="center"
             android:textAllCaps="true"

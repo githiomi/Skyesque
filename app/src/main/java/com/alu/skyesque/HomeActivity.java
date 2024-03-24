@@ -3,9 +3,8 @@ package com.alu.skyesque;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +23,7 @@ import java.time.LocalDate;
  */
 public class HomeActivity extends AppCompatActivity {
 
-    ImageView toProfile;
+    ImageButton toProfile;
     TextView townName, currentDate, overview, details;
     FrameLayout overviewDetailsContainer;
 

@@ -19,7 +19,23 @@
         android:contentDescription="@string/content_description"
         android:src="@drawable/arrow_back_24" />
 
+    <TextView
+        android:id="@+id/TV_activityTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_toStartOf="@id/IB_camera"
+        android:layout_toEndOf="@id/IB_backArrow"
+        android:fontFamily="@font/libre_franklin"
+        android:text="@string/profile"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
     <ImageButton
+        android:id="@+id/IB_camera"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignParentEnd="true"
@@ -27,7 +43,7 @@
         android:background="@color/transparent"
         android:clickable="true"
         android:contentDescription="@string/content_description"
-        android:src="@drawable/lock_24" />
+        android:src="@drawable/camera_24" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -129,13 +145,13 @@
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="10dp"
                 android:elevation="30dp"
+                android:enabled="false"
                 android:hint="@string/email_address_placeholder"
                 android:textColorHint="@color/light_blue_card_background"
                 app:boxStrokeColor="@color/light_blue_gradient"
                 app:boxStrokeErrorColor="@android:color/holo_red_dark"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="1dp"
-                android:enabled="false"
                 app:endIconMode="clear_text"
                 app:endIconTint="@color/light_blue_gradient"
                 app:errorIconTint="@color/light_blue_gradient"
@@ -165,9 +181,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginHorizontal="30dp"
-                android:enabled="false"
                 android:layout_marginVertical="10dp"
                 android:elevation="30dp"
+                android:enabled="false"
                 android:hint="@string/password_placeholder"
                 android:textColorHint="@color/light_blue_card_background"
                 app:boxStrokeColor="@color/light_blue_gradient"
@@ -244,10 +260,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
+                android:clickable="true"
                 android:fontFamily="@font/libre_franklin"
                 android:paddingVertical="15dp"
                 android:paddingStart="10dp"
-                android:clickable="true"
                 android:paddingEnd="0dp"
                 android:text="@string/edit_preferences"
                 android:textColor="@color/white"

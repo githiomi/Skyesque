@@ -8,6 +8,543 @@
     android:orientation="vertical"
     tools:context=".SettingsActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="10dp">
 
+        <ImageButton
+            android:id="@+id/IB_backButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:background="@color/transparent"
+            android:contentDescription="@string/content_description"
+            android:src="@drawable/arrow_back_24" />
+
+        <TextView
+            android:id="@+id/TV_activityTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/IB_backButton"
+            android:fontFamily="@font/libre_franklin"
+            android:text="@string/settings"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/TV_timeFormat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="15dp"
+                    android:fontFamily="@font/libre_franklin"
+                    android:text="Time Format"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TV_timeFormatPM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/TV_timeFormat"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="@drawable/card_gradient_background"
+                    android:fontFamily="@font/libre_franklin"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="01:00 PM"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TV_timeFormat24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/TV_timeFormat"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_toEndOf="@id/TV_timeFormatPM"
+                    android:background="@drawable/profile_card_background"
+                    android:fontFamily="@font/libre_franklin"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="01:00 PM"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp">
+
+                <TextView
+                    android:id="@+id/TV_dateFormat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="15dp"
+                    android:fontFamily="@font/libre_franklin"
+                    android:text="Date Format"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TV_dateFormatDD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/TV_dateFormat"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="@drawable/card_gradient_background"
+                    android:fontFamily="@font/libre_franklin"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="dd-mm-yyyy"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TV_dateFormatMM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/TV_dateFormat"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_toEndOf="@id/TV_dateFormatDD"
+                    android:background="@drawable/card_gradient_background"
+                    android:fontFamily="@font/libre_franklin"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="mm-dd-yyyy"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TV_dateFormatDefault"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/TV_dateFormatDD"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/profile_card_background"
+                    android:fontFamily="@font/libre_franklin"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="dd mm, yyyy"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp">
+
+                <TextView
+                    android:id="@+id/TV_temperature"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="15dp"
+                    android:fontFamily="@font/libre_franklin"
+                    android:text="Temperature"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TV_temperatureFahrenheit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/TV_temperature"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="@drawable/card_gradient_background"
+                    android:fontFamily="@font/libre_franklin"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="Fahrenheit"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TV_temperatureDegrees"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/TV_temperature"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_toEndOf="@id/TV_temperatureFahrenheit"
+                    android:background="@drawable/profile_card_background"
+                    android:fontFamily="@font/libre_franklin"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="Celcius"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp">
+
+                <TextView
+                    android:id="@+id/TV_windSpeed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="15dp"
+                    android:fontFamily="@font/libre_franklin"
+                    android:text="Wind Speed"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TV_windMPH"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/TV_windSpeed"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="@drawable/card_gradient_background"
+                    android:fontFamily="@font/libre_franklin"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="MPH"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TV_windKMH"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/TV_windSpeed"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_toEndOf="@id/TV_windMPH"
+                    android:background="@drawable/profile_card_background"
+                    android:fontFamily="@font/libre_franklin"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="Km/H"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TV_windBF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/TV_windSpeed"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_toEndOf="@id/TV_windKMH"
+                    android:background="@drawable/card_gradient_background"
+                    android:fontFamily="@font/libre_franklin"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="Beaufort"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp">
+
+                <TextView
+                    android:id="@+id/TV_pressure"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="15dp"
+                    android:fontFamily="@font/libre_franklin"
+                    android:text="Pressure"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TV_pressurePSI"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/TV_pressure"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="@drawable/card_gradient_background"
+                    android:fontFamily="@font/libre_franklin"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="psi"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TV_pressureBAR"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/TV_pressure"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_toEndOf="@id/TV_pressurePSI"
+                    android:background="@drawable/profile_card_background"
+                    android:fontFamily="@font/libre_franklin"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="Bar"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TV_pressureHPS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/TV_pressure"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_toEndOf="@id/TV_pressureBAR"
+                    android:background="@drawable/card_gradient_background"
+                    android:fontFamily="@font/libre_franklin"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="hPs"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TV_pressureMMHG"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/TV_pressure"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_toEndOf="@id/TV_pressureHPS"
+                    android:background="@drawable/card_gradient_background"
+                    android:fontFamily="@font/libre_franklin"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="mmHg"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp">
+
+                <TextView
+                    android:id="@+id/TV_alerts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="15dp"
+                    android:fontFamily="@font/libre_franklin"
+                    android:text="Alerts"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TV_alertsMorning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/TV_alerts"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="@drawable/profile_card_background"
+                    android:fontFamily="@font/libre_franklin"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="Morning"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TV_alertsAfternoon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/TV_alerts"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_toEndOf="@id/TV_alertsMorning"
+                    android:background="@drawable/card_gradient_background"
+                    android:fontFamily="@font/libre_franklin"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="Afternoon"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TV_alertsEvening"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/TV_alertsMorning"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/card_gradient_background"
+                    android:fontFamily="@font/libre_franklin"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="Evening"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TV_alertsNever"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/TV_alertsMorning"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_toEndOf="@id/TV_alertsEvening"
+                    android:background="@drawable/card_gradient_background"
+                    android:fontFamily="@font/libre_franklin"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="Never"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp">
+
+                <TextView
+                    android:id="@+id/TV_updates"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="15dp"
+                    android:fontFamily="@font/libre_franklin"
+                    android:text="Update Every:"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TV_update1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/TV_updates"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="@drawable/card_gradient_background"
+                    android:fontFamily="@font/libre_franklin"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="1 Hr"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TV_update2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/TV_updates"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_toEndOf="@id/TV_update1"
+                    android:background="@drawable/profile_card_background"
+                    android:fontFamily="@font/libre_franklin"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="2 Hrs"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TV_update3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/TV_updates"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_toEndOf="@id/TV_update2"
+                    android:background="@drawable/card_gradient_background"
+                    android:fontFamily="@font/libre_franklin"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="hPs"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TV_update5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/TV_updates"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_toEndOf="@id/TV_update3"
+                    android:background="@drawable/card_gradient_background"
+                    android:fontFamily="@font/libre_franklin"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:text="mmHg"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

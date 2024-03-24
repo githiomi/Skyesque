@@ -11,14 +11,25 @@
         android:layout_height="match_parent"
         android:layout_marginVertical="20dp">
 
-        <ImageView
+        <!--        <ImageView-->
+        <!--            android:id="@+id/IV_currentWeatherVisual"-->
+        <!--            android:layout_width="150dp"-->
+        <!--            android:layout_height="150dp"-->
+        <!--            android:layout_centerHorizontal="true"-->
+        <!--            android:layout_marginBottom="20dp"-->
+        <!--            android:contentDescription="@string/app_name"-->
+        <!--            android:src="@drawable/weather_icon" />-->
+
+        <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/IV_currentWeatherVisual"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/weather_icon" />
+            android:layout_marginBottom="30dp"
+            android:contentDescription="@string/content_description"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/raining" />
 
         <TextView
             android:id="@+id/TV_currentTemperature"

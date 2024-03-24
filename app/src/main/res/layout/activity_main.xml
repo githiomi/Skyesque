@@ -14,7 +14,7 @@
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="150dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="70dp"
         android:contentDescription="@string/content_description"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"

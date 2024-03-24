@@ -261,7 +261,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="30dp"
                 android:background="@drawable/button_background"
-                android:drawableStart="@drawable/lock_24"
+                android:drawableStart="@drawable/logout_24"
                 android:drawablePadding="20dp"
                 android:fontFamily="@font/libre_franklin"
                 android:paddingHorizontal="30dp"

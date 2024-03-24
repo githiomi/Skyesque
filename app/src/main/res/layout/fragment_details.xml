@@ -25,7 +25,7 @@
                 android:layout_height="220dp"
                 android:layout_gravity="center"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/chart_1" />
+                android:src="@drawable/chart" />
 
         </androidx.cardview.widget.CardView>
 
@@ -332,7 +332,7 @@
                         android:layout_height="25dp"
                         android:layout_marginEnd="15dp"
                         android:contentDescription="@string/content_description"
-                        android:src="@drawable/cloudy" />
+                        android:src="@drawable/visibility_24" />
 
                     <TextView
                         android:layout_width="match_parent"

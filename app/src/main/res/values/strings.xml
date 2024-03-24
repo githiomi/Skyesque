@@ -29,4 +29,6 @@
     <string name="password_placeholder">Password</string>
     <string name="application_preferences">Application Preferences</string>
     <string name="dark_mode_theme">Dark Mode Theme</string>
+    <string name="edit_preferences">Edit System Preferences</string>
+    <string name="logout">Log Out</string>
 </resources>

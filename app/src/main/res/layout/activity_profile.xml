@@ -12,9 +12,8 @@
         android:id="@+id/IB_backArrow"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginHorizontal="15dp"
-        android:layout_marginVertical="15dp"
         android:layout_alignParentStart="true"
+        android:layout_margin="15dp"
         android:background="@color/transparent"
         android:clickable="true"
         android:contentDescription="@string/content_description"
@@ -24,13 +23,16 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignParentEnd="true"
-        android:src=""
-        android:contentDescription="@string/content_description"
+        android:layout_margin="15dp"
+        android:background="@color/transparent"
         android:clickable="true"
+        android:contentDescription="@string/content_description"
+        android:src="@drawable/lock_24" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/IB_backArrow">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -101,18 +103,20 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/BTN_editDetails"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/profile_card_background"
+                    android:background="@drawable/button_background"
                     android:contentDescription="@string/content_description"
                     android:fontFamily="@font/libre_franklin"
                     android:text="@string/edit"
                     android:textAllCaps="true"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    tools:ignore="RelativeOverlap" />
 
             </RelativeLayout>
 
@@ -131,6 +135,7 @@
                 app:boxStrokeErrorColor="@android:color/holo_red_dark"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="1dp"
+                android:enabled="false"
                 app:endIconMode="clear_text"
                 app:endIconTint="@color/light_blue_gradient"
                 app:errorIconTint="@color/light_blue_gradient"
@@ -160,6 +165,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginHorizontal="30dp"
+                android:enabled="false"
                 android:layout_marginVertical="10dp"
                 android:elevation="30dp"
                 android:hint="@string/password_placeholder"
@@ -215,9 +221,10 @@
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/libre_franklin"
                     android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
                     android:text="@string/dark_mode_theme"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <androidx.appcompat.widget.SwitchCompat
@@ -226,15 +233,42 @@
                     android:layout_height="50dp"
                     android:layout_alignParentEnd="true"
                     android:background="@color/transparent"
-                    android:contentDescription="@string/content_description"
-                    android:fontFamily="@font/libre_franklin"
-                    android:textAllCaps="true"
                     android:checked="true"
-                    android:theme="@style/BrandedSwitch.control"
                     android:textColor="@color/white"
-                    app:switchPadding="20dp" />
+                    android:theme="@style/BrandedSwitch.control" />
 
             </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:fontFamily="@font/libre_franklin"
+                android:paddingVertical="15dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="0dp"
+                android:text="@string/edit_preferences"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:drawableEndCompat="@drawable/arrow_forward_24" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="30dp"
+                android:background="@drawable/button_background"
+                android:drawableStart="@drawable/lock_24"
+                android:drawablePadding="20dp"
+                android:fontFamily="@font/libre_franklin"
+                android:paddingHorizontal="30dp"
+                android:paddingVertical="15dp"
+                android:text="@string/logout"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

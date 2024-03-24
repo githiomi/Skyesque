@@ -12,11 +12,13 @@
     <string name="content_description">Image Content Description</string>
     <string name="day_of_week_placeholder">Wednesday</string>
     <string name="weekly_weather_summary">Weekly Weather Summary</string>
-    <string name="username_split">Daniel\nGithiomi</string>
+    <string name="br_username">Daniel\nGithiomi</string>
     <string name="user_details">User Details</string>
     <string name="edit">Edit</string>
     <string name="email_address_placeholder">Email Address</string>
     <string name="password_placeholder">Password</string>
     <string name="application_preferences">Application Preferences</string>
     <string name="dark_mode_theme">Dark Mode Theme</string>
+    <string name="edit_preferences">Edit System Preferences</string>
+    <string name="logout">Log )ut</string>
 </resources>

@@ -43,7 +43,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/TV_lowestTemperature"
+                android:id="@+id/TV_minimumTemperature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/current_temperature_placeholder"
@@ -62,7 +62,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/TV_highestTemperature"
+                android:id="@+id/TV_maximumTemperature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/current_temperature_placeholder"

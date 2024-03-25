@@ -28,7 +28,9 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHold
     private final Context context;
     private final WeatherDTO weatherDTO;
 
-    private final int[] weatherIcons = {R.drawable.cloudy, R.drawable.thunder, R.drawable.fog, R.drawable.mist, R.drawable.rain, R.drawable.snow, R.drawable.day_clear, R.drawable.night_sleet, R.drawable.day_rain, R.drawable.snow_thunder};
+    private final int[] weatherIcons = {R.drawable.cloudy, R.drawable.thunder, R.drawable.fog,
+            R.drawable.mist, R.drawable.rain, R.drawable.snow, R.drawable.day_clear,
+            R.drawable.night_sleet, R.drawable.day_rain, R.drawable.snow_thunder};
 
     // Constructor
     public SummaryAdapter(Context context, WeatherDTO weatherDTO) {
@@ -57,7 +59,7 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHold
             return;
         }
 
-        String time = String.valueOf(currentTime.plusHours(2L * position).getHour()) + ":00" ;
+        String time = String.valueOf(currentTime.plusHours(2L * position).getHour()) + ":00";
         String temperature = String.valueOf(getRandomTemperature()) + context.getResources().getString(R.string.degrees_celsius);
         holder.summaryTemperature.setText(temperature);
         holder.summaryWeatherIcon.setImageResource(weatherIcons[getRandom()]);

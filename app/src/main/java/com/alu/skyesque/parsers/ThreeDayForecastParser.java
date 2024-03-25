@@ -106,8 +106,9 @@ public class ThreeDayForecastParser {
         String weatherSummary = title.substring(title.indexOf(": ") + 2, title.indexOf(","));
         String maximumTemperature = description.substring(description.indexOf("Maximum Temperature: ") + 21, description.indexOf(", Minimum") - 1).split(" ")[0];
         String minimumTemperature = description.substring(description.indexOf("Minimum Temperature: ") + 21, description.indexOf(", Wind Direction") - 1).split(" ")[0];
-        String temperatureCelsius = "9999°C";
-        String temperatureFahrenheit = "1000°F";
+        int temp = (Integer.parseInt(maximumTemperature.split("°")[0]) + Integer.parseInt(minimumTemperature.split("°")[0])) / 2;
+        String temperatureCelsius = String.valueOf(temp) + "°C";
+        String temperatureFahrenheit = String.valueOf((temp * (9/5)) + 32) + "°F";
         String windDirection = description.substring(description.indexOf("Direction: ") + 11, description.lastIndexOf(", Wind"));
         String windSpeed = description.substring(description.indexOf("Speed: ") + 7, description.lastIndexOf(", Visibility"));
         String visibility = description.substring(description.indexOf("Visibility: ") + 12, description.lastIndexOf(", Pressure"));
@@ -124,6 +125,8 @@ public class ThreeDayForecastParser {
 //        Log.e("Check", weatherSummary);
 //        Log.e("Check", maximumTemperature);
 //        Log.e("Check", minimumTemperature);
+//        Log.e("Check", temperatureCelsius);
+//        Log.e("Check", temperatureFahrenheit);
 //        Log.e("Check", windDirection);
 //        Log.e("Check", windSpeed);
 //        Log.e("Check", visibility);

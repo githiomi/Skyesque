@@ -11,6 +11,7 @@
     <string name="current_temperature_placeholder">24°C</string>
     <string name="current_temperature_only_placeholder">24</string>
     <string name="degrees_celsius">°C</string>
+    <string name="degrees_only">°C</string>
     <string name="current_state_placeholder">Heavy Rainfall</string>
     <string name="wind_speed">Wind Speed</string>
     <string name="wind_speed_placeholder">20 km/h</string>

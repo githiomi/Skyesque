@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,7 +36,7 @@ public class HomeActivity extends AppCompatActivity {
 
     // Local Variables
 //    private final String sourceUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2643123";
-    private final String sourceUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/observation/rss/2643123";
+    private final String sourceUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/observation/rss/2648579";
     private WeatherUnit weatherUnit;
 
     // Views
@@ -93,7 +94,8 @@ public class HomeActivity extends AppCompatActivity {
                     result.append(inputLine);
                 bufferedReader.close();
             } catch (IOException ae) {
-                Log.e("MyTag", "ioexception -> " + ae.getMessage());
+                Toast.makeText(this, "Could not get weather data. Check internet connection.", Toast.LENGTH_LONG).show();
+                Log.e("Current Forecast URL Connection Exception", "ioexception -> " + ae.getMessage());
             }
 
             // Clean result to remove unnecessary tags
@@ -139,7 +141,7 @@ public class HomeActivity extends AppCompatActivity {
         String temperatureCelsius = description.substring(description.indexOf("Temperature: ") + 13, description.indexOf("(") - 1);
         String temperatureFahrenheit = title.substring(title.indexOf("(") + 1, title.indexOf(")"));
         String windDirection = description.substring(description.indexOf("Direction: ") + 11, description.lastIndexOf(", Wind"));
-        String windSpeed = description.substring(description.indexOf("Speed: ") + 8, description.lastIndexOf(", Humidity"));
+        String windSpeed = description.substring(description.indexOf("Speed: ") + 7, description.lastIndexOf(", Humidity"));
         String humidity = description.substring(description.indexOf("Humidity: ") + 10, description.lastIndexOf(", Pressure"));
         String pressure = description.substring(description.indexOf("Pressure: ") + 10, description.lastIndexOf(", Visibility")).split(",")[0];
         String visibility = description.substring(description.indexOf("Visibility: ") + 12);

@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alu.skyesque.interfaces.ForecastInterface;
 import com.alu.skyesque.models.WeatherDTO;
 
 import java.time.LocalTime;
@@ -41,8 +42,7 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.summary_item, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.summary_item, parent, false));
     }
 
     @Override
@@ -79,7 +79,7 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return 6;
+        return 5;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -95,6 +95,7 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHold
             summaryTemperature = itemView.findViewById(R.id.TV_summaryItemTemp);
             summaryWeatherIcon = itemView.findViewById(R.id.IV_summaryItemImage);
             summaryTime = itemView.findViewById(R.id.TV_summaryItemTime);
+
         }
     }
 }

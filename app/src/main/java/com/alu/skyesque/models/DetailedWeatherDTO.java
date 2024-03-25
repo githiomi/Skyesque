@@ -1,5 +1,7 @@
 package com.alu.skyesque.models;
 
+import android.os.Parcelable;
+
 /**
  * Author: dangit
  * Project Name: Skyesque

@@ -1,5 +1,6 @@
 package com.alu.skyesque;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageButton;
@@ -17,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alu.skyesque.interfaces.ForecastInterface;
 import com.alu.skyesque.models.DetailedWeatherDTO;
 import com.alu.skyesque.parsers.ThreeDayForecastParser;
 
@@ -37,7 +39,7 @@ import java.util.Random;
  * Student ID           S2110911
  * Programme of Study   Computing - ALU Mauritius
  */
-public class WeeklyForecastActivity extends AppCompatActivity {
+public class WeeklyForecastActivity extends AppCompatActivity implements ForecastInterface {
 
     // Views
     ImageButton backArrow;
@@ -122,7 +124,7 @@ public class WeeklyForecastActivity extends AppCompatActivity {
                     result.append(inputLine);
                 bufferedReader.close();
             } catch (IOException ae) {
-                Toast.makeText(this, "Could not get weather data. Check internet connection.", Toast.LENGTH_LONG).show();
+                WeeklyForecastActivity.this.runOnUiThread(() -> Toast.makeText(this, "Could not get weather data. Check internet connection.", Toast.LENGTH_LONG).show());
                 Log.e("Weekly Forecast URL Connection Exception", "ioexception -> " + ae.getMessage());
             }
 
@@ -147,22 +149,29 @@ public class WeeklyForecastActivity extends AppCompatActivity {
 
     }
 
-    private void populateViews(DetailedWeatherDTO data){
+    private void populateViews(DetailedWeatherDTO data) {
         String location = data.getLocation();
         String temperature = data.getTemperatureCelsius().split("°")[0];
         String summary = data.getWeatherSummary();
 
         this.location.setText(location);
         this.temperature.setText(temperature);
-        this.weatherVisual.setImageResource(this.weatherIcons[new Random().nextInt( (9 - 1) + 1) + 1 ]);
+        this.weatherVisual.setImageResource(this.weatherIcons[new Random().nextInt((9 - 1) + 1) + 1]);
         this.summary.setText(summary);
     }
 
     private void setUpAdapter(List<DetailedWeatherDTO> data) {
-        this.weeklyForecastRecyclerView.setAdapter(new WeeklyForecastAdapter(this, data));
+        this.weeklyForecastRecyclerView.setAdapter(new WeeklyForecastAdapter(this, data, this));
         this.weeklyForecastRecyclerView.setHasFixedSize(true);
         this.weeklyForecastRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
+    @Override
+    public void setOnItemClick(int position) {
 
+        Intent intent = new Intent(this, WeatherDetailsActivity.class);
+        intent.putExtra("toDetailsDTO", this.detailedWeatherDTOs.get(position));
+        startActivity(intent);
+
+    }
 }

@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alu.skyesque.interfaces.ForecastInterface;
 import com.alu.skyesque.models.DetailedWeatherDTO;
 import com.alu.skyesque.models.WeatherDTO;
 import com.alu.skyesque.models.WeatherUnit;
@@ -29,20 +30,22 @@ import java.util.Random;
 public class WeeklyForecastAdapter extends RecyclerView.Adapter<WeeklyForecastAdapter.ViewHolder> {
 
     // Adapter properties
+    public final ForecastInterface forecastInterface;
     List<DetailedWeatherDTO> weatherDTOs;
     int[] weatherIcons = {R.drawable.cloudy, R.drawable.thunder, R.drawable.fog, R.drawable.mist, R.drawable.rain, R.drawable.snow, R.drawable.day_clear, R.drawable.night_sleet, R.drawable.day_rain, R.drawable.snow_thunder};
 
     Context context;
 
-    public WeeklyForecastAdapter(Context context, List<DetailedWeatherDTO> weatherDTOs) {
+    public WeeklyForecastAdapter(Context context, List<DetailedWeatherDTO> weatherDTOs, ForecastInterface forecastInterface) {
         this.weatherDTOs = weatherDTOs;
         this.context = context;
+        this.forecastInterface = forecastInterface;
     }
 
     @NonNull
     @Override
     public WeeklyForecastAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.weekly_forecast_item, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.weekly_forecast_item, parent, false), forecastInterface);
     }
 
     @Override
@@ -75,13 +78,19 @@ public class WeeklyForecastAdapter extends RecyclerView.Adapter<WeeklyForecastAd
         TextView dayOfWeek, minimumTemperature, maximumTemperature;
         ImageView weatherIcon;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, ForecastInterface forecastInterface) {
             super(itemView);
             this.weeklySummaryItem = itemView.findViewById(R.id.RL_weeklyForecast);
             this.dayOfWeek = itemView.findViewById(R.id.TV_dayOfTheWeek);
             this.weatherIcon = itemView.findViewById(R.id.IV_dailyWeatherImage);
             this.minimumTemperature = itemView.findViewById(R.id.TV_minimumTemperature);
             this.maximumTemperature = itemView.findViewById(R.id.TV_maximumTemperature);
+
+            itemView.setOnClickListener(v -> {
+                if (forecastInterface != null) {
+                    forecastInterface.setOnItemClick(getAdapterPosition());
+                }
+            });
         }
     }
 }

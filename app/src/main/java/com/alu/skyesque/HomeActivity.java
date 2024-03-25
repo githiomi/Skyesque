@@ -94,7 +94,7 @@ public class HomeActivity extends AppCompatActivity {
                     result.append(inputLine);
                 bufferedReader.close();
             } catch (IOException ae) {
-                Toast.makeText(this, "Could not get weather data. Check internet connection.", Toast.LENGTH_LONG).show();
+                HomeActivity.this.runOnUiThread(() -> Toast.makeText(this, "Could not get weather data. Check internet connection.", Toast.LENGTH_LONG).show());
                 Log.e("Current Forecast URL Connection Exception", "ioexception -> " + ae.getMessage());
             }
 

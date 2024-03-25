@@ -35,4 +35,6 @@
     <string name="profile">Profile</string>
     <string name="min_max_temperature_placeholder">20°C / 28°C</string>
     <string name="view_location_in_map">View Location in Map</string>
+    <string name="wind_direction">Wind Direction</string>
+    <string name="wind_direction_placeholder">South South Easterly</string>
 </resources>

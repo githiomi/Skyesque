@@ -65,7 +65,12 @@ public class OverviewFragment extends Fragment {
         populateData();
         setSummaryAdapter(container);
 
-        this.toWeeklyForecast.setOnClickListener(v -> requireActivity().startActivity(new Intent(getContext(), WeeklyForecastActivity.class)));
+        // On Click Listeners
+        this.toWeeklyForecast.setOnClickListener(v -> {
+            Intent forecastIntent = new Intent(getContext(), WeeklyForecastActivity.class);
+            forecastIntent.putExtra(ARGUMENT, weatherData);
+            requireActivity().startActivity(forecastIntent);
+        });
 
         return view;
     }

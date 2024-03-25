@@ -84,7 +84,7 @@
                 </RelativeLayout>
 
                 <TextView
-                    android:id="@+id/TV_airQuality"
+                    android:id="@+id/TV_windDirection"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lilita_one"

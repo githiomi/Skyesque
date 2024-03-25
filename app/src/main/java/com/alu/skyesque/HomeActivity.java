@@ -110,12 +110,9 @@ public class HomeActivity extends AppCompatActivity {
 
             WeatherDTO dto = HomeActivity.this.populateWeatherDTO(weatherUnit);
 
-            OverviewFragment overviewFragment = new OverviewFragment();
-            Bundle bundle = new Bundle();
-            bundle.putParcelable("weatherData", dto);
-            overviewFragment.setArguments(bundle);
-
-            getSupportFragmentManager().beginTransaction().replace(R.id.FL_overviewDetails, overviewFragment)
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.FL_overviewDetails, OverviewFragment.newInstance(dto))
                     .commit();
 
             HomeActivity.this.runOnUiThread(() -> {
@@ -161,7 +158,6 @@ public class HomeActivity extends AppCompatActivity {
 
         String date = this.weatherData.getDay() + " " + getDate();
         this.currentDate.setText(date);
-
     }
 
     private String getDate() {
@@ -176,7 +172,7 @@ public class HomeActivity extends AppCompatActivity {
         this.details.setBackground(getDrawable(R.drawable.active_tab_background));
         this.overview.setBackgroundColor(getColor(R.color.transparent));
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.FL_overviewDetails, new DetailsFragment())
+                .replace(R.id.FL_overviewDetails, DetailsFragment.newInstance(weatherData))
                 .commit();
     }
 
@@ -187,7 +183,7 @@ public class HomeActivity extends AppCompatActivity {
         this.overview.setBackground(getDrawable(R.drawable.active_tab_background));
         this.details.setBackgroundColor(getColor(R.color.transparent));
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.FL_overviewDetails, new OverviewFragment())
+                .replace(R.id.FL_overviewDetails, OverviewFragment.newInstance(weatherData))
                 .commit();
     }
 }

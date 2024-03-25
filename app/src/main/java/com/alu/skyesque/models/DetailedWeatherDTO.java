@@ -100,7 +100,7 @@ public class DetailedWeatherDTO extends WeatherDTO {
                 ", visibility='" + super.getVisibility() + '\'' +
                 ", latitude='" + super.getLatitude() + '\'' +
                 ", longitude='" + super.getLongitude() + '\'' +
-                "minimumTemperature='" + minimumTemperature + '\'' +
+                ", minimumTemperature='" + minimumTemperature + '\'' +
                 ", maximumTemperature='" + maximumTemperature + '\'' +
                 ", uvRisk='" + uvRisk + '\'' +
                 ", pollution='" + pollution + '\'' +

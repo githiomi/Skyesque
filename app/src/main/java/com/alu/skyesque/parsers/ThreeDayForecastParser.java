@@ -36,7 +36,7 @@ public class ThreeDayForecastParser {
     WeatherUnit weatherUnit;
     private String text;
 
-    public void getThreeDayForecast(InputStream inputStream) {
+    public List<DetailedWeatherDTO> getThreeDayForecast(InputStream inputStream) {
 
         try {
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -89,12 +89,11 @@ public class ThreeDayForecastParser {
             e.printStackTrace();
         }
 
-        this.convertToDTO(weatherUnits);
-        Log.e("Weather Units -> ", weatherUnits.toString());
-    }
+//        Log.e("Weather Units -> ", weatherUnits.toString());
+//        Log.e("----- -> ","------------------------------");
+//        Log.e("Detailed Weather Units -> ", detailedWeatherUnits.toString());
 
-    private void convertToDTO(List<WeatherUnit> weatherUnits) {
-        this.detailedWeatherUnits = this.weatherUnits.stream().map(this::DTOMapper).collect(Collectors.toList());
+        return this.weatherUnits.stream().map(this::DTOMapper).collect(Collectors.toList());
     }
 
     private DetailedWeatherDTO DTOMapper(WeatherUnit weatherUnit) {
@@ -107,7 +106,6 @@ public class ThreeDayForecastParser {
         String weatherSummary = title.substring(title.indexOf(": ") + 2, title.indexOf(","));
         String maximumTemperature = description.substring(description.indexOf("Maximum Temperature: ") + 21, description.indexOf(", Minimum") - 1).split(" ")[0];
         String minimumTemperature = description.substring(description.indexOf("Minimum Temperature: ") + 21, description.indexOf(", Wind Direction") - 1).split(" ")[0];
-//        String temperatureCelsius = String.valueOf((Integer.valueOf(maximumTemperature.split("°")[0]) + Integer.valueOf(minimumTemperature.split("°")[0])) /2);
         String temperatureCelsius = "9999°C";
         String temperatureFahrenheit = "1000°F";
         String windDirection = description.substring(description.indexOf("Direction: ") + 11, description.lastIndexOf(", Wind"));
@@ -122,24 +120,24 @@ public class ThreeDayForecastParser {
         String latitude = weatherUnit.getGeorss().split(" ")[0];
         String longitude = weatherUnit.getGeorss().split(" ")[1];
 
-        Log.e("Check", day);
-        Log.e("Check", weatherSummary);
-        Log.e("Check", maximumTemperature);
-        Log.e("Check", minimumTemperature);
-        Log.e("Check", windDirection);
-        Log.e("Check", windSpeed);
-        Log.e("Check", visibility);
-        Log.e("Check", pressure);
-        Log.e("Check", humidity);
-        Log.e("Check", uvRisk);
-        Log.e("Check", pollution);
-        Log.e("Check", sunrise);
-        Log.e("Check", sunset);
-        Log.e("Check", latitude);
-        Log.e("Check", longitude);
+//        Log.e("Check", day);
+//        Log.e("Check", weatherSummary);
+//        Log.e("Check", maximumTemperature);
+//        Log.e("Check", minimumTemperature);
+//        Log.e("Check", windDirection);
+//        Log.e("Check", windSpeed);
+//        Log.e("Check", visibility);
+//        Log.e("Check", pressure);
+//        Log.e("Check", humidity);
+//        Log.e("Check", uvRisk);
+//        Log.e("Check", pollution);
+//        Log.e("Check", sunrise);
+//        Log.e("Check", sunset);
+//        Log.e("Check", latitude);
+//        Log.e("Check", longitude);
 
-//        return new DetailedWeatherDTO(location, day, weatherSummary, temperatureCelsius, temperatureFahrenheit,
-//                windDirection, windSpeed, humidity, pressure, visibility, latitude, longitude);
-        return null;
+        return new DetailedWeatherDTO(location, day, weatherSummary, temperatureCelsius, temperatureFahrenheit,
+                windDirection, windSpeed, humidity, pressure, visibility, latitude, longitude, minimumTemperature,
+                maximumTemperature, uvRisk, pollution, sunrise, sunset);
     }
 }

@@ -12,7 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alu.skyesque.models.DetailedWeatherDTO;
+
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Name                 Daniel Githiomi
@@ -22,11 +25,11 @@ import java.time.LocalDate;
 public class WeeklyForecastAdapter extends RecyclerView.Adapter<WeeklyForecastAdapter.ViewHolder> {
 
     // Adapter properties
-    String[] weekdays = new String[7];
-
+    List<DetailedWeatherDTO> weatherDTOs;
     Context context;
 
-    public WeeklyForecastAdapter(Context context) {
+    public WeeklyForecastAdapter(Context context, List<DetailedWeatherDTO> weatherDTOs) {
+        this.weatherDTOs = weatherDTOs;
         this.context = context;
     }
 
@@ -51,7 +54,7 @@ public class WeeklyForecastAdapter extends RecyclerView.Adapter<WeeklyForecastAd
 
     @Override
     public int getItemCount() {
-        return 7;
+        return weatherDTOs.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

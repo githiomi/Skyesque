@@ -15,8 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.alu.skyesque.models.WeatherDTO;
-import com.alu.skyesque.models.WeatherUnit;
+import com.alu.skyesque.models.DetailedWeatherDTO;
 import com.alu.skyesque.parsers.ThreeDayForecastParser;
 
 import java.io.BufferedReader;
@@ -47,7 +46,7 @@ public class WeeklyForecastActivity extends AppCompatActivity {
 
     // Activity Properties
     private final String sourceUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2643123";
-    private List<WeatherUnit> weatherUnits = new ArrayList<WeatherUnit>();
+    private List<DetailedWeatherDTO> detailedWeatherDTOS = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +68,6 @@ public class WeeklyForecastActivity extends AppCompatActivity {
         // Click listeners
         this.backArrow.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
 
-        this.weeklyForecastRecyclerView.setAdapter(new WeeklyForecastAdapter(this));
-        this.weeklyForecastRecyclerView.setHasFixedSize(true);
-        this.weeklyForecastRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     /**
@@ -79,7 +75,8 @@ public class WeeklyForecastActivity extends AppCompatActivity {
      */
     private void changeHeroImage() {
         LocalTime localTime = LocalTime.now();
-        if (localTime.getHour() >= 19 && localTime.getHour() <= 7)
+        System.out.println(localTime.getHour());
+        if (localTime.getHour() >= 19)
             heroSection.setBackground(ContextCompat.getDrawable(this, R.drawable.night_sky));
         else
             heroSection.setBackground(ContextCompat.getDrawable(this, R.drawable.day_sky));
@@ -129,10 +126,19 @@ public class WeeklyForecastActivity extends AppCompatActivity {
 
             ThreeDayForecastParser threeDayForecastParser = new ThreeDayForecastParser();
             InputStream forecastInputStream = new ByteArrayInputStream(String.valueOf(result).getBytes());
-            threeDayForecastParser.getThreeDayForecast(forecastInputStream);
+            this.detailedWeatherDTOS = threeDayForecastParser.getThreeDayForecast(forecastInputStream);
+
+
+            WeeklyForecastActivity.this.runOnUiThread(() -> this.setUpAdapter(detailedWeatherDTOS));
 
         }).start();
 
+    }
+
+    private void setUpAdapter(List<DetailedWeatherDTO> data) {
+        this.weeklyForecastRecyclerView.setAdapter(new WeeklyForecastAdapter(this, data));
+        this.weeklyForecastRecyclerView.setHasFixedSize(true);
+        this.weeklyForecastRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
 

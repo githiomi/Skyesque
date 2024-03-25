@@ -129,7 +129,7 @@ public class WeeklyForecastActivity extends AppCompatActivity {
 
             ThreeDayForecastParser threeDayForecastParser = new ThreeDayForecastParser();
             InputStream forecastInputStream = new ByteArrayInputStream(String.valueOf(result).getBytes());
-            weatherUnits = threeDayForecastParser.getThreeDayForecast(forecastInputStream);
+            threeDayForecastParser.getThreeDayForecast(forecastInputStream);
 
         }).start();
 

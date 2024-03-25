@@ -1,5 +1,13 @@
 package com.alu.skyesque.parsers;
 
+import android.util.Log;
+
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
+
+import com.alu.skyesque.R;
+import com.alu.skyesque.models.DetailedWeatherDTO;
+import com.alu.skyesque.models.WeatherDTO;
 import com.alu.skyesque.models.WeatherUnit;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -10,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Author: dangit
@@ -22,11 +31,12 @@ import java.util.List;
 public class ThreeDayForecastParser {
 
     // Array to hold the 3 day forecast
-    List<WeatherUnit> weatherUnits = new ArrayList<WeatherUnit>();
+    List<WeatherUnit> weatherUnits = new ArrayList<>();
+    List<DetailedWeatherDTO> detailedWeatherUnits = new ArrayList<>();
     WeatherUnit weatherUnit;
     private String text;
 
-    public List<WeatherUnit> getThreeDayForecast(InputStream inputStream) {
+    public void getThreeDayForecast(InputStream inputStream) {
 
         try {
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -79,6 +89,57 @@ public class ThreeDayForecastParser {
             e.printStackTrace();
         }
 
-        return weatherUnits;
+        this.convertToDTO(weatherUnits);
+        Log.e("Weather Units -> ", weatherUnits.toString());
+    }
+
+    private void convertToDTO(List<WeatherUnit> weatherUnits) {
+        this.detailedWeatherUnits = this.weatherUnits.stream().map(this::DTOMapper).collect(Collectors.toList());
+    }
+
+    private DetailedWeatherDTO DTOMapper(WeatherUnit weatherUnit) {
+
+        String location = "aobuLBD";
+        String title = weatherUnit.getTitle();
+        String description = weatherUnit.getDescription();
+
+        String day = title.split(": ")[0];
+        String weatherSummary = title.substring(title.indexOf(": ") + 2, title.indexOf(","));
+        String maximumTemperature = description.substring(description.indexOf("Maximum Temperature: ") + 21, description.indexOf(", Minimum") - 1).split(" ")[0];
+        String minimumTemperature = description.substring(description.indexOf("Minimum Temperature: ") + 21, description.indexOf(", Wind Direction") - 1).split(" ")[0];
+//        String temperatureCelsius = String.valueOf((Integer.valueOf(maximumTemperature.split("°")[0]) + Integer.valueOf(minimumTemperature.split("°")[0])) /2);
+        String temperatureCelsius = "9999°C";
+        String temperatureFahrenheit = "1000°F";
+        String windDirection = description.substring(description.indexOf("Direction: ") + 11, description.lastIndexOf(", Wind"));
+        String windSpeed = description.substring(description.indexOf("Speed: ") + 7, description.lastIndexOf(", Visibility"));
+        String visibility = description.substring(description.indexOf("Visibility: ") + 12, description.lastIndexOf(", Pressure"));
+        String pressure = description.substring(description.indexOf("Pressure: ") + 10, description.lastIndexOf(", Humidity"));
+        String humidity = description.substring(description.indexOf("Humidity: ") + 10, description.lastIndexOf(", UV"));
+        String uvRisk = description.substring(description.indexOf("UV Risk: ") + 9, description.lastIndexOf(", Pollution"));
+        String pollution = description.substring(description.indexOf("Pollution: ") + 11, description.lastIndexOf(", Sunrise"));
+        String sunrise = description.substring(description.indexOf("Sunrise: ") + 9, description.lastIndexOf(", Sunset"));
+        String sunset = description.substring(description.indexOf("Sunset: ") + 9);
+        String latitude = weatherUnit.getGeorss().split(" ")[0];
+        String longitude = weatherUnit.getGeorss().split(" ")[1];
+
+        Log.e("Check", day);
+        Log.e("Check", weatherSummary);
+        Log.e("Check", maximumTemperature);
+        Log.e("Check", minimumTemperature);
+        Log.e("Check", windDirection);
+        Log.e("Check", windSpeed);
+        Log.e("Check", visibility);
+        Log.e("Check", pressure);
+        Log.e("Check", humidity);
+        Log.e("Check", uvRisk);
+        Log.e("Check", pollution);
+        Log.e("Check", sunrise);
+        Log.e("Check", sunset);
+        Log.e("Check", latitude);
+        Log.e("Check", longitude);
+
+//        return new DetailedWeatherDTO(location, day, weatherSummary, temperatureCelsius, temperatureFahrenheit,
+//                windDirection, windSpeed, humidity, pressure, visibility, latitude, longitude);
+        return null;
     }
 }

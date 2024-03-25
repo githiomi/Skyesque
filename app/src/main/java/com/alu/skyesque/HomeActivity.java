@@ -136,7 +136,7 @@ public class HomeActivity extends AppCompatActivity {
         String title = weatherUnit.getTitle();
         String description = weatherUnit.getDescription();
 
-        String day = weatherUnit.getTitle().split(" ")[0];
+        String day = title.split(" ")[0];
         String weatherSummary = title.substring(title.indexOf(": ") + 2, title.indexOf(","));
         String temperatureCelsius = description.substring(description.indexOf("Temperature: ") + 13, description.indexOf("(") - 1);
         String temperatureFahrenheit = title.substring(title.indexOf("(") + 1, title.indexOf(")"));

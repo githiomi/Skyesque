@@ -2,7 +2,7 @@ package com.alu.skyesque;
 
 import android.util.Log;
 
-import com.alu.skyesque.models.WeatherChannel;
+import com.alu.skyesque.models.WeatherUnit;
 import com.alu.skyesque.parsers.LatestObservationParser;
 
 import java.io.BufferedReader;
@@ -12,8 +12,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-
-import lombok.Getter;
 
 /**
  * Author: dangit
@@ -26,8 +24,7 @@ import lombok.Getter;
 public class BackgroundTask implements Runnable {
 
     private final String sourceUrl;
-    @Getter
-    private WeatherChannel weatherChannel;
+    private WeatherUnit weatherUnit;
 
     public BackgroundTask(String sourceUrl) {
         this.sourceUrl = sourceUrl;
@@ -68,9 +65,9 @@ public class BackgroundTask implements Runnable {
 
         LatestObservationParser latestObservationParser = new LatestObservationParser();
         InputStream latestInputStream = new ByteArrayInputStream(String.valueOf(result).getBytes());
-        weatherChannel = latestObservationParser.getWeatherChannel(latestInputStream);
+        weatherUnit = latestObservationParser.getWeatherUnit(latestInputStream);
 
-        Log.e("From weather channel", weatherChannel.toString());
+        Log.e("From weather channel", weatherUnit.toString());
 
     }
 }

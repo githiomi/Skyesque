@@ -1,7 +1,5 @@
 package com.alu.skyesque.parsers;
 
-import android.util.Log;
-
 import com.alu.skyesque.models.WeatherUnit;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -19,15 +17,17 @@ import java.util.List;
  * Name: Daniel Githiomi
  * Student Id: S2110911
  * Programme of Study: Computing
- * Date of creation: Sunday 24, 03 2024
+ * Date of creation: Monday 25, 03 2024
  */
-public class LatestObservationParser {
+public class ThreeDayForecastParser {
 
-    private final List<WeatherUnit> weatherUnits = new ArrayList<>();
-    private WeatherUnit weatherUnit;
+    // Array to hold the 3 day forecast
+    List<WeatherUnit> weatherUnits = new ArrayList<WeatherUnit>();
+    WeatherUnit weatherUnit;
     private String text;
 
-    public WeatherUnit getWeatherUnit(InputStream inputStream) {
+    public List<WeatherUnit> getThreeDayForecast(InputStream inputStream) {
+
         try {
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             factory.setNamespaceAware(true);
@@ -64,8 +64,8 @@ public class LatestObservationParser {
                             weatherUnit.setDate(text);
                         } else if (tagname.equalsIgnoreCase("georss:point") & weatherUnit != null) {
                             weatherUnit.setGeorss(text);
-                        }else if (tagname.equalsIgnoreCase("item") & weatherUnit != null) {
-                            Log.d("Weather Unit", weatherUnit.toString());
+                        } else if (tagname.equalsIgnoreCase("item") & weatherUnit != null) {
+                            weatherUnits.add(weatherUnit);
                         }
 
                         break;
@@ -79,7 +79,6 @@ public class LatestObservationParser {
             e.printStackTrace();
         }
 
-        return weatherUnit;
+        return weatherUnits;
     }
-
 }

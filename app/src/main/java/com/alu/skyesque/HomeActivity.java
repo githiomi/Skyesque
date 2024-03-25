@@ -2,6 +2,7 @@ package com.alu.skyesque;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -12,8 +13,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.alu.skyesque.databinding.ActivityHomeBinding;
+import com.alu.skyesque.models.WeatherUnit;
+import com.alu.skyesque.parsers.LatestObservationParser;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.time.LocalDate;
 
 /**
@@ -24,8 +33,9 @@ import java.time.LocalDate;
 public class HomeActivity extends AppCompatActivity {
 
     // Local Variables
-//    private final String urlSource="https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2643123";
-    private final String urlSource = "https://weather-broker-cdn.api.bbci.co.uk/en/observation/rss/2643123";
+    private final String sourceUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2643123";
+    //    private final String sourceUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/observation/rss/2643123";
+    private WeatherUnit weatherUnit;
 
     // Views
     ImageButton toProfile;
@@ -45,8 +55,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         // Initialize the views
-        ActivityHomeBinding homeBinding = ActivityHomeBinding.inflate(getLayoutInflater());
-        initViews(homeBinding);
+        initViews();
 
         getData();
 
@@ -60,17 +69,48 @@ public class HomeActivity extends AppCompatActivity {
                 .commit();
     }
 
-    private void initViews(ActivityHomeBinding binding) {
+    private void initViews() {
         this.toProfile = findViewById(R.id.IV_toProfile);
-        this.townName = binding.TVTownName;
-        this.currentDate = binding.TVCurrentDate;
+        this.townName = findViewById(R.id.TV_townName);
+        this.currentDate = findViewById(R.id.TV_currentDate);
         this.overview = findViewById(R.id.TV_overview);
         this.details = findViewById(R.id.TV_details);
-        this.overviewDetailsContainer = binding.FLOverviewDetails;
+        this.overviewDetailsContainer = findViewById(R.id.FL_overviewDetails);
     }
 
     private void getData() {
-        new Thread(new BackgroundTask(this.urlSource)).start();
+        // new Thread(new BackgroundTask(this.urlSource)).start();
+        new Thread(() -> {
+            StringBuilder result = new StringBuilder();
+            URL url;
+            URLConnection urlConnection;
+            BufferedReader bufferedReader;
+            String inputLine;
+
+            try {
+                url = new URL(sourceUrl);
+                urlConnection = url.openConnection();
+                bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                while ((inputLine = bufferedReader.readLine()) != null)
+                    result.append(inputLine);
+                bufferedReader.close();
+            } catch (IOException ae) {
+                Log.e("MyTag", "ioexception");
+            }
+
+            // Clean result to remove unnecessary tags
+            //Get rid of the first tag <?xml version="1.0" encoding="utf-8"?>
+            int i = result.indexOf(">");
+            result = new StringBuilder(result.substring(i + 1));
+            //Get rid of the 2nd tag <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+            i = result.indexOf(">");
+            result = new StringBuilder(result.substring(i + 1));
+
+            LatestObservationParser latestObservationParser = new LatestObservationParser();
+            InputStream latestInputStream = new ByteArrayInputStream(String.valueOf(result).getBytes());
+            weatherUnit = latestObservationParser.getWeatherUnit(latestInputStream);
+
+        }).start();
     }
 
     private String getDate() {

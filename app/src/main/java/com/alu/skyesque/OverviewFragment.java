@@ -79,7 +79,7 @@ public class OverviewFragment extends Fragment {
     }
 
     private void setSummaryAdapter(ViewGroup container) {
-        summaryAdapter = new SummaryAdapter(container.getContext());
+        summaryAdapter = new SummaryAdapter(container.getContext(), weatherData);
         summaryRecyclerView.setAdapter(summaryAdapter);
         summaryRecyclerView.setLayoutManager(new LinearLayoutManager(container.getContext(), LinearLayoutManager.HORIZONTAL, false));
         summaryRecyclerView.setHasFixedSize(true);

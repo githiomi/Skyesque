@@ -62,13 +62,9 @@ public class HomeActivity extends AppCompatActivity {
         getData();
 
         this.toProfile.setOnClickListener(v -> startActivity(new Intent(this, ProfileActivity.class)));
-        this.townName.setText("Nairobi");
-        this.currentDate.setText(getDate());
         this.details.setOnClickListener(v -> switchToDetails());
         this.overview.setOnClickListener(v -> switchToOverview());
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.FL_overviewDetails, new OverviewFragment())
-                .commit();
+
     }
 
     private void initViews() {
@@ -97,7 +93,7 @@ public class HomeActivity extends AppCompatActivity {
                     result.append(inputLine);
                 bufferedReader.close();
             } catch (IOException ae) {
-                Log.e("MyTag", "ioexception");
+                Log.e("MyTag", "ioexception -> " + ae.getMessage());
             }
 
             // Clean result to remove unnecessary tags
@@ -114,11 +110,17 @@ public class HomeActivity extends AppCompatActivity {
 
             WeatherDTO dto = HomeActivity.this.populateWeatherDTO(weatherUnit);
 
-            Log.e("In RUN", "Running again...");
+            OverviewFragment overviewFragment = new OverviewFragment();
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("weatherData", dto);
+            overviewFragment.setArguments(bundle);
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.FL_overviewDetails, overviewFragment)
+                    .commit();
 
             HomeActivity.this.runOnUiThread(() -> {
                 this.weatherData = dto;
-                this.displayData(dto);
+                this.displayData();
             });
 
         }).start();
@@ -126,6 +128,7 @@ public class HomeActivity extends AppCompatActivity {
 
     /**
      * Method to get data from response into usable DTO format
+     *
      * @param weatherUnit
      * @return a weather data DTO object
      */
@@ -141,7 +144,7 @@ public class HomeActivity extends AppCompatActivity {
         String windDirection = description.substring(description.indexOf("Direction: ") + 11, description.lastIndexOf(", Wind"));
         String windSpeed = description.substring(description.indexOf("Speed: ") + 8, description.lastIndexOf(", Humidity"));
         String humidity = description.substring(description.indexOf("Humidity: ") + 10, description.lastIndexOf(", Pressure"));
-        String pressure = description.substring(description.indexOf("Pressure: ") + 10, description.lastIndexOf(", Visibility"));
+        String pressure = description.substring(description.indexOf("Pressure: ") + 10, description.lastIndexOf(", Visibility")).split(",")[0];
         String visibility = description.substring(description.indexOf("Visibility: ") + 12);
         String latitude = "latitude";
         String longitude = "longitude";
@@ -150,10 +153,13 @@ public class HomeActivity extends AppCompatActivity {
                 windDirection, windSpeed, humidity, pressure, visibility, latitude, longitude);
     }
 
-    private void displayData(WeatherDTO data){
-        this.townName.setText(data.getLocation());
+    /**
+     * Method to take retrieved data and display on the UI
+     */
+    private void displayData() {
+        this.townName.setText(this.weatherData.getLocation());
 
-        String date = data.getDay() + " " + getDate();
+        String date = this.weatherData.getDay() + " " + getDate();
         this.currentDate.setText(date);
 
     }

@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.alu.skyesque.databinding.FragmentOverviewBinding;
+import com.alu.skyesque.models.WeatherDTO;
 
 /**
  * Name                 Daniel Githiomi
@@ -20,9 +20,13 @@ import com.alu.skyesque.databinding.FragmentOverviewBinding;
  */
 public class OverviewFragment extends Fragment {
 
+    // Fragment Properties
+    private static final String ARGUMENT = "weatherData";
+    private static WeatherDTO weatherData;
+
     // Views
     RecyclerView summaryRecyclerView;
-    TextView toWeeklyForecast;
+    TextView currentTemperature, currentState, windSummary, humiditySummary, sunSummary, toWeeklyForecast;
 
     // Adapters
     SummaryAdapter summaryAdapter;
@@ -31,23 +35,47 @@ public class OverviewFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static OverviewFragment newInstance(WeatherDTO weatherDTO) {
+        OverviewFragment overviewFragment = new OverviewFragment();
+        Bundle weatherBundle = new Bundle();
+        weatherBundle.putParcelable(ARGUMENT, weatherDTO);
+        overviewFragment.setArguments(weatherBundle);
+        return overviewFragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null)
+            weatherData = getArguments().getParcelable(ARGUMENT);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_overview, container, false);
 
+        this.currentTemperature = view.findViewById(R.id.TV_currentTemperature);
+        this.currentState = view.findViewById(R.id.TV_currentState);
+        this.windSummary = view.findViewById(R.id.TV_windSummary);
+        this.humiditySummary = view.findViewById(R.id.TV_humiditySummary);
+        this.sunSummary = view.findViewById(R.id.TV_sunSummary);
         this.summaryRecyclerView = view.findViewById(R.id.RV_todaySummary);
         this.toWeeklyForecast = view.findViewById(R.id.TV_toFullForecast);
 
+        populateData();
         setSummaryAdapter(container);
 
         this.toWeeklyForecast.setOnClickListener(v -> requireActivity().startActivity(new Intent(getContext(), WeeklyForecastActivity.class)));
 
         return view;
+    }
+
+    private void populateData() {
+        this.currentTemperature.setText(weatherData.getTemperatureCelsius());
+        this.currentState.setText(weatherData.getWeatherSummary());
+        this.windSummary.setText(weatherData.getWindSpeed());
+        this.humiditySummary.setText(weatherData.getHumidity());
+        this.sunSummary.setText(weatherData.getPressure());
     }
 
     private void setSummaryAdapter(ViewGroup container) {

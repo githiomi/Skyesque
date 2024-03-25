@@ -1,5 +1,7 @@
 package com.alu.skyesque.models;
 
+import lombok.Data;
+
 /**
  * Author: dangit
  * Project Name: Skyesque
@@ -8,11 +10,14 @@ package com.alu.skyesque.models;
  * Programme of Study: Computing
  * Date of creation: Monday 25, 03 2024
  */
+
+@Data
 public class WeatherDTO {
     private String location;
     private String day;
     private String weatherSummary;
-    private String temperature;
+    private String temperatureCelsius;
+    private String temperatureFahrenheit;
     private String windDirection;
     private String windSpeed;
     private String humidity;
@@ -24,13 +29,15 @@ public class WeatherDTO {
     public WeatherDTO() {
     }
 
-    public WeatherDTO(String location, String day, String weatherSummary, String temperature, String windDirection,
-                      String windSpeed, String humidity, String pressure, String visibility, String latitude,
+    public WeatherDTO(String location, String day, String weatherSummary, String temperatureCelsius,
+                      String temperatureFahrenheit, String windDirection, String windSpeed,
+                      String humidity, String pressure, String visibility, String latitude,
                       String longitude) {
         this.location = location;
         this.day = day;
         this.weatherSummary = weatherSummary;
-        this.temperature = temperature;
+        this.temperatureCelsius = temperatureCelsius;
+        this.temperatureFahrenheit = temperatureFahrenheit;
         this.windDirection = windDirection;
         this.windSpeed = windSpeed;
         this.humidity = humidity;
@@ -38,5 +45,23 @@ public class WeatherDTO {
         this.visibility = visibility;
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    @Override
+    public String toString() {
+        return "WeatherDTO{" +
+                "location='" + location + '\'' +
+                ", day='" + day + '\'' +
+                ", weatherSummary='" + weatherSummary + '\'' +
+                ", temperatureCelsius='" + temperatureCelsius + '\'' +
+                ", temperatureFahrenheit='" + temperatureFahrenheit + '\'' +
+                ", windDirection='" + windDirection + '\'' +
+                ", windSpeed='" + windSpeed + '\'' +
+                ", humidity='" + humidity + '\'' +
+                ", pressure='" + pressure + '\'' +
+                ", visibility='" + visibility + '\'' +
+                ", latitude='" + latitude + '\'' +
+                ", longitude='" + longitude + '\'' +
+                '}';
     }
 }

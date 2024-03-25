@@ -13,6 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.alu.skyesque.models.WeatherDTO;
 import com.alu.skyesque.models.WeatherUnit;
 import com.alu.skyesque.parsers.LatestObservationParser;
 
@@ -33,8 +34,8 @@ import java.time.LocalDate;
 public class HomeActivity extends AppCompatActivity {
 
     // Local Variables
-    private final String sourceUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2643123";
-    //    private final String sourceUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/observation/rss/2643123";
+//    private final String sourceUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2643123";
+    private final String sourceUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/observation/rss/2643123";
     private WeatherUnit weatherUnit;
 
     // Views
@@ -110,7 +111,34 @@ public class HomeActivity extends AppCompatActivity {
             InputStream latestInputStream = new ByteArrayInputStream(String.valueOf(result).getBytes());
             weatherUnit = latestObservationParser.getWeatherUnit(latestInputStream);
 
+            WeatherDTO data = HomeActivity.this.populateWeatherDTO(weatherUnit);
+            data.toString();
+
         }).start();
+    }
+
+    private WeatherDTO populateWeatherDTO(WeatherUnit weatherUnit) {
+        String location = "Manchester";
+        String title = weatherUnit.getTitle();
+        String description = weatherUnit.getDescription();
+
+        String day = weatherUnit.getTitle().split(" ")[0];
+        String weatherSummary = title.substring(title.indexOf(": ") + 2, title.indexOf(","));
+        String temperatureCelsius = description.substring(description.indexOf("Temperature: ") + 13, description.indexOf("(") - 1);
+        String temperatureFahrenheit = title.substring(title.indexOf("(") + 1, title.indexOf(")"));
+        String windDirection = description.substring(description.indexOf("Direction: ") + 11, description.lastIndexOf(", Wind"));
+        String windSpeed = description.substring(description.indexOf("Speed: ") + 8, description.lastIndexOf(", Humidity"));
+        String humidity = description.substring(description.indexOf("Humidity: ") + 10, description.lastIndexOf(", Pressure"));
+        String pressure = description.substring(description.indexOf("Pressure: ") + 10, description.lastIndexOf(", Visibility"));
+        String visibility = description.substring(description.indexOf("Visibility: ") + 12);
+        String latitude = "latitude";
+        String longitude = "longitude";
+
+        WeatherDTO dto = new WeatherDTO(location, day, weatherSummary, temperatureCelsius, temperatureFahrenheit,
+                windDirection, windSpeed, humidity, pressure, visibility, latitude, longitude);
+
+        Log.e("END DTO", dto.toString());
+        return dto;
     }
 
     private String getDate() {

@@ -11,7 +11,6 @@ import lombok.Data;
  * Date of creation: Monday 25, 03 2024
  */
 
-@Data
 public class WeatherDTO {
     private String location;
     private String day;
@@ -45,6 +44,14 @@ public class WeatherDTO {
         this.visibility = visibility;
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getDay() {
+        return day;
     }
 
     @Override

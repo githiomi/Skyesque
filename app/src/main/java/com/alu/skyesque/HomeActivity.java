@@ -42,6 +42,7 @@ public class HomeActivity extends AppCompatActivity {
     ImageButton toProfile;
     TextView townName, currentDate, overview, details;
     FrameLayout overviewDetailsContainer;
+    WeatherDTO weatherData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,12 +112,23 @@ public class HomeActivity extends AppCompatActivity {
             InputStream latestInputStream = new ByteArrayInputStream(String.valueOf(result).getBytes());
             weatherUnit = latestObservationParser.getWeatherUnit(latestInputStream);
 
-            WeatherDTO data = HomeActivity.this.populateWeatherDTO(weatherUnit);
-            data.toString();
+            WeatherDTO dto = HomeActivity.this.populateWeatherDTO(weatherUnit);
+
+            Log.e("In RUN", "Running again...");
+
+            HomeActivity.this.runOnUiThread(() -> {
+                this.weatherData = dto;
+                this.displayData(dto);
+            });
 
         }).start();
     }
 
+    /**
+     * Method to get data from response into usable DTO format
+     * @param weatherUnit
+     * @return a weather data DTO object
+     */
     private WeatherDTO populateWeatherDTO(WeatherUnit weatherUnit) {
         String location = "Manchester";
         String title = weatherUnit.getTitle();
@@ -134,11 +146,16 @@ public class HomeActivity extends AppCompatActivity {
         String latitude = "latitude";
         String longitude = "longitude";
 
-        WeatherDTO dto = new WeatherDTO(location, day, weatherSummary, temperatureCelsius, temperatureFahrenheit,
+        return new WeatherDTO(location, day, weatherSummary, temperatureCelsius, temperatureFahrenheit,
                 windDirection, windSpeed, humidity, pressure, visibility, latitude, longitude);
+    }
 
-        Log.e("END DTO", dto.toString());
-        return dto;
+    private void displayData(WeatherDTO data){
+        this.townName.setText(data.getLocation());
+
+        String date = data.getDay() + " " + getDate();
+        this.currentDate.setText(date);
+
     }
 
     private String getDate() {

@@ -3,7 +3,9 @@ package com.alu.skyesque;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -28,6 +30,7 @@ import java.net.URLConnection;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Name                 Daniel Githiomi
@@ -36,17 +39,20 @@ import java.util.List;
  */
 public class WeeklyForecastActivity extends AppCompatActivity {
 
-    // View Binding
+    // Views
     ImageButton backArrow;
     RecyclerView weeklyForecastRecyclerView;
     RelativeLayout heroSection;
+    TextView location, temperature, summary;
+    ImageView weatherVisual;
+    int[] weatherIcons = {R.drawable.cloudy, R.drawable.thunder, R.drawable.fog, R.drawable.mist, R.drawable.rain, R.drawable.snow, R.drawable.day_clear, R.drawable.night_sleet, R.drawable.day_rain, R.drawable.snow_thunder};
 
     // Adapters
     WeeklyForecastAdapter weeklyForecastAdapter;
 
     // Activity Properties
     private final String sourceUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2643123";
-    private List<DetailedWeatherDTO> detailedWeatherDTOS = new ArrayList<>();
+    private List<DetailedWeatherDTO> detailedWeatherDTOs = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +94,10 @@ public class WeeklyForecastActivity extends AppCompatActivity {
     private void initViews() {
         this.backArrow = findViewById(R.id.IB_backArrow);
         this.heroSection = findViewById(R.id.RL_hero);
+        this.location = findViewById(R.id.TV_heroLocation);
+        this.temperature = findViewById(R.id.TV_currentTemperature);
+        this.weatherVisual = findViewById(R.id.IV_currentWeather);
+        this.summary = findViewById(R.id.TV_weatherSummary);
         this.weeklyForecastRecyclerView = findViewById(R.id.RV_weeklyForecast);
     }
 
@@ -126,13 +136,26 @@ public class WeeklyForecastActivity extends AppCompatActivity {
 
             ThreeDayForecastParser threeDayForecastParser = new ThreeDayForecastParser();
             InputStream forecastInputStream = new ByteArrayInputStream(String.valueOf(result).getBytes());
-            this.detailedWeatherDTOS = threeDayForecastParser.getThreeDayForecast(forecastInputStream);
+            this.detailedWeatherDTOs = threeDayForecastParser.getThreeDayForecast(forecastInputStream);
 
-
-            WeeklyForecastActivity.this.runOnUiThread(() -> this.setUpAdapter(detailedWeatherDTOS));
+            WeeklyForecastActivity.this.runOnUiThread(() -> {
+                this.setUpAdapter(detailedWeatherDTOs);
+                this.populateViews(detailedWeatherDTOs.get(0));
+            });
 
         }).start();
 
+    }
+
+    private void populateViews(DetailedWeatherDTO data){
+        String location = data.getLocation();
+        String temperature = data.getTemperatureCelsius().split("°")[0];
+        String summary = data.getWeatherSummary();
+
+        this.location.setText(location);
+        this.temperature.setText(temperature);
+        this.weatherVisual.setImageResource(this.weatherIcons[new Random().nextInt( (9 - 1) + 1) + 1 ]);
+        this.summary.setText(summary);
     }
 
     private void setUpAdapter(List<DetailedWeatherDTO> data) {

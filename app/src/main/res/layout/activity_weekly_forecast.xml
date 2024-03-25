@@ -35,6 +35,7 @@
             android:paddingVertical="30dp">
 
             <TextView
+                android:id="@+id/TV_heroLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -95,6 +96,7 @@
                         android:src="@drawable/sunny_24" />
 
                     <TextView
+                        android:id="@+id/TV_weatherSummary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/current_state_placeholder"

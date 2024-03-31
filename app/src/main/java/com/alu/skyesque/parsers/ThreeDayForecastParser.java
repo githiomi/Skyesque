@@ -122,23 +122,23 @@ public class ThreeDayForecastParser {
         String latitude = weatherUnit.getGeorss().split(" ")[0];
         String longitude = weatherUnit.getGeorss().split(" ")[1];
 
-//        Log.e("Check", day);
-//        Log.e("Check", weatherSummary);
-//        Log.e("Check", maximumTemperature);
-//        Log.e("Check", minimumTemperature);
-//        Log.e("Check", temperatureCelsius);
-//        Log.e("Check", temperatureFahrenheit);
-//        Log.e("Check", windDirection);
-//        Log.e("Check", windSpeed);
-//        Log.e("Check", visibility);
-//        Log.e("Check", pressure);
-//        Log.e("Check", humidity);
-//        Log.e("Check", uvRisk);
-//        Log.e("Check", pollution);
-//        Log.e("Check", sunrise);
-//        Log.e("Check", sunset);
-//        Log.e("Check", latitude);
-//        Log.e("Check", longitude);
+        Log.e("Check", day);
+        Log.e("Check", weatherSummary);
+        Log.e("Check", maximumTemperature);
+        Log.e("Check", minimumTemperature);
+        Log.e("Check", temperatureCelsius);
+        Log.e("Check", temperatureFahrenheit);
+        Log.e("Check", windDirection);
+        Log.e("Check", windSpeed);
+        Log.e("Check", visibility);
+        Log.e("Check", pressure);
+        Log.e("Check", humidity);
+        Log.e("Check", uvRisk);
+        Log.e("Check", pollution);
+        Log.e("Check", sunrise);
+        Log.e("Check", sunset);
+        Log.e("Check", latitude);
+        Log.e("Check", longitude);
 
         return new DetailedWeatherDTO(location, day, weatherSummary, temperatureCelsius, temperatureFahrenheit,
                 windDirection, windSpeed, humidity, pressure, visibility, latitude, longitude, minimumTemperature,

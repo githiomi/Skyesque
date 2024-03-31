@@ -55,7 +55,7 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHold
             holder.summaryTemperature.setText(this.weatherDTO.getTemperatureCelsius());
             holder.summaryWeatherIcon.setImageResource(weatherIcons[getRandom()]);
 
-            String time = String.valueOf(currentTime.getHour()) + ":" + (currentTime.minusMinutes(10l).getMinute() > 10 ? currentTime.getMinute() : currentTime.getMinute() + 10);
+            String time = String.valueOf(currentTime.getHour() + ":" + currentTime.getMinute());
             holder.summaryTime.setText(time);
             return;
         }

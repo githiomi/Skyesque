@@ -90,7 +90,7 @@ public class DetailedWeatherDTO extends WeatherDTO implements Parcelable {
     @Override
     public String toString() {
         return "DetailedWeatherDTO{" +
-                "location='" + super.getLocation() + '\'' +
+                "  location='" + super.getLocation() + '\'' +
                 ", day='" + super.getDay() + '\'' +
                 ", weatherSummary='" + super.getWeatherSummary() + '\'' +
                 ", temperatureCelsius='" + super.getTemperatureCelsius() + '\'' +

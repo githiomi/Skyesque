@@ -3,8 +3,11 @@ package com.alu.skyesque;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +43,8 @@ public class HomeActivity extends AppCompatActivity {
     private WeatherUnit weatherUnit;
 
     // Views
+    ProgressBar loadingProgressBar;
+    ScrollView pageContent;
     ImageButton toProfile;
     TextView townName, currentDate, overview, details;
     FrameLayout overviewDetailsContainer;
@@ -51,7 +56,7 @@ public class HomeActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
 
         setContentView(R.layout.activity_home);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.RL_mainView), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -69,6 +74,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void initViews() {
+        this.loadingProgressBar = findViewById(R.id.PB_loading);
+        this.pageContent = findViewById(R.id.SV_pageContent);
         this.toProfile = findViewById(R.id.IV_toProfile);
         this.townName = findViewById(R.id.TV_townName);
         this.currentDate = findViewById(R.id.TV_currentDate);
@@ -99,7 +106,7 @@ public class HomeActivity extends AppCompatActivity {
             }
 
             // Clean result to remove unnecessary tags
-            //Get rid of the first tag <?xml version="1.0" encoding="utf-8"?>
+            // Get rid of the first tag <?xml version="1.0" encoding="utf-8"?>
             int i = result.indexOf(">");
             result = new StringBuilder(result.substring(i + 1));
             //Get rid of the 2nd tag <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
@@ -160,11 +167,21 @@ public class HomeActivity extends AppCompatActivity {
 
         String date = this.weatherData.getDay() + " " + getDate();
         this.currentDate.setText(date);
+
+        this.dataLoaded();
     }
 
     private String getDate() {
         LocalDate localDate = LocalDate.now();
         return localDate.getDayOfMonth() + " " + localDate.getMonth() + ", " + localDate.getYear();
+    }
+
+    /**
+     * This method will remove the progress bar and display loaded data
+     */
+    private void dataLoaded() {
+        this.loadingProgressBar.setVisibility(View.GONE);
+        this.pageContent.setVisibility(View.VISIBLE);
     }
 
     /**

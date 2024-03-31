@@ -15,7 +15,6 @@ import java.io.Serializable;
  * Programme of Study: Computing
  * Date of creation: Monday 25, 03 2024
  */
-
 public class WeatherDTO implements Parcelable {
     private String location;
     private String day;

@@ -8,7 +8,6 @@ package com.alu.skyesque.models;
  * Programme of Study: Computing
  * Date of creation: Monday 25, 03 2024
  */
-
 public class Constants {
 
     private final String DTO_TRANSFER = "DTO Transfer";

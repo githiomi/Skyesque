@@ -14,7 +14,6 @@ import lombok.ToString;
  * Programme of Study: Computing
  * Date of creation: Sunday 24, 03 2024
  */
-
 public class WeatherUnit {
 
     private String title;

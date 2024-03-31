@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--Name                 Daniel Githiomi-->
+<!--Student ID           S2110911-->
+<!--Programme of Study   Computing - ALU Mauritius-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,15 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginVertical="20dp">
-
-        <!--        <ImageView-->
-        <!--            android:id="@+id/IV_currentWeatherVisual"-->
-        <!--            android:layout_width="150dp"-->
-        <!--            android:layout_height="150dp"-->
-        <!--            android:layout_centerHorizontal="true"-->
-        <!--            android:layout_marginBottom="20dp"-->
-        <!--            android:contentDescription="@string/app_name"-->
-        <!--            android:src="@drawable/weather_icon" />-->
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/IV_currentWeatherVisual"

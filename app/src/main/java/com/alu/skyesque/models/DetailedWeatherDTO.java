@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
  * Programme of Study: Computing
  * Date of creation: Monday 25, 03 2024
  */
-
 public class DetailedWeatherDTO implements Parcelable {
     private String location;
     private String day;
@@ -42,7 +41,6 @@ public class DetailedWeatherDTO implements Parcelable {
                               String humidity, String pressure, String visibility, String latitude,
                               String longitude, String minimumTemperature, String maximumTemperature,
                               String uvRisk, String pollution, String sunrise, String sunset) {
-
         this.location = location;
         this.day = day;
         this.weatherSummary = weatherSummary;

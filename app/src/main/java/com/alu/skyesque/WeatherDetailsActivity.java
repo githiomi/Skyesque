@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -15,14 +16,19 @@ import androidx.core.view.WindowInsetsCompat;
 import com.alu.skyesque.models.DetailedWeatherDTO;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.Random;
 
 public class WeatherDetailsActivity extends AppCompatActivity {
 
     // Views
+    ImageButton backButton;
     TextView townName, pinLocation, currentDate, currentTemperature, minMaxTemperature, currentState,
             windSpeedSummary, humiditySummary, pressureSummary, windDirection, uvIndex, rainfall, visibility;
+
+    // Activity properties
+    DetailedWeatherDTO detailedWeatherDTO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +44,10 @@ public class WeatherDetailsActivity extends AppCompatActivity {
         // Bind views
         bindViews();
 
-        DetailedWeatherDTO detailedWeatherDTO = getIntent().getParcelableExtra("toDetailsDTO");
-        Log.e(TAG, "onCreate: " + detailedWeatherDTO.toString());
-
-        populateData(detailedWeatherDTO);
+        this.detailedWeatherDTO = getIntent().getParcelableExtra("toDetailsDTO");
+        assert this.detailedWeatherDTO != null;
+        Log.e("Detailed DTO", detailedWeatherDTO.toString());
+        populateData(this.detailedWeatherDTO);
 
         // CLick listeners
         this.pinLocation.setOnClickListener(v -> {
@@ -50,10 +56,11 @@ public class WeatherDetailsActivity extends AppCompatActivity {
 //            mapIntent.putExtra("coordinates", coordinates);
 //            startActivity(mapIntent);
         });
-
+        this.backButton.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
     }
 
     private void bindViews() {
+        this.backButton = findViewById(R.id.IB_backArrow);
         this.townName = findViewById(R.id.TV_townName);
         this.pinLocation = findViewById(R.id.TV_pinLocation);
         this.currentDate = findViewById(R.id.TV_currentDate);
@@ -98,12 +105,12 @@ public class WeatherDetailsActivity extends AppCompatActivity {
 
     private String getRainfall() {
         float min = 20.0F, max = 300.0F;
-        return String.valueOf(round(new Random().nextFloat() * (max - min) + min, 2)) + "mm";
+        return String.valueOf(round(new Random().nextFloat() * (max - min) + min)) + "mm";
     }
 
-    private String round(float d, int decimalPlace) {
+    private String round(float d) {
         BigDecimal bd = new BigDecimal(Float.toString(d));
-        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
         return String.valueOf(bd);
     }
 }

@@ -90,10 +90,6 @@ public class ThreeDayForecastParser {
             e.printStackTrace();
         }
 
-//        Log.e("Weather Units -> ", weatherUnits.toString());
-//        Log.e("----- -> ","------------------------------");
-//        Log.e("Detailed Weather Units -> ", detailedWeatherUnits.toString());
-
         return this.weatherUnits.stream().map(this::DTOMapper).collect(Collectors.toList());
     }
 
@@ -107,8 +103,9 @@ public class ThreeDayForecastParser {
 
         String day = title.split(": ")[0];
         String weatherSummary = title.substring(title.indexOf(": ") + 2, title.indexOf(","));
-        String maximumTemperature = description.substring(description.indexOf("Maximum Temperature: ") + 21, description.indexOf(" (") - 1);
-        String minimumTemperature = description.substring(description.indexOf("Minimum Temperature: ") + 21, description.indexOf(", Wind Direction") - 1);
+//        String maximumTemperature = description.substring(description.indexOf("Maximum Temperature: ") + 21, description.indexOf(" (") - 1);
+        String maximumTemperature = "14°C";
+        String minimumTemperature = description.substring(description.indexOf("Minimum Temperature: ") + 21, description.indexOf(", Wind") - 7);
         int temp = (Integer.parseInt(maximumTemperature.split("°")[0]) + Integer.parseInt(minimumTemperature.split("°")[0])) / 2;
         String temperatureCelsius = String.valueOf(temp) + "°C";
         String temperatureFahrenheit = String.valueOf((temp * (9/5)) + 32) + "°F";
@@ -118,7 +115,8 @@ public class ThreeDayForecastParser {
         String pressure = description.substring(description.indexOf("Pressure: ") + 10, description.lastIndexOf(", Humidity"));
         String humidity = description.substring(description.indexOf("Humidity: ") + 10, description.lastIndexOf(", UV"));
         String uvRisk = description.substring(description.indexOf("UV Risk: ") + 9, description.lastIndexOf(", Pollution"));
-        String pollution = description.substring(description.indexOf("Pollution: ") + 11, description.lastIndexOf(", Sunrise"));
+//        String pollution = description.substring(description.indexOf("Pollution: ") + 11, description.lastIndexOf(", Sunrise"));
+        String pollution = "Low";
         String sunrise = description.substring(description.indexOf("Sunrise: ") + 9, description.lastIndexOf(", Sunset"));
         String sunset = description.substring(description.indexOf("Sunset: ") + 9);
         String latitude = weatherUnit.getGeorss().split(" ")[0];

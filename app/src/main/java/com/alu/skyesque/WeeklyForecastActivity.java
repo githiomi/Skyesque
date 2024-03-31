@@ -58,7 +58,7 @@ public class WeeklyForecastActivity extends AppCompatActivity implements Forecas
     WeeklyForecastAdapter weeklyForecastAdapter;
 
     // Activity Properties
-    private final String sourceUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2648579";
+    private final String sourceUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2643123";
     private List<DetailedWeatherDTO> detailedWeatherDTOs = new ArrayList<>();
 
     @Override

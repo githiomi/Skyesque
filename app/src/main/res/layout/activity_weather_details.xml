@@ -247,7 +247,7 @@
                 android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/CV_airQuality"
+                    android:id="@+id/CV_windDirection"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="15dp"
@@ -268,7 +268,7 @@
                             android:padding="15dp">
 
                             <ImageView
-                                android:id="@+id/IV_airQuality"
+                                android:id="@+id/IV_windDirection"
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
                                 android:layout_marginEnd="15dp"
@@ -279,7 +279,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
-                                android:layout_toEndOf="@id/IV_airQuality"
+                                android:layout_toEndOf="@id/IV_windDirection"
                                 android:text="@string/wind_direction"
                                 android:textAllCaps="true"
                                 android:textColor="@color/white"

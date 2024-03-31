@@ -11,6 +11,16 @@
     android:orientation="vertical"
     tools:context=".SettingsActivity">
 
+    <TextView
+        android:id="@+id/TV_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/gcu_credentials"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

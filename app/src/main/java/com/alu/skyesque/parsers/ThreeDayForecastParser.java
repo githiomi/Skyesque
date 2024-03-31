@@ -99,8 +99,6 @@ public class ThreeDayForecastParser {
         String title = weatherUnit.getTitle();
         String description = weatherUnit.getDescription();
 
-        Log.e(TAG, "ViewHolder: " + description);
-
         String day = title.split(": ")[0];
         String weatherSummary = title.substring(title.indexOf(": ") + 2, title.indexOf(","));
 //        String maximumTemperature = description.substring(description.indexOf("Maximum Temperature: ") + 21, description.indexOf(" (") - 1);

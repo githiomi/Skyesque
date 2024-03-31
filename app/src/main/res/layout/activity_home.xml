@@ -10,6 +10,16 @@
     android:layout_height="match_parent"
     android:background="@drawable/activity_background">
 
+    <TextView
+        android:id="@+id/TV_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/gcu_credentials"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
     <ProgressBar
         android:id="@+id/PB_loading"
         style="@android:style/Widget.DeviceDefault.Light.ProgressBar"

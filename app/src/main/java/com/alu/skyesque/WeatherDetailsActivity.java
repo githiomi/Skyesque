@@ -1,5 +1,7 @@
 package com.alu.skyesque;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.alu.skyesque.models.DetailedWeatherDTO;
+import com.alu.skyesque.models.WeatherDTO;
 
 import java.util.Objects;
 
@@ -27,6 +30,7 @@ public class WeatherDetailsActivity extends AppCompatActivity {
             return insets;
         });
 
-        DetailedWeatherDTO detailedWeatherDTO = getIntent().getParcelableExtra("toDetailsDTO");
+        WeatherDTO detailedWeatherDTO = getIntent().getParcelableExtra("toDetailsDTO");
+        Log.e(TAG, "onCreate: " + detailedWeatherDTO.toString());
     }
 }

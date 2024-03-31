@@ -96,7 +96,7 @@ public class ProfileActivity extends AppCompatActivity {
         String fullName = this.loggedInUser.getFirstName() + "\n" + this.loggedInUser.getLastName();
         this.username.setText(fullName);
         this.emailInputLayout.setHint(this.loggedInUser.getEmail());
-        this.passwordInputLayout.setHint("**********");
+        this.passwordInputLayout.setHint(this.loggedInUser.getPassword());
     }
 
 }

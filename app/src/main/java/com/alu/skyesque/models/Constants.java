@@ -1,7 +1,5 @@
 package com.alu.skyesque.models;
 
-import lombok.Getter;
-
 /**
  * Author: dangit
  * Project Name: Skyesque
@@ -17,10 +15,15 @@ public class Constants {
 
     private final String WEATHER_DETAILS = "Weather Details";
 
+    private final String MY_SHARED_PREFERENCES = "authentication";
     private final String LOGGED_IN_SHARED_PREFERENCES = "isLoggedIn";
 
     public String getDTO_TRANSFER() {
         return DTO_TRANSFER;
+    }
+
+    public String getMY_SHARED_PREFERENCES() {
+        return MY_SHARED_PREFERENCES;
     }
 
     public String getWEATHER_DETAILS() {

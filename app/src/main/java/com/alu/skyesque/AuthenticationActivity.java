@@ -1,12 +1,10 @@
 package com.alu.skyesque;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -29,6 +27,7 @@ public class AuthenticationActivity extends AppCompatActivity {
     // Views
     TextInputLayout usernameInputLayout, passwordInputLayout;
     AppCompatButton loginButton;
+    TextView createNewAccount;
 
     // Class variables
     // MODE_PUBLIC will make the file public which could be accessible by other applications on the device
@@ -65,11 +64,15 @@ public class AuthenticationActivity extends AppCompatActivity {
                 checkPassword(User.ABART999, password);
             else if (username.equals("DGITH200"))
                 checkPassword(User.DGITH200, password);
+            else if (username.isEmpty())
+                this.usernameInputLayout.setError("This is a required field.");
             else {
+                this.usernameInputLayout.setError("This username does not exist");
                 Toast.makeText(this, "Invalid Credentials. Try again.", Toast.LENGTH_SHORT).show();
             }
 
         });
+        this.createNewAccount.setOnClickListener(v -> Toast.makeText(this, "Contact System Admin to create a new account", Toast.LENGTH_SHORT).show());
     }
 
     /**
@@ -79,17 +82,19 @@ public class AuthenticationActivity extends AppCompatActivity {
         this.usernameInputLayout = findViewById(R.id.IL_username);
         this.passwordInputLayout = findViewById(R.id.IL_password);
         this.loginButton = findViewById(R.id.BTN_login);
+        this.createNewAccount = findViewById(R.id.TV_createNewAccount);
     }
 
     /**
      * Method definition for checking password and editing shared preferences
      */
     private void checkPassword(User user, String password) {
-        Log.e(TAG, "passed: " + password);
-        Log.e(TAG, "user: " + user.getPassword());
 
-        if (!password.equals(user.getPassword())) {
-            Toast.makeText(this, "Invalid password. Try again.", Toast.LENGTH_SHORT).show();
+        if (password.isEmpty()) {
+            this.passwordInputLayout.setError("This is a required field");
+            return;
+        } else if (!password.equals(user.getPassword())) {
+            this.passwordInputLayout.setError("Invalid password. Try again.");
             return;
         }
 
@@ -106,7 +111,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         // Check if the user is already logged in
         String user = this.sharedPreferences.getString("loggedInUser", "");
 
-        if (!user.isEmpty()){
+        if (!user.isEmpty()) {
             startActivity(new Intent(this, HomeActivity.class));
             finish();
         }

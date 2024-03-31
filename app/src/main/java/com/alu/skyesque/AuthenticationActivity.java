@@ -49,7 +49,7 @@ public class AuthenticationActivity extends AppCompatActivity {
             return insets;
         });
 
-        this.sharedPreferences = getSharedPreferences("authenticationActivity", Context.MODE_PRIVATE);
+        this.sharedPreferences = getSharedPreferences("authentication", Context.MODE_PRIVATE);
         this.sharedPreferencesEditor = this.sharedPreferences.edit();
 
         // View Binding
@@ -70,7 +70,6 @@ public class AuthenticationActivity extends AppCompatActivity {
             }
 
         });
-
     }
 
     /**
@@ -111,6 +110,5 @@ public class AuthenticationActivity extends AppCompatActivity {
             startActivity(new Intent(this, HomeActivity.class));
             finish();
         }
-
     }
 }

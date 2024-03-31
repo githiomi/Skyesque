@@ -1,6 +1,7 @@
 package com.alu.skyesque;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.alu.skyesque.models.User;
 import com.google.android.material.textfield.TextInputLayout;
 
 /**
@@ -26,9 +28,12 @@ public class ProfileActivity extends AppCompatActivity {
     ImageButton backButton;
     AppCompatButton editButton, logoutButton;
     TextInputLayout emailInputLayout, passwordInputLayout;
-    TextView toSystemPreferences;
+    TextView username, toSystemPreferences;
 
-    String email = "daniel@gmail.com", password = "**********";
+    // Activity properties
+    User loggedInUser;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor sharedPreferencesEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,15 +46,14 @@ public class ProfileActivity extends AppCompatActivity {
             return insets;
         });
 
-        this.backButton = findViewById(R.id.IB_backArrow);
-        this.editButton = findViewById(R.id.BTN_editDetails);
-        this.emailInputLayout = findViewById(R.id.IL_emailAddress);
-        this.passwordInputLayout = findViewById(R.id.IL_password);
-        this.toSystemPreferences = findViewById(R.id.TV_toSystemPreferences);
+        this.sharedPreferences = getSharedPreferences("authentication", MODE_PRIVATE);
+        this.sharedPreferencesEditor = this.sharedPreferences.edit();
 
-        this.emailInputLayout.setHint(email);
-        this.passwordInputLayout.setHint(password);
+        bindViews();
 
+        populateUserDetails();
+
+        // On Click Listeners
         this.backButton.setOnClickListener(v -> super.getOnBackPressedDispatcher().onBackPressed());
         this.editButton.setOnClickListener(v -> {
 
@@ -65,6 +69,34 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
         this.toSystemPreferences.setOnClickListener(v -> startActivity(new Intent(this, SettingsActivity.class)));
-
+        this.logoutButton.setOnClickListener(v -> {
+            this.sharedPreferencesEditor.remove("loggedInUser").apply();
+            startActivity(new Intent(this, AuthenticationActivity.class));
+            finish();
+        });
     }
+
+    /**
+     * Method definition to bind views
+     */
+    private void bindViews(){
+        this.backButton = findViewById(R.id.IB_backArrow);
+        this.username = findViewById(R.id.TV_username);
+        this.editButton = findViewById(R.id.BTN_editDetails);
+        this.emailInputLayout = findViewById(R.id.IL_emailAddress);
+        this.passwordInputLayout = findViewById(R.id.IL_password);
+        this.toSystemPreferences = findViewById(R.id.TV_toSystemPreferences);
+        this.logoutButton = findViewById(R.id.BTN_logout);
+    }
+
+    private void populateUserDetails(){
+        String username = this.sharedPreferences.getString("loggedInUser", "");
+        this.loggedInUser = username.equals("DGITH200") ? User.DGITH200 : User.ABART999;
+
+        String fullName = this.loggedInUser.getFirstName() + "\n" + this.loggedInUser.getLastName();
+        this.username.setText(fullName);
+        this.emailInputLayout.setHint(this.loggedInUser.getEmail());
+        this.passwordInputLayout.setHint("**********");
+    }
+
 }

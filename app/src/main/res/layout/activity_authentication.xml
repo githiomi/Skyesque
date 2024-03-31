@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/activity_background"
+    android:orientation="vertical"
+    tools:context=".AuthenticationActivity">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/credentials" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/libre_franklin"
+        android:text="@string/log_in"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:cardBackgroundColor="@color/transparent"
+        app:cardCornerRadius="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/card_gradient_background"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/IL_username"
+                style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginVertical="10dp"
+                android:elevation="30dp"
+                android:enabled="false"
+                android:hint="@string/username"
+                android:textColorHint="@color/light_blue_card_background"
+                app:boxStrokeColor="@color/light_blue_gradient"
+                app:boxStrokeErrorColor="@android:color/holo_red_dark"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="1dp"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/light_blue_gradient"
+                app:errorIconTint="@color/light_blue_gradient"
+                app:errorTextColor="@android:color/holo_red_dark"
+                app:hintAnimationEnabled="true"
+                app:startIconDrawable="@drawable/ic_profile"
+                app:startIconTint="@color/light_blue_gradient">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/transparent"
+                    android:fontFamily="@font/libre_franklin"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    android:textCursorDrawable="@color/light_blue_gradient"
+                    android:textSize="18sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/IL_password"
+                style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginVertical="10dp"
+                android:elevation="30dp"
+                android:enabled="false"
+                android:hint="@string/email_address_placeholder"
+                android:textColorHint="@color/light_blue_card_background"
+                app:boxStrokeColor="@color/light_blue_gradient"
+                app:boxStrokeErrorColor="@android:color/holo_red_dark"
+                app:boxStrokeWidth="10dp"
+                app:boxStrokeWidthFocused="30dp"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/light_blue_gradient"
+                app:errorIconTint="@color/light_blue_gradient"
+                app:errorTextColor="@android:color/holo_red_dark"
+                app:hintAnimationEnabled="true"
+                app:startIconDrawable="@drawable/email_24"
+                app:startIconTint="@color/light_blue_gradient">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/transparent"
+                    android:fontFamily="@font/libre_franklin"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    android:textCursorDrawable="@color/light_blue_gradient"
+                    android:textSize="18sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/BTN_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_background"
+        android:drawableStart="@drawable/login_24"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/libre_franklin"
+        android:paddingHorizontal="15dp"
+        android:text="@string/log_in"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/libre_franklin"
+        android:text="@string/create_a_new_account"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/light_blue_gradient"
+        android:textSize="13sp" />
+
+</LinearLayout>

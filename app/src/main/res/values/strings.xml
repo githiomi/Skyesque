@@ -47,4 +47,7 @@
     <string name="view_location_in_map">View Location in Map</string>
     <string name="wind_direction">Wind Direction</string>
     <string name="wind_direction_placeholder">South South Easterly</string>
+    <string name="username">Username</string>
+    <string name="log_in">Log in</string>
+    <string name="create_a_new_account">Don\'t have an account? Create One</string>
 </resources>

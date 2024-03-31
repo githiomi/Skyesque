@@ -35,7 +35,7 @@ import java.time.LocalDate;
 public class HomeActivity extends AppCompatActivity {
 
     // Local Variables
-//    private final String sourceUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2643123";
+    // private final String sourceUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2643123";
     private final String sourceUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/observation/rss/2648579";
     private WeatherUnit weatherUnit;
 
@@ -132,7 +132,7 @@ public class HomeActivity extends AppCompatActivity {
      * @return a weather data DTO object
      */
     private WeatherDTO populateWeatherDTO(WeatherUnit weatherUnit) {
-        String location = "Manchester";
+        String location = "Glasgow";
         String title = weatherUnit.getTitle();
         String description = weatherUnit.getDescription();
 

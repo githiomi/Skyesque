@@ -53,7 +53,7 @@ public class WeeklyForecastActivity extends AppCompatActivity implements Forecas
     WeeklyForecastAdapter weeklyForecastAdapter;
 
     // Activity Properties
-    private final String sourceUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2643123";
+    private final String sourceUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2648579";
     private List<DetailedWeatherDTO> detailedWeatherDTOs = new ArrayList<>();
 
     @Override
@@ -168,10 +168,8 @@ public class WeeklyForecastActivity extends AppCompatActivity implements Forecas
 
     @Override
     public void setOnItemClick(int position) {
-
         Intent intent = new Intent(this, WeatherDetailsActivity.class);
         intent.putExtra("toDetailsDTO", this.detailedWeatherDTOs.get(position));
         startActivity(intent);
-
     }
 }

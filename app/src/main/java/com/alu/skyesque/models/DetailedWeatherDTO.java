@@ -11,7 +11,7 @@ import android.os.Parcelable;
  * Date of creation: Monday 25, 03 2024
  */
 
-public class DetailedWeatherDTO extends WeatherDTO {
+public class DetailedWeatherDTO extends WeatherDTO implements Parcelable {
     private String minimumTemperature;
     private String maximumTemperature;
     private String uvRisk;

@@ -97,7 +97,7 @@ public class ThreeDayForecastParser {
 
     private DetailedWeatherDTO DTOMapper(WeatherUnit weatherUnit) {
 
-        String location = "aobuLBD";
+        String location = "Glasgow";
         String title = weatherUnit.getTitle();
         String description = weatherUnit.getDescription();
 

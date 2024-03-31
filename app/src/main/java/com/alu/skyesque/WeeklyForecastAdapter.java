@@ -1,7 +1,7 @@
 package com.alu.skyesque;
 
 import android.content.Context;
-import android.icu.util.LocaleData;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alu.skyesque.interfaces.ForecastInterface;
 import com.alu.skyesque.models.DetailedWeatherDTO;
-import com.alu.skyesque.models.WeatherDTO;
-import com.alu.skyesque.models.WeatherUnit;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -33,7 +31,6 @@ public class WeeklyForecastAdapter extends RecyclerView.Adapter<WeeklyForecastAd
     public final ForecastInterface forecastInterface;
     List<DetailedWeatherDTO> weatherDTOs;
     int[] weatherIcons = {R.drawable.cloudy, R.drawable.thunder, R.drawable.fog, R.drawable.mist, R.drawable.rain, R.drawable.snow, R.drawable.day_clear, R.drawable.night_sleet, R.drawable.day_rain, R.drawable.snow_thunder};
-
     Context context;
 
     public WeeklyForecastAdapter(Context context, List<DetailedWeatherDTO> weatherDTOs, ForecastInterface forecastInterface) {
@@ -45,7 +42,7 @@ public class WeeklyForecastAdapter extends RecyclerView.Adapter<WeeklyForecastAd
     @NonNull
     @Override
     public WeeklyForecastAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.weekly_forecast_item, parent, false), forecastInterface);
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.weekly_forecast_item, parent, false), context, weatherDTOs);
     }
 
     @Override
@@ -78,7 +75,7 @@ public class WeeklyForecastAdapter extends RecyclerView.Adapter<WeeklyForecastAd
         TextView dayOfWeek, minimumTemperature, maximumTemperature;
         ImageView weatherIcon;
 
-        public ViewHolder(@NonNull View itemView, ForecastInterface forecastInterface) {
+        public ViewHolder(@NonNull View itemView, Context context, List<DetailedWeatherDTO> dtos) {
             super(itemView);
             this.weeklySummaryItem = itemView.findViewById(R.id.RL_weeklyForecast);
             this.dayOfWeek = itemView.findViewById(R.id.TV_dayOfTheWeek);
@@ -87,9 +84,13 @@ public class WeeklyForecastAdapter extends RecyclerView.Adapter<WeeklyForecastAd
             this.maximumTemperature = itemView.findViewById(R.id.TV_maximumTemperature);
 
             itemView.setOnClickListener(v -> {
-                if (forecastInterface != null) {
-                    forecastInterface.setOnItemClick(getAdapterPosition());
-                }
+//                if (forecastInterface != null) {
+//                    forecastInterface.setOnItemClick(getAdapterPosition());
+//                }
+                Intent intent = new Intent(context, WeatherDetailsActivity.class);
+                intent.putExtra("toDetailsDTO", dtos.get(getAdapterPosition()));
+                context.startActivity(intent);
+
             });
         }
     }

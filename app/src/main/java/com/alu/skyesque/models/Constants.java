@@ -13,8 +13,21 @@ import lombok.Getter;
 
 public class Constants {
 
-    public final String DTO_TRANSFER = "DTO Transfer";
+    private final String DTO_TRANSFER = "DTO Transfer";
 
-    public final String WEATHER_DETAILS = "Weather Details";
+    private final String WEATHER_DETAILS = "Weather Details";
 
+    private final String LOGGED_IN_SHARED_PREFERENCES = "isLoggedIn";
+
+    public String getDTO_TRANSFER() {
+        return DTO_TRANSFER;
+    }
+
+    public String getWEATHER_DETAILS() {
+        return WEATHER_DETAILS;
+    }
+
+    public String getLOGGED_IN_SHARED_PREFERENCES() {
+        return LOGGED_IN_SHARED_PREFERENCES;
+    }
 }

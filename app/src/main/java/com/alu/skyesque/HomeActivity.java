@@ -168,7 +168,7 @@ public class HomeActivity extends AppCompatActivity {
         String date = this.weatherData.getDay() + " " + getDate();
         this.currentDate.setText(date);
 
-        this.dataLoaded();
+        this.togglePageContent();
     }
 
     private String getDate() {
@@ -179,7 +179,7 @@ public class HomeActivity extends AppCompatActivity {
     /**
      * This method will remove the progress bar and display loaded data
      */
-    private void dataLoaded() {
+    private void togglePageContent() {
         this.loadingProgressBar.setVisibility(View.GONE);
         this.pageContent.setVisibility(View.VISIBLE);
     }

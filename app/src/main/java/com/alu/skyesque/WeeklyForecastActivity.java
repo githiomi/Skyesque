@@ -3,8 +3,11 @@ package com.alu.skyesque;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +46,8 @@ public class WeeklyForecastActivity extends AppCompatActivity implements Forecas
 
     // Views
     ImageButton backArrow;
+    ProgressBar progressBar;
+    LinearLayout pageContent;
     RecyclerView weeklyForecastRecyclerView;
     RelativeLayout heroSection;
     TextView location, temperature, summary;
@@ -95,6 +100,8 @@ public class WeeklyForecastActivity extends AppCompatActivity implements Forecas
      */
     private void initViews() {
         this.backArrow = findViewById(R.id.IB_backArrow);
+        this.progressBar = findViewById(R.id.PB_loading);
+        this.pageContent = findViewById(R.id.LL_pageContent);
         this.heroSection = findViewById(R.id.RL_hero);
         this.location = findViewById(R.id.TV_heroLocation);
         this.temperature = findViewById(R.id.TV_currentTemperature);
@@ -158,6 +165,16 @@ public class WeeklyForecastActivity extends AppCompatActivity implements Forecas
         this.temperature.setText(temperature);
         this.weatherVisual.setImageResource(this.weatherIcons[new Random().nextInt((9 - 1) + 1) + 1]);
         this.summary.setText(summary);
+
+        this.togglePageContent();
+    }
+
+    /**
+     * This method hides the progress bar and displays loaded data
+     */
+    private void togglePageContent(){
+        this.progressBar.setVisibility(View.GONE);
+        this.pageContent.setVisibility(View.VISIBLE);
     }
 
     private void setUpAdapter(List<DetailedWeatherDTO> data) {

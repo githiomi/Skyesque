@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class Constants {
 
-    public static final String OBSERVATION_BASE_URL = "https://weather-broker-cdn.api.bbci.co.uk/en/obsevation/rss/";
+    public static final String OBSERVATION_BASE_URL = "https://weather-broker-cdn.api.bbci.co.uk/en/observation/rss/";
     public static final String THREE_DAY_BASE_URL = "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/";
     public static final String WEATHER_DTO_TRANSFER = "Weather DTO Transfer";
     public static final String WEATHER_LOCATION_TRANSFER = "Weather Location Transfer";

@@ -1,5 +1,8 @@
 package com.alu.skyesque;
 
+import static com.alu.skyesque.models.Constants.COORDINATES;
+import static com.alu.skyesque.models.Constants.PIN_LOCATION;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
@@ -51,8 +54,8 @@ public class WeatherDetailsActivity extends AppCompatActivity {
         this.pinLocation.setOnClickListener(v -> {
             Intent mapIntent = new Intent(this, MapsActivity.class);
             String coordinates = detailedWeatherDTO.getLatitude() + "," + detailedWeatherDTO.getLongitude();
-            mapIntent.putExtra("pinLocation", detailedWeatherDTO.getLocation());
-            mapIntent.putExtra("coordinates", coordinates);
+            mapIntent.putExtra(PIN_LOCATION, detailedWeatherDTO.getLocation());
+            mapIntent.putExtra(COORDINATES, coordinates);
             startActivity(mapIntent);
         });
         this.backButton.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());

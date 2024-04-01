@@ -1,11 +1,15 @@
 package com.alu.skyesque;
 
+import static com.alu.skyesque.models.Constants.COORDINATES;
+import static com.alu.skyesque.models.Constants.PIN_LOCATION;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import com.alu.skyesque.databinding.ActivityMapsBinding;
+import com.alu.skyesque.models.Constants;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -30,8 +34,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
 
-        this.location = getIntent().getStringExtra("pinLocation");
-        this.coordinates = getIntent().getStringExtra("coordinates");
+        this.location = getIntent().getStringExtra(PIN_LOCATION);
+        this.coordinates = getIntent().getStringExtra(COORDINATES);
 
 
         assert mapFragment != null;

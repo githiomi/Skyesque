@@ -1,5 +1,7 @@
 package com.alu.skyesque;
 
+import static com.alu.skyesque.models.Constants.LOGGED_IN_USER;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,6 +16,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.alu.skyesque.models.Constants;
 import com.alu.skyesque.models.User;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -48,7 +51,7 @@ public class AuthenticationActivity extends AppCompatActivity {
             return insets;
         });
 
-        this.sharedPreferences = getSharedPreferences("authentication", Context.MODE_PRIVATE);
+        this.sharedPreferences = getSharedPreferences(Constants.MY_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         this.sharedPreferencesEditor = this.sharedPreferences.edit();
 
         // View Binding
@@ -98,7 +101,7 @@ public class AuthenticationActivity extends AppCompatActivity {
             return;
         }
 
-        this.sharedPreferencesEditor.putString("loggedInUser", user.getUsername()).apply();
+        this.sharedPreferencesEditor.putString(LOGGED_IN_USER, user.getUsername()).apply();
         startActivity(new Intent(this, HomeActivity.class));
         finish();
 
@@ -109,7 +112,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         super.onStart();
 
         // Check if the user is already logged in
-        String user = this.sharedPreferences.getString("loggedInUser", "");
+        String user = this.sharedPreferences.getString(LOGGED_IN_USER, "");
 
         if (!user.isEmpty()) {
             startActivity(new Intent(this, HomeActivity.class));

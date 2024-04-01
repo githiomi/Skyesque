@@ -1,6 +1,8 @@
 package com.alu.skyesque;
 
 import static android.content.ContentValues.TAG;
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 import static com.alu.skyesque.models.Constants.OBSERVATION_BASE_URL;
 
 import android.content.Intent;
@@ -21,6 +23,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.alu.skyesque.models.Constants;
 import com.alu.skyesque.models.Location;
 import com.alu.skyesque.models.WeatherDTO;
@@ -50,6 +53,7 @@ public class HomeActivity extends AppCompatActivity {
     private Location currentLocation;
 
     // Views
+    LottieAnimationView errorAnimation;
     ProgressBar loadingProgressBar;
     ScrollView pageContent;
     ImageButton toProfile, toPrevious, toNext;
@@ -89,6 +93,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void initViews() {
+        this.errorAnimation = findViewById(R.id.LA_error);
         this.loadingProgressBar = findViewById(R.id.PB_loading);
         this.pageContent = findViewById(R.id.SV_pageContent);
         this.toProfile = findViewById(R.id.IV_toProfile);
@@ -151,6 +156,7 @@ public class HomeActivity extends AppCompatActivity {
                 bufferedReader.close();
             } catch (IOException ae) {
                 HomeActivity.this.runOnUiThread(() -> Toast.makeText(this, "Could not get weather data. Check internet connection.", Toast.LENGTH_LONG).show());
+                toggleErrorView();
                 Log.e("Current Forecast URL Connection Exception", "ioexception -> " + ae.getMessage());
             }
 
@@ -230,6 +236,14 @@ public class HomeActivity extends AppCompatActivity {
     private void togglePageContent() {
         this.loadingProgressBar.setVisibility(View.GONE);
         this.pageContent.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * Method definition to hide progress bar and show error animation
+     */
+    private void toggleErrorView() {
+        this.loadingProgressBar.setVisibility(GONE);
+        this.errorAnimation.setVisibility(VISIBLE);
     }
 
     /**

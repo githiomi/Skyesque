@@ -20,8 +20,10 @@ public class Constants {
     public static final String WEATHER_LOCATION_TRANSFER = "Weather Location Transfer";
     public static final String WEATHER_DETAILS_TRANSFER = "Weather Details Transfer";
     public static final String LOCATION_ID = "Location ID";
+    public static final String COORDINATES = "Coordinates";
+    public static final String PIN_LOCATION = "Pin Location";
     public static final String MY_SHARED_PREFERENCES = "authentication";
-    public static final String LOGGED_IN_SHARED_PREFERENCES = "isLoggedIn";
+    public static final String LOGGED_IN_USER = "Logged In User";
     public static final List<Location> LOCATIONS = new ArrayList<>(
             Arrays.asList(Location.GLASGOW, Location.LONDON, Location.NEW_YORK, Location.OMAN, Location.MAURITIUS, Location.BANGLADESH)
     );

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--Name                 Daniel Githiomi-->
+<?xml version="1.0" encoding="utf-8"?><!--Name                 Daniel Githiomi-->
 <!--Student ID           S2110911-->
 <!--Programme of Study   Computing - ALU Mauritius-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -33,6 +32,16 @@
         android:contentDescription="@string/content_description"
         android:src="@drawable/arrow_back_24" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/LA_error"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/error" />
+
     <ProgressBar
         android:id="@+id/PB_loading"
         style="@android:style/Widget.DeviceDefault.Light.ProgressBar"
@@ -45,17 +54,17 @@
     <LinearLayout
         android:id="@+id/LL_pageContent"
         android:layout_width="match_parent"
-        android:weightSum="2"
-        android:visibility="gone"
         android:layout_height="match_parent"
         android:layout_below="@id/IB_backArrow"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:weightSum="2">
 
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
             android:layout_margin="15dp"
+            android:layout_weight="1"
             app:cardBackgroundColor="@color/transparent"
             app:cardCornerRadius="15dp">
 
@@ -149,15 +158,15 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1" >
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/TV_todaySummary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:layout_margin="1dp"
+                android:layout_marginTop="15dp"
                 android:paddingHorizontal="5dp"
                 android:text="@string/weekly_weather_summary"
                 android:textColor="@color/white"

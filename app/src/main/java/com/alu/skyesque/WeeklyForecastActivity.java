@@ -1,5 +1,7 @@
 package com.alu.skyesque;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 import static com.alu.skyesque.models.Constants.LOCATION_ID;
 import static com.alu.skyesque.models.Constants.THREE_DAY_BASE_URL;
 import static com.alu.skyesque.models.Constants.WEATHER_DETAILS_TRANSFER;
@@ -7,7 +9,6 @@ import static com.alu.skyesque.models.Constants.WEATHER_DETAILS_TRANSFER;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,6 +26,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.alu.skyesque.interfaces.ForecastInterface;
 import com.alu.skyesque.models.Constants;
 import com.alu.skyesque.models.DetailedWeatherDTO;
@@ -52,6 +54,7 @@ public class WeeklyForecastActivity extends AppCompatActivity implements Forecas
 
     // Views
     ImageButton backArrow;
+    LottieAnimationView errorAnimation;
     ProgressBar progressBar;
     LinearLayout pageContent;
     RecyclerView weeklyForecastRecyclerView;
@@ -111,6 +114,7 @@ public class WeeklyForecastActivity extends AppCompatActivity implements Forecas
      */
     private void initViews() {
         this.backArrow = findViewById(R.id.IB_backArrow);
+        this.errorAnimation = findViewById(R.id.LA_error);
         this.progressBar = findViewById(R.id.PB_loading);
         this.pageContent = findViewById(R.id.LL_pageContent);
         this.heroSection = findViewById(R.id.RL_hero);
@@ -145,6 +149,7 @@ public class WeeklyForecastActivity extends AppCompatActivity implements Forecas
                 bufferedReader.close();
             } catch (IOException ae) {
                 WeeklyForecastActivity.this.runOnUiThread(() -> Toast.makeText(this, "Could not get weather data. Check internet connection.", Toast.LENGTH_LONG).show());
+                toggleErrorView();
                 Log.e("Weekly Forecast URL Connection Exception", "ioexception -> " + ae.getMessage());
             }
 
@@ -186,8 +191,16 @@ public class WeeklyForecastActivity extends AppCompatActivity implements Forecas
      * This method hides the progress bar and displays loaded data
      */
     private void togglePageContent() {
-        this.progressBar.setVisibility(View.GONE);
-        this.pageContent.setVisibility(View.VISIBLE);
+        this.progressBar.setVisibility(GONE);
+        this.pageContent.setVisibility(VISIBLE);
+    }
+
+    /**
+     * Method definition to hide progress bar and show error animation
+     */
+    private void toggleErrorView() {
+        this.progressBar.setVisibility(GONE);
+        this.errorAnimation.setVisibility(VISIBLE);
     }
 
     private void setUpAdapter(List<DetailedWeatherDTO> data) {

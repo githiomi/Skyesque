@@ -231,7 +231,8 @@
                             android:layout_height="100dp"
                             android:layout_gravity="center"
                             android:contentDescription="@string/wind_speed"
-                            android:src="@drawable/sun" />
+                            android:padding="13dp"
+                            android:src="@drawable/barometer" />
 
                         <TextView
                             android:id="@+id/TV_sunSummary"

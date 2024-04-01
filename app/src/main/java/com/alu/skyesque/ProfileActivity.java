@@ -1,5 +1,7 @@
 package com.alu.skyesque;
 
+import static com.alu.skyesque.models.Constants.LOGGED_IN_USER;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.alu.skyesque.models.Constants;
 import com.alu.skyesque.models.User;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -46,7 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
             return insets;
         });
 
-        this.sharedPreferences = getSharedPreferences("authentication", MODE_PRIVATE);
+        this.sharedPreferences = getSharedPreferences(Constants.MY_SHARED_PREFERENCES, MODE_PRIVATE);
         this.sharedPreferencesEditor = this.sharedPreferences.edit();
 
         bindViews();
@@ -70,7 +73,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
         this.toSystemPreferences.setOnClickListener(v -> startActivity(new Intent(this, SettingsActivity.class)));
         this.logoutButton.setOnClickListener(v -> {
-            this.sharedPreferencesEditor.remove("loggedInUser").apply();
+            this.sharedPreferencesEditor.remove(LOGGED_IN_USER).apply();
             startActivity(new Intent(this, AuthenticationActivity.class));
             finish();
         });
@@ -90,7 +93,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void populateUserDetails(){
-        String username = this.sharedPreferences.getString("loggedInUser", "");
+        String username = this.sharedPreferences.getString(LOGGED_IN_USER, "");
         this.loggedInUser = username.equals("DGITH200") ? User.DGITH200 : User.ABART999;
 
         String fullName = this.loggedInUser.getFirstName() + "\n" + this.loggedInUser.getLastName();

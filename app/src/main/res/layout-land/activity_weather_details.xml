@@ -259,8 +259,7 @@
                     android:id="@+id/TV_details"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginVertical="5dp"
                     android:paddingHorizontal="15dp"
                     android:text="@string/weather_details"
                     android:textColor="@color/white"
@@ -271,7 +270,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@id/TV_details"
-                    android:layout_marginVertical="10dp"
+                    android:layout_marginVertical="5dp"
                     android:background="@color/transparent"
                     android:orientation="vertical">
 

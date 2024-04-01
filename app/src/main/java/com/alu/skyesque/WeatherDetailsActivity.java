@@ -54,6 +54,7 @@ public class WeatherDetailsActivity extends AppCompatActivity {
         this.pinLocation.setOnClickListener(v -> {
             Intent mapIntent = new Intent(this, MapsActivity.class);
             String coordinates = detailedWeatherDTO.getLatitude() + "," + detailedWeatherDTO.getLongitude();
+            mapIntent.putExtra("pinLocation", detailedWeatherDTO.getLocation());
             mapIntent.putExtra("coordinates", coordinates);
             startActivity(mapIntent);
         });

@@ -33,7 +33,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        android:visibility="gone"
         tools:context=".HomeActivity">
 
         <RelativeLayout
@@ -52,18 +51,46 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_profile" />
 
+            <ImageButton
+                android:id="@+id/IV_toPrevious"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@id/IV_toProfile"
+                android:layout_alignParentStart="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp"
+                android:background="@color/transparent"
+                android:clickable="true"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitCenter"
+                android:src="@drawable/arrow_back_24" />
+
             <TextView
                 android:id="@+id/TV_townName"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/IV_toProfile"
+                android:layout_centerHorizontal="true"
                 android:layout_marginBottom="5dp"
                 android:fontFamily="@font/lilita_one"
                 android:letterSpacing=".06"
                 android:text="@string/town_placeholder"
-                android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="40sp" />
+
+            <ImageButton
+                android:id="@+id/IV_toNext"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@id/IV_toProfile"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="@color/transparent"
+                android:clickable="true"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitCenter"
+                android:src="@drawable/arrow_forward_24" />
 
             <TextView
                 android:id="@+id/TV_currentDate"

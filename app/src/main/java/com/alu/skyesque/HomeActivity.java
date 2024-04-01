@@ -13,10 +13,13 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.collection.CircularArray;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.alu.skyesque.models.Constants;
+import com.alu.skyesque.models.Location;
 import com.alu.skyesque.models.WeatherDTO;
 import com.alu.skyesque.models.WeatherUnit;
 import com.alu.skyesque.parsers.LatestObservationParser;
@@ -29,6 +32,10 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Name                 Daniel Githiomi
@@ -39,13 +46,15 @@ public class HomeActivity extends AppCompatActivity {
 
     // Local Variables
     // private final String sourceUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2643123";
-    private final String sourceUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/observation/rss/2648579";
+    private final String BASE_URL = "https://weather-broker-cdn.api.bbci.co.uk/en/observation/rss/";
     private WeatherUnit weatherUnit;
+    private List<Location> locations = Constants.LOCATIONS;
+    private Location currentLocation;
 
     // Views
     ProgressBar loadingProgressBar;
     ScrollView pageContent;
-    ImageButton toProfile;
+    ImageButton toProfile, toPrevious, toNext;
     TextView townName, currentDate, overview, details;
     FrameLayout overviewDetailsContainer;
     WeatherDTO weatherData;
@@ -65,9 +74,22 @@ public class HomeActivity extends AppCompatActivity {
         // Initialize the views
         initViews();
 
-        getData();
+        this.currentLocation = this.locations.get(0);
+        this.getData(currentLocation);
 
         this.toProfile.setOnClickListener(v -> startActivity(new Intent(this, ProfileActivity.class)));
+        this.toPrevious.setOnClickListener(v -> {
+            Toast.makeText(this, "To Previous Click", Toast.LENGTH_LONG).show();
+
+            this.toggleLoading();
+            this.goToPrevious();
+        });
+        this.toNext.setOnClickListener(v -> {
+            Toast.makeText(this, "To Next Click", Toast.LENGTH_LONG).show();
+
+            this.toggleLoading();
+            this.goToNext();
+        });
         this.details.setOnClickListener(v -> switchToDetails());
         this.overview.setOnClickListener(v -> switchToOverview());
 
@@ -77,6 +99,8 @@ public class HomeActivity extends AppCompatActivity {
         this.loadingProgressBar = findViewById(R.id.PB_loading);
         this.pageContent = findViewById(R.id.SV_pageContent);
         this.toProfile = findViewById(R.id.IV_toProfile);
+        this.toPrevious = findViewById(R.id.IV_toPrevious);
+        this.toNext = findViewById(R.id.IV_toNext);
         this.townName = findViewById(R.id.TV_townName);
         this.currentDate = findViewById(R.id.TV_currentDate);
         this.overview = findViewById(R.id.TV_overview);
@@ -84,7 +108,23 @@ public class HomeActivity extends AppCompatActivity {
         this.overviewDetailsContainer = findViewById(R.id.FL_overviewDetails);
     }
 
-    private void getData() {
+    private void goToPrevious(){
+        int index = getIndex() - 1 < 0 ? this.locations.size() - 1 : getIndex() - 1;
+        this.currentLocation = locations.get(index);
+        this.getData(currentLocation);
+    }
+
+    private void goToNext(){
+        int index = getIndex() + 1 > this.locations.size() - 1 ? 0 : getIndex() + 1;
+        this.currentLocation = locations.get(index);
+        this.getData(currentLocation);
+    }
+
+    private int getIndex(){
+        return this.locations.indexOf(this.currentLocation);
+    }
+
+    private void getData(Location location) {
         // new Thread(new BackgroundTask(this.urlSource)).start();
         new Thread(() -> {
             StringBuilder result = new StringBuilder();
@@ -94,7 +134,11 @@ public class HomeActivity extends AppCompatActivity {
             String inputLine;
 
             try {
-                url = new URL(sourceUrl);
+                Long townId = location.getLocationId();
+                url = new URL(this.BASE_URL + townId);
+
+                Log.e("URL", "URL: " + url);
+
                 urlConnection = url.openConnection();
                 bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                 while ((inputLine = bufferedReader.readLine()) != null)
@@ -117,7 +161,7 @@ public class HomeActivity extends AppCompatActivity {
             InputStream latestInputStream = new ByteArrayInputStream(String.valueOf(result).getBytes());
             weatherUnit = latestObservationParser.getWeatherUnit(latestInputStream);
 
-            WeatherDTO dto = HomeActivity.this.populateWeatherDTO(weatherUnit);
+            WeatherDTO dto = HomeActivity.this.populateWeatherDTO(weatherUnit, location.getLocationName());
 
             getSupportFragmentManager()
                     .beginTransaction()
@@ -138,8 +182,7 @@ public class HomeActivity extends AppCompatActivity {
      * @param weatherUnit
      * @return a weather data DTO object
      */
-    private WeatherDTO populateWeatherDTO(WeatherUnit weatherUnit) {
-        String location = "Glasgow";
+    private WeatherDTO populateWeatherDTO(WeatherUnit weatherUnit, String townName) {
         String title = weatherUnit.getTitle();
         String description = weatherUnit.getDescription();
 
@@ -155,7 +198,7 @@ public class HomeActivity extends AppCompatActivity {
         String latitude = "latitude";
         String longitude = "longitude";
 
-        return new WeatherDTO(location, day, weatherSummary, temperatureCelsius, temperatureFahrenheit,
+        return new WeatherDTO(townName, day, weatherSummary, temperatureCelsius, temperatureFahrenheit,
                 windDirection, windSpeed, humidity, pressure, visibility, latitude, longitude);
     }
 
@@ -182,6 +225,14 @@ public class HomeActivity extends AppCompatActivity {
     private void togglePageContent() {
         this.loadingProgressBar.setVisibility(View.GONE);
         this.pageContent.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * This method will set the loading view awaiting data
+     */
+    private void toggleLoading(){
+        this.loadingProgressBar.setVisibility(View.VISIBLE);
+        this.pageContent.setVisibility(View.GONE);
     }
 
     /**

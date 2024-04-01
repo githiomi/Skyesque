@@ -1,5 +1,9 @@
 package com.alu.skyesque.models;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Author: dangit
  * Project Name: Skyesque
@@ -10,26 +14,13 @@ package com.alu.skyesque.models;
  */
 public class Constants {
 
-    private final String DTO_TRANSFER = "DTO Transfer";
+    public static final String DTO_TRANSFER = "DTO Transfer";
+    public static final String WEATHER_DETAILS = "Weather Details";
 
-    private final String WEATHER_DETAILS = "Weather Details";
+    public static final String MY_SHARED_PREFERENCES = "authentication";
+    public static final String LOGGED_IN_SHARED_PREFERENCES = "isLoggedIn";
+    public static final List<Location> LOCATIONS = new ArrayList<>(
+            Arrays.asList(Location.GLASGOW, Location.LONDON, Location.NEW_YORK, Location.OMAN, Location.MAURITIUS, Location.BANGLADESH)
+    );
 
-    private final String MY_SHARED_PREFERENCES = "authentication";
-    private final String LOGGED_IN_SHARED_PREFERENCES = "isLoggedIn";
-
-    public String getDTO_TRANSFER() {
-        return DTO_TRANSFER;
-    }
-
-    public String getMY_SHARED_PREFERENCES() {
-        return MY_SHARED_PREFERENCES;
-    }
-
-    public String getWEATHER_DETAILS() {
-        return WEATHER_DETAILS;
-    }
-
-    public String getLOGGED_IN_SHARED_PREFERENCES() {
-        return LOGGED_IN_SHARED_PREFERENCES;
-    }
 }

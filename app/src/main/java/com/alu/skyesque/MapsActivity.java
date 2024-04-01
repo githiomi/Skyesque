@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     // Activity properties
+    String location;
     String coordinates;
 
     @Override
@@ -29,7 +30,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
 
+        this.location = getIntent().getStringExtra("pinLocation");
         this.coordinates = getIntent().getStringExtra("coordinates");
+
 
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
@@ -52,7 +55,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Add a marker in Sydney and move the camera
         LatLng pin = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
-        googleMap.addMarker(new MarkerOptions().position(pin).title("Marker in Sydney")).setDraggable(true);
+        googleMap.addMarker(new MarkerOptions().position(pin).title("Pin Marker for " + location.toUpperCase())).setDraggable(false);
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(pin));
     }
 

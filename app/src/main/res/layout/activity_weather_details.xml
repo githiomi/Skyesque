@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--Name                 Daniel Githiomi-->
+<?xml version="1.0" encoding="utf-8"?>
+<!--Name                 Daniel Githiomi-->
 <!--Student ID           S2110911-->
 <!--Programme of Study   Computing - ALU Mauritius-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,6 +15,7 @@
         android:id="@+id/TV_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:text="@string/gcu_credentials"
         android:textAlignment="center"
         android:textAllCaps="true"

@@ -24,7 +24,8 @@
         <activity
             android:name=".MapsActivity"
             android:exported="false"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_maps"
+            android:theme="@style/Base.Theme.Skyesque" />
         <activity
             android:name=".AuthenticationActivity"
             android:exported="false" />

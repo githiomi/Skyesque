@@ -1,19 +1,22 @@
 package com.alu.skyesque;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
-import android.os.Bundle;
-
+import com.alu.skyesque.databinding.ActivityMapsBinding;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.alu.skyesque.databinding.ActivityMapsBinding;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+
+    // Activity properties
+    String coordinates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+
+        this.coordinates = getIntent().getStringExtra("coordinates");
+
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
     }
@@ -41,10 +47,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
 
+        String lat = this.coordinates.split(",")[0];
+        String lng = this.coordinates.split(",")[1];
+
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng pin = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
+        googleMap.addMarker(new MarkerOptions().position(pin).title("Marker in Sydney")).setDraggable(true);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(pin));
     }
 
 }

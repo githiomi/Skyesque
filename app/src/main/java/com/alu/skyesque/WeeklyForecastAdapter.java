@@ -45,7 +45,7 @@ public class WeeklyForecastAdapter extends RecyclerView.Adapter<WeeklyForecastAd
     @NonNull
     @Override
     public WeeklyForecastAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.weekly_forecast_item, parent, false), context, weatherDTOs);
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.weekly_forecast_item, parent, false), context, forecastInterface, weatherDTOs);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class WeeklyForecastAdapter extends RecyclerView.Adapter<WeeklyForecastAd
         TextView dayOfWeek, minimumTemperature, maximumTemperature;
         ImageView weatherIcon;
 
-        public ViewHolder(@NonNull View itemView, Context context, List<DetailedWeatherDTO> dtos) {
+        public ViewHolder(@NonNull View itemView, Context context, ForecastInterface forecastInterface, List<DetailedWeatherDTO> dtos) {
             super(itemView);
             this.weeklySummaryItem = itemView.findViewById(R.id.RL_weeklyForecast);
             this.dayOfWeek = itemView.findViewById(R.id.TV_dayOfTheWeek);
@@ -87,14 +87,9 @@ public class WeeklyForecastAdapter extends RecyclerView.Adapter<WeeklyForecastAd
             this.maximumTemperature = itemView.findViewById(R.id.TV_maximumTemperature);
 
             itemView.setOnClickListener(v -> {
-//                if (forecastInterface != null) {
-//                    forecastInterface.setOnItemClick(getAdapterPosition());
-//                }
-                Intent intent = new Intent(context, WeatherDetailsActivity.class);
-                intent.putExtra("toDetailsDTO", dtos.get(getAdapterPosition()));
-                Log.e(TAG, "ViewHolder: " +dtos.get(getAdapterPosition()) );
-                context.startActivity(intent);
-
+                if (forecastInterface != null) {
+                    forecastInterface.setOnItemClick(getAdapterPosition());
+                }
             });
         }
     }

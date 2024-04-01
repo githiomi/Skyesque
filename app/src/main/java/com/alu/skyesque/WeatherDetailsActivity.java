@@ -2,6 +2,7 @@ package com.alu.skyesque;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageButton;
@@ -51,10 +52,10 @@ public class WeatherDetailsActivity extends AppCompatActivity {
 
         // CLick listeners
         this.pinLocation.setOnClickListener(v -> {
-//            Intent mapIntent = new Intent(this, MapActivity.class);
-//            String coordinates = detailedWeatherDTO.getLatitude() + "," + detailedWeatherDTO.getLongitude();
-//            mapIntent.putExtra("coordinates", coordinates);
-//            startActivity(mapIntent);
+            Intent mapIntent = new Intent(this, MapsActivity.class);
+            String coordinates = detailedWeatherDTO.getLatitude() + "," + detailedWeatherDTO.getLongitude();
+            mapIntent.putExtra("coordinates", coordinates);
+            startActivity(mapIntent);
         });
         this.backButton.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
     }

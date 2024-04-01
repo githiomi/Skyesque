@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?><!--Name                 Daniel Githiomi-->
+<!--Student ID           S2110911-->
+<!--Programme of Study   Computing - ALU Mauritius-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/activity_background"
+    tools:context=".ProfileActivity">
+
+    <TextView
+        android:id="@+id/TV_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/gcu_credentials"
+        android:layout_alignParentTop="true"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+    <RelativeLayout
+        android:id="@+id/TL_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TV_name" >
+
+        <ImageButton
+            android:id="@+id/IB_backArrow"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentStart="true"
+            android:layout_margin="15dp"
+            android:background="@color/transparent"
+            android:clickable="true"
+            android:contentDescription="@string/content_description"
+            android:src="@drawable/arrow_back_24" />
+
+        <TextView
+            android:id="@+id/TV_activityTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_toStartOf="@id/IB_camera"
+            android:layout_toEndOf="@id/IB_backArrow"
+            android:fontFamily="@font/libre_franklin"
+            android:text="@string/profile"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/IB_camera"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="15dp"
+            android:background="@color/transparent"
+            android:clickable="true"
+            android:contentDescription="@string/content_description"
+            android:src="@drawable/camera_24" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/TL_toolbar"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:gravity="center"
+        android:weightSum="2" >
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:cardBackgroundColor="@color/transparent"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/profile_card_background"
+                android:paddingVertical="20dp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/IV_profilePicture"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_centerHorizontal="true"
+                    app:cardCornerRadius="250dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/content_description"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/profile_picture" />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/TV_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:fontFamily="@font/lilita_one"
+                    android:letterSpacing=".05"
+                    android:text="@string/br_username"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="30sp" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="30dp">
+
+                    <TextView
+                        android:id="@+id/TV_userDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:fontFamily="@font/libre_franklin"
+                        android:text="@string/user_details"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/BTN_editDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/button_background"
+                        android:contentDescription="@string/content_description"
+                        android:fontFamily="@font/libre_franklin"
+                        android:text="@string/edit"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        tools:ignore="RelativeOverlap" />
+
+                </RelativeLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/IL_emailAddress"
+                    style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="30dp"
+                    android:enabled="false"
+                    android:hint="@string/email_address_placeholder"
+                    android:textColorHint="@color/light_blue_gradient"
+                    app:boxStrokeColor="@color/light_blue_gradient"
+                    app:boxStrokeErrorColor="@android:color/holo_red_dark"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="1dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="@color/light_blue_gradient"
+                    app:errorIconTint="@color/light_blue_gradient"
+                    app:errorTextColor="@android:color/holo_red_dark"
+                    app:hintAnimationEnabled="true"
+                    app:startIconDrawable="@drawable/email_24"
+                    app:startIconTint="@color/light_blue_gradient">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:background="@color/transparent"
+                        android:fontFamily="@font/libre_franklin"
+                        android:inputType="text"
+                        android:singleLine="true"
+                        android:textColor="@color/white"
+                        android:textCursorDrawable="@color/light_blue_gradient"
+                        android:textSize="18sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/IL_password"
+                    style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="30dp"
+                    android:enabled="false"
+                    android:hint="@string/password_placeholder"
+                    android:textColorHint="@color/light_blue_gradient"
+                    app:boxStrokeColor="@color/light_blue_gradient"
+                    app:boxStrokeErrorColor="@android:color/holo_red_dark"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:endIconMode="password_toggle"
+                    app:endIconTint="@color/light_blue_gradient"
+                    app:errorIconTint="@color/light_blue_gradient"
+                    app:errorTextColor="@android:color/holo_red_dark"
+                    app:hintAnimationEnabled="true"
+                    app:startIconDrawable="@drawable/lock_24"
+                    app:startIconTint="@color/light_blue_gradient">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:background="@color/transparent"
+                        android:fontFamily="@font/libre_franklin"
+                        android:inputType="text"
+                        android:singleLine="true"
+                        android:textColor="@color/white"
+                        android:textCursorDrawable="@color/light_blue_gradient"
+                        android:textSize="18sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/TV_appPreferences"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginVertical="15dp"
+                    android:fontFamily="@font/libre_franklin"
+                    android:text="@string/application_preferences"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="30dp">
+
+                    <TextView
+                        android:id="@+id/TV_theme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:fontFamily="@font/libre_franklin"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="0dp"
+                        android:text="@string/dark_mode_theme"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/toggle_themeSwitcher"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentEnd="true"
+                        android:background="@color/transparent"
+                        android:checked="true"
+                        android:textColor="@color/white"
+                        android:theme="@style/BrandedSwitch.control" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/TV_toSystemPreferences"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="30dp"
+                    android:clickable="true"
+                    android:fontFamily="@font/libre_franklin"
+                    android:paddingVertical="15dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
+                    android:text="@string/edit_preferences"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:drawableEndCompat="@drawable/arrow_forward_24" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/BTN_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="30dp"
+                    android:background="@drawable/button_background"
+                    android:drawableStart="@drawable/logout_24"
+                    android:drawablePadding="20dp"
+                    android:fontFamily="@font/libre_franklin"
+                    android:paddingHorizontal="30dp"
+                    android:paddingVertical="15dp"
+                    android:text="@string/logout"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>

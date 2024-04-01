@@ -19,7 +19,6 @@ public class Constants {
     public static final String WEATHER_DTO_TRANSFER = "Weather DTO Transfer";
     public static final String WEATHER_LOCATION_TRANSFER = "Weather Location Transfer";
     public static final String WEATHER_DETAILS_TRANSFER = "Weather Details Transfer";
-    public static final String LOCATION_NAME = "Location Name";
     public static final String LOCATION_ID = "Location ID";
     public static final String MY_SHARED_PREFERENCES = "authentication";
     public static final String LOGGED_IN_SHARED_PREFERENCES = "isLoggedIn";

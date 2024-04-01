@@ -1,7 +1,6 @@
 package com.alu.skyesque;
 
 import static com.alu.skyesque.models.Constants.LOCATION_ID;
-import static com.alu.skyesque.models.Constants.LOCATION_NAME;
 import static com.alu.skyesque.models.Constants.WEATHER_DETAILS_TRANSFER;
 import static com.alu.skyesque.models.Constants.WEATHER_DTO_TRANSFER;
 
@@ -46,7 +45,6 @@ public class OverviewFragment extends Fragment {
         OverviewFragment overviewFragment = new OverviewFragment();
         Bundle weatherBundle = new Bundle();
         weatherBundle.putParcelable(WEATHER_DTO_TRANSFER, weatherDTO);
-        weatherBundle.putString(LOCATION_NAME, location.getLocationName());
         weatherBundle.putLong(LOCATION_ID, location.getLocationId());
         overviewFragment.setArguments(weatherBundle);
         return overviewFragment;
@@ -57,7 +55,6 @@ public class OverviewFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             weatherData = getArguments().getParcelable(WEATHER_DTO_TRANSFER);
-            locationName = getArguments().getString(LOCATION_NAME);
             locationId = getArguments().getLong(LOCATION_ID);
         }
     }
@@ -74,7 +71,6 @@ public class OverviewFragment extends Fragment {
         this.toWeeklyForecast.setOnClickListener(v -> {
             Intent forecastIntent = new Intent(getContext(), WeeklyForecastActivity.class);
             forecastIntent.putExtra(WEATHER_DETAILS_TRANSFER, weatherData);
-            forecastIntent.putExtra(LOCATION_NAME, locationName);
             forecastIntent.putExtra(LOCATION_ID, locationId);
             requireActivity().startActivity(forecastIntent);
         });

@@ -5,6 +5,7 @@ import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
 import static com.alu.skyesque.models.Constants.LOCATION_ID;
 import static com.alu.skyesque.models.Constants.LOCATION_NAME;
 import static com.alu.skyesque.models.Constants.THREE_DAY_BASE_URL;
+import static com.alu.skyesque.models.Constants.WEATHER_DETAILS_TRANSFER;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alu.skyesque.interfaces.ForecastInterface;
 import com.alu.skyesque.models.Constants;
 import com.alu.skyesque.models.DetailedWeatherDTO;
+import com.alu.skyesque.models.WeatherDTO;
 import com.alu.skyesque.parsers.ThreeDayForecastParser;
 
 import java.io.BufferedReader;
@@ -61,8 +63,8 @@ public class WeeklyForecastActivity extends AppCompatActivity implements Forecas
     ImageView weatherVisual;
 
     // Activity Properties
+    private WeatherDTO weatherData;
     private Long locationId;
-    private String locationName;
     int[] weatherIcons = {R.drawable.cloudy, R.drawable.thunder, R.drawable.fog, R.drawable.mist,
             R.drawable.rain, R.drawable.snow, R.drawable.day_clear, R.drawable.night_sleet,
             R.drawable.day_rain, R.drawable.snow_thunder};
@@ -84,8 +86,8 @@ public class WeeklyForecastActivity extends AppCompatActivity implements Forecas
             return insets;
         });
 
+        this.weatherData = getIntent().getParcelableExtra(WEATHER_DETAILS_TRANSFER);
         this.locationId = getIntent().getLongExtra(LOCATION_ID, 0L);
-        this.locationName = getIntent().getStringExtra(LOCATION_NAME);
 
         initViews();
         changeHeroImage();
@@ -159,18 +161,18 @@ public class WeeklyForecastActivity extends AppCompatActivity implements Forecas
 
             ThreeDayForecastParser threeDayForecastParser = new ThreeDayForecastParser();
             InputStream forecastInputStream = new ByteArrayInputStream(String.valueOf(result).getBytes());
-            this.detailedWeatherDTOs = threeDayForecastParser.getThreeDayForecast(forecastInputStream, locationName);
+            this.detailedWeatherDTOs = threeDayForecastParser.getThreeDayForecast(forecastInputStream, weatherData.getLocation());
 
             WeeklyForecastActivity.this.runOnUiThread(() -> {
                 this.setUpAdapter(detailedWeatherDTOs);
-                this.populateViews(detailedWeatherDTOs.get(0));
+                this.populateViews(weatherData);
             });
 
         }).start();
 
     }
 
-    private void populateViews(DetailedWeatherDTO data) {
+    private void populateViews(WeatherDTO data) {
         String location = data.getLocation();
         String temperature = data.getTemperatureCelsius().split("°")[0];
         String summary = data.getWeatherSummary();

@@ -1,9 +1,6 @@
 package com.alu.skyesque;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
-
 import static com.alu.skyesque.models.Constants.LOCATION_ID;
-import static com.alu.skyesque.models.Constants.LOCATION_NAME;
 import static com.alu.skyesque.models.Constants.THREE_DAY_BASE_URL;
 import static com.alu.skyesque.models.Constants.WEATHER_DETAILS_TRANSFER;
 
@@ -29,7 +26,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alu.skyesque.interfaces.ForecastInterface;
-import com.alu.skyesque.models.Constants;
 import com.alu.skyesque.models.DetailedWeatherDTO;
 import com.alu.skyesque.models.WeatherDTO;
 import com.alu.skyesque.parsers.ThreeDayForecastParser;
@@ -188,7 +184,7 @@ public class WeeklyForecastActivity extends AppCompatActivity implements Forecas
     /**
      * This method hides the progress bar and displays loaded data
      */
-    private void togglePageContent(){
+    private void togglePageContent() {
         this.progressBar.setVisibility(View.GONE);
         this.pageContent.setVisibility(View.VISIBLE);
     }

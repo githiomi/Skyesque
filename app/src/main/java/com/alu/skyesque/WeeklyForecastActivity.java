@@ -149,8 +149,10 @@ public class WeeklyForecastActivity extends AppCompatActivity implements Forecas
                 bufferedReader.close();
             } catch (IOException ae) {
                 WeeklyForecastActivity.this.runOnUiThread(() -> Toast.makeText(this, "Could not get weather data. Check internet connection.", Toast.LENGTH_LONG).show());
-                toggleErrorView();
                 Log.e("Weekly Forecast URL Connection Exception", "ioexception -> " + ae.getMessage());
+
+                WeeklyForecastActivity.this.runOnUiThread(this::toggleErrorView);
+                return;
             }
 
             // Clean result to remove unnecessary tags

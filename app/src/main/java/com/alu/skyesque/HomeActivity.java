@@ -156,8 +156,10 @@ public class HomeActivity extends AppCompatActivity {
                 bufferedReader.close();
             } catch (IOException ae) {
                 HomeActivity.this.runOnUiThread(() -> Toast.makeText(this, "Could not get weather data. Check internet connection.", Toast.LENGTH_LONG).show());
-                toggleErrorView();
                 Log.e("Current Forecast URL Connection Exception", "ioexception -> " + ae.getMessage());
+
+                HomeActivity.this.runOnUiThread(this::toggleErrorView);
+                return;
             }
 
             // Clean result to remove unnecessary tags

@@ -1,9 +1,11 @@
 package com.alu.skyesque;
 
+import static android.content.ContentValues.TAG;
 import static com.alu.skyesque.models.Constants.OBSERVATION_BASE_URL;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -15,7 +17,6 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.collection.CircularArray;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -34,10 +35,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Name                 Daniel Githiomi
@@ -48,7 +46,7 @@ public class HomeActivity extends AppCompatActivity {
 
     // Local Variables
     private WeatherUnit weatherUnit;
-    private List<Location> locations = Constants.LOCATIONS;
+    private final List<Location> locations = Constants.LOCATIONS;
     private Location currentLocation;
 
     // Views
@@ -73,7 +71,6 @@ public class HomeActivity extends AppCompatActivity {
 
         // Initialize the views
         initViews();
-
         this.currentLocation = this.locations.get(0);
         this.getData(currentLocation);
 
@@ -86,6 +83,7 @@ public class HomeActivity extends AppCompatActivity {
             this.toggleLoading();
             this.goToNext();
         });
+
         this.details.setOnClickListener(v -> switchToDetails());
         this.overview.setOnClickListener(v -> switchToOverview());
     }
@@ -103,22 +101,37 @@ public class HomeActivity extends AppCompatActivity {
         this.overviewDetailsContainer = findViewById(R.id.FL_overviewDetails);
     }
 
-    private void goToPrevious(){
+    private void goToPrevious() {
         int index = getIndex() - 1 < 0 ? this.locations.size() - 1 : getIndex() - 1;
         this.currentLocation = locations.get(index);
         this.getData(currentLocation);
     }
 
-    private void goToNext(){
+    private void goToNext() {
         int index = getIndex() + 1 > this.locations.size() - 1 ? 0 : getIndex() + 1;
         this.currentLocation = locations.get(index);
         this.getData(currentLocation);
     }
 
-    private int getIndex(){
+    private int getIndex() {
         return this.locations.indexOf(this.currentLocation);
     }
 
+    public void refreshLayout() {
+        while (true) {
+            new Handler().postDelayed(() -> {
+                Log.e(TAG, "refreshLayout: IN REFRESH LAYOUT");
+                this.toggleLoading();
+                this.getData(this.currentLocation);
+            }, 5000);
+        }
+    }
+
+    /**
+     * Method definition to make a network call to retrieve data
+     *
+     * @param location the location to get the data
+     */
     private void getData(Location location) {
 
         new Thread(() -> {
@@ -222,7 +235,7 @@ public class HomeActivity extends AppCompatActivity {
     /**
      * This method will set the loading view awaiting data
      */
-    private void toggleLoading(){
+    private void toggleLoading() {
         this.loadingProgressBar.setVisibility(View.VISIBLE);
         this.pageContent.setVisibility(View.GONE);
     }

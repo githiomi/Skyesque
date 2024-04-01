@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alu.skyesque.interfaces.ForecastInterface;
+import com.alu.skyesque.models.Constants;
 import com.alu.skyesque.models.DetailedWeatherDTO;
 import com.alu.skyesque.models.WeatherDTO;
 import com.alu.skyesque.parsers.ThreeDayForecastParser;
@@ -198,7 +199,7 @@ public class WeeklyForecastActivity extends AppCompatActivity implements Forecas
     @Override
     public void setOnItemClick(int position) {
         Intent intent = new Intent(this, WeatherDetailsActivity.class);
-        intent.putExtra("toDetailsDTO", this.detailedWeatherDTOs.get(position));
+        intent.putExtra(Constants.WEATHER_DTO_TRANSFER, this.detailedWeatherDTOs.get(position));
         startActivity(intent);
     }
 }

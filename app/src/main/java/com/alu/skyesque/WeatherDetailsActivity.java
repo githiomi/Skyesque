@@ -1,10 +1,7 @@
 package com.alu.skyesque;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -14,6 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.alu.skyesque.models.Constants;
 import com.alu.skyesque.models.DetailedWeatherDTO;
 
 import java.math.BigDecimal;
@@ -45,9 +43,8 @@ public class WeatherDetailsActivity extends AppCompatActivity {
         // Bind views
         bindViews();
 
-        this.detailedWeatherDTO = getIntent().getParcelableExtra("toDetailsDTO");
+        this.detailedWeatherDTO = getIntent().getParcelableExtra(Constants.WEATHER_DTO_TRANSFER);
         assert this.detailedWeatherDTO != null;
-        Log.e("Detailed DTO", detailedWeatherDTO.toString());
         populateData(this.detailedWeatherDTO);
 
         // CLick listeners
@@ -80,7 +77,7 @@ public class WeatherDetailsActivity extends AppCompatActivity {
 
     private void populateData(DetailedWeatherDTO dto) {
 
-        this.townName.setText("Glasgow");
+        this.townName.setText(dto.getLocation());
         this.currentDate.setText(getDate(dto.getDay()));
         this.currentTemperature.setText(dto.getTemperatureCelsius());
         String minMax = dto.getMinimumTemperature() + " / " + dto.getMaximumTemperature();

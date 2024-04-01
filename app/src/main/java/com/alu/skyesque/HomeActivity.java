@@ -1,5 +1,7 @@
 package com.alu.skyesque;
 
+import static com.alu.skyesque.models.Constants.OBSERVATION_BASE_URL;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,8 +47,6 @@ import java.util.Map;
 public class HomeActivity extends AppCompatActivity {
 
     // Local Variables
-    // private final String sourceUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2643123";
-    private final String BASE_URL = "https://weather-broker-cdn.api.bbci.co.uk/en/observation/rss/";
     private WeatherUnit weatherUnit;
     private List<Location> locations = Constants.LOCATIONS;
     private Location currentLocation;
@@ -79,20 +79,15 @@ public class HomeActivity extends AppCompatActivity {
 
         this.toProfile.setOnClickListener(v -> startActivity(new Intent(this, ProfileActivity.class)));
         this.toPrevious.setOnClickListener(v -> {
-            Toast.makeText(this, "To Previous Click", Toast.LENGTH_LONG).show();
-
             this.toggleLoading();
             this.goToPrevious();
         });
         this.toNext.setOnClickListener(v -> {
-            Toast.makeText(this, "To Next Click", Toast.LENGTH_LONG).show();
-
             this.toggleLoading();
             this.goToNext();
         });
         this.details.setOnClickListener(v -> switchToDetails());
         this.overview.setOnClickListener(v -> switchToOverview());
-
     }
 
     private void initViews() {
@@ -125,7 +120,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void getData(Location location) {
-        // new Thread(new BackgroundTask(this.urlSource)).start();
+
         new Thread(() -> {
             StringBuilder result = new StringBuilder();
             URL url;
@@ -135,10 +130,7 @@ public class HomeActivity extends AppCompatActivity {
 
             try {
                 Long townId = location.getLocationId();
-                url = new URL(this.BASE_URL + townId);
-
-                Log.e("URL", "URL: " + url);
-
+                url = new URL(OBSERVATION_BASE_URL + townId);
                 urlConnection = url.openConnection();
                 bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                 while ((inputLine = bufferedReader.readLine()) != null)
@@ -165,7 +157,7 @@ public class HomeActivity extends AppCompatActivity {
 
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.FL_overviewDetails, OverviewFragment.newInstance(dto))
+                    .replace(R.id.FL_overviewDetails, OverviewFragment.newInstance(dto, currentLocation))
                     .commit();
 
             HomeActivity.this.runOnUiThread(() -> {
@@ -253,7 +245,7 @@ public class HomeActivity extends AppCompatActivity {
         this.overview.setBackground(getDrawable(R.drawable.active_tab_background));
         this.details.setBackgroundColor(getColor(R.color.transparent));
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.FL_overviewDetails, OverviewFragment.newInstance(weatherData))
+                .replace(R.id.FL_overviewDetails, OverviewFragment.newInstance(weatherData, currentLocation))
                 .commit();
     }
 }

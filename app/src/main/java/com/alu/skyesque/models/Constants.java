@@ -14,9 +14,13 @@ import java.util.List;
  */
 public class Constants {
 
-    public static final String DTO_TRANSFER = "DTO Transfer";
-    public static final String WEATHER_DETAILS = "Weather Details";
-
+    public static final String OBSERVATION_BASE_URL = "https://weather-broker-cdn.api.bbci.co.uk/en/observation/rss/";
+    public static final String THREE_DAY_BASE_URL = "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/";
+    public static final String WEATHER_DTO_TRANSFER = "Weather DTO Transfer";
+    public static final String WEATHER_LOCATION_TRANSFER = "Weather Location Transfer";
+    public static final String WEATHER_DETAILS_TRANSFER = "Weather Details Transfer";
+    public static final String LOCATION_NAME = "Location Name";
+    public static final String LOCATION_ID = "Location ID";
     public static final String MY_SHARED_PREFERENCES = "authentication";
     public static final String LOGGED_IN_SHARED_PREFERENCES = "isLoggedIn";
     public static final List<Location> LOCATIONS = new ArrayList<>(

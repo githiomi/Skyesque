@@ -6,7 +6,7 @@
     <string name="sunshine_intensity_placeholder">4 of 10</string>
     <string name="today_s_summary">Today\'s Summary</string>
     <string name="current_state_placeholder">Heavy Rainfall</string>
-    <string name="view_full_week_forecast"><u>View Full Week Forecast</u></string>
+    <string name="view_full_week_forecast"><u>View 3 Week Forecast</u></string>
     <string name="current_temperature_only_placeholder">24</string>
     <string name="degrees_celsius">°C</string>
     <string name="degrees_only">°C</string>

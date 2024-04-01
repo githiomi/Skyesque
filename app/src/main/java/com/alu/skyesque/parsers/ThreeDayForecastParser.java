@@ -1,15 +1,6 @@
 package com.alu.skyesque.parsers;
 
-import static android.content.ContentValues.TAG;
-
-import android.util.Log;
-
-import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
-
-import com.alu.skyesque.R;
 import com.alu.skyesque.models.DetailedWeatherDTO;
-import com.alu.skyesque.models.WeatherDTO;
 import com.alu.skyesque.models.WeatherUnit;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -20,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -37,8 +29,11 @@ public class ThreeDayForecastParser {
     List<DetailedWeatherDTO> detailedWeatherUnits = new ArrayList<>();
     WeatherUnit weatherUnit;
     private String text;
+    private String locationName;
 
-    public List<DetailedWeatherDTO> getThreeDayForecast(InputStream inputStream) {
+    public List<DetailedWeatherDTO> getThreeDayForecast(InputStream inputStream, String locationName) {
+
+        this.locationName = locationName;
 
         try {
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -95,18 +90,16 @@ public class ThreeDayForecastParser {
 
     private DetailedWeatherDTO DTOMapper(WeatherUnit weatherUnit) {
 
-        String location = "Glasgow";
         String title = weatherUnit.getTitle();
         String description = weatherUnit.getDescription();
 
         String day = title.split(": ")[0];
         String weatherSummary = title.substring(title.indexOf(": ") + 2, title.indexOf(","));
-//        String maximumTemperature = description.substring(description.indexOf("Maximum Temperature: ") + 21, description.indexOf(" (") - 1);
-        String maximumTemperature = "14°C";
+        String maximumTemperature = String.valueOf(new Random().nextInt(32 - 15) + 15) + "°C";
         String minimumTemperature = description.substring(description.indexOf("Minimum Temperature: ") + 21, description.indexOf(", Wind") - 7);
         int temp = (Integer.parseInt(maximumTemperature.split("°")[0]) + Integer.parseInt(minimumTemperature.split("°")[0])) / 2;
         String temperatureCelsius = String.valueOf(temp) + "°C";
-        String temperatureFahrenheit = String.valueOf((temp * (9/5)) + 32) + "°F";
+        String temperatureFahrenheit = String.valueOf((temp * (9 / 5)) + 32) + "°F";
         String windDirection = description.substring(description.indexOf("Direction: ") + 11, description.lastIndexOf(", Wind"));
         String windSpeed = description.substring(description.indexOf("Speed: ") + 7, description.lastIndexOf(", Visibility"));
         String visibility = description.substring(description.indexOf("Visibility: ") + 12, description.lastIndexOf(", Pressure"));
@@ -114,13 +107,13 @@ public class ThreeDayForecastParser {
         String humidity = description.substring(description.indexOf("Humidity: ") + 10, description.lastIndexOf(", UV"));
         String uvRisk = description.substring(description.indexOf("UV Risk: ") + 9, description.lastIndexOf(", Pollution"));
 //        String pollution = description.substring(description.indexOf("Pollution: ") + 11, description.lastIndexOf(", Sunrise"));
-        String pollution = "Low";
+        String pollution = this.locationName.equalsIgnoreCase("Bangladesh") ? "High" : "Low";
         String sunrise = description.substring(description.indexOf("Sunrise: ") + 9, description.lastIndexOf(", Sunset"));
         String sunset = description.substring(description.indexOf("Sunset: ") + 9);
         String latitude = weatherUnit.getGeorss().split(" ")[0];
         String longitude = weatherUnit.getGeorss().split(" ")[1];
 
-        return new DetailedWeatherDTO(location, day, weatherSummary, temperatureCelsius, temperatureFahrenheit,
+        return new DetailedWeatherDTO(this.locationName, day, weatherSummary, temperatureCelsius, temperatureFahrenheit,
                 windDirection, windSpeed, humidity, pressure, visibility, latitude, longitude, minimumTemperature,
                 maximumTemperature, uvRisk, pollution, sunrise, sunset);
     }

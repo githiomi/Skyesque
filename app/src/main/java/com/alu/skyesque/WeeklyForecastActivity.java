@@ -1,5 +1,11 @@
 package com.alu.skyesque;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
+
+import static com.alu.skyesque.models.Constants.LOCATION_ID;
+import static com.alu.skyesque.models.Constants.LOCATION_NAME;
+import static com.alu.skyesque.models.Constants.THREE_DAY_BASE_URL;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +28,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alu.skyesque.interfaces.ForecastInterface;
+import com.alu.skyesque.models.Constants;
 import com.alu.skyesque.models.DetailedWeatherDTO;
 import com.alu.skyesque.parsers.ThreeDayForecastParser;
 
@@ -52,13 +59,18 @@ public class WeeklyForecastActivity extends AppCompatActivity implements Forecas
     RelativeLayout heroSection;
     TextView location, temperature, summary;
     ImageView weatherVisual;
-    int[] weatherIcons = {R.drawable.cloudy, R.drawable.thunder, R.drawable.fog, R.drawable.mist, R.drawable.rain, R.drawable.snow, R.drawable.day_clear, R.drawable.night_sleet, R.drawable.day_rain, R.drawable.snow_thunder};
+
+    // Activity Properties
+    private Long locationId;
+    private String locationName;
+    int[] weatherIcons = {R.drawable.cloudy, R.drawable.thunder, R.drawable.fog, R.drawable.mist,
+            R.drawable.rain, R.drawable.snow, R.drawable.day_clear, R.drawable.night_sleet,
+            R.drawable.day_rain, R.drawable.snow_thunder};
 
     // Adapters
     WeeklyForecastAdapter weeklyForecastAdapter;
 
     // Activity Properties
-    private final String sourceUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2643123";
     private List<DetailedWeatherDTO> detailedWeatherDTOs = new ArrayList<>();
 
     @Override
@@ -72,15 +84,15 @@ public class WeeklyForecastActivity extends AppCompatActivity implements Forecas
             return insets;
         });
 
+        this.locationId = getIntent().getLongExtra(LOCATION_ID, 0L);
+        this.locationName = getIntent().getStringExtra(LOCATION_NAME);
+
         initViews();
-
         changeHeroImage();
-
         get3DayForecast();
 
         // Click listeners
         this.backArrow.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
-
     }
 
     /**
@@ -123,6 +135,8 @@ public class WeeklyForecastActivity extends AppCompatActivity implements Forecas
             BufferedReader bufferedReader;
             String inputLine;
 
+            String sourceUrl = THREE_DAY_BASE_URL + this.locationId;
+
             try {
                 url = new URL(sourceUrl);
                 urlConnection = url.openConnection();
@@ -145,7 +159,7 @@ public class WeeklyForecastActivity extends AppCompatActivity implements Forecas
 
             ThreeDayForecastParser threeDayForecastParser = new ThreeDayForecastParser();
             InputStream forecastInputStream = new ByteArrayInputStream(String.valueOf(result).getBytes());
-            this.detailedWeatherDTOs = threeDayForecastParser.getThreeDayForecast(forecastInputStream);
+            this.detailedWeatherDTOs = threeDayForecastParser.getThreeDayForecast(forecastInputStream, locationName);
 
             WeeklyForecastActivity.this.runOnUiThread(() -> {
                 this.setUpAdapter(detailedWeatherDTOs);

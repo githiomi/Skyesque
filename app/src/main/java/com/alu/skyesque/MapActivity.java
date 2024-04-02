@@ -1,19 +1,23 @@
 package com.alu.skyesque;
 
-import androidx.fragment.app.FragmentActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.fragment.app.FragmentActivity;
+
+import com.alu.skyesque.databinding.ActivityMapBinding;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.alu.skyesque.databinding.ActivityMapBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    // Views
+    BottomNavigationView bottomNavigationView;
     private GoogleMap mMap;
     private ActivityMapBinding binding;
 
@@ -24,10 +28,36 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         binding = ActivityMapBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        this.bottomNavigationView = binding.NVBottomNavigation;
+        initNavigation();
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+    }
+
+    private void initNavigation() {
+        this.bottomNavigationView.setSelectedItemId(R.id.bottom_map);
+        this.bottomNavigationView.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+
+            if (id == R.id.bottom_home) {
+                startActivity(new Intent(this, HomeActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+                return true;
+            } else if (id == R.id.bottom_map) {
+                return true;
+            } else if (id == R.id.bottom_profile) {
+                startActivity(new Intent(this, ProfileActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+                return true;
+            }
+
+            return false;
+        });
     }
 
     /**

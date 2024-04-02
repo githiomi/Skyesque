@@ -18,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.alu.skyesque.models.Constants;
 import com.alu.skyesque.models.User;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputLayout;
 
 /**
@@ -32,6 +33,7 @@ public class ProfileActivity extends AppCompatActivity {
     AppCompatButton editButton, logoutButton;
     TextInputLayout emailInputLayout, passwordInputLayout;
     TextView username, toSystemPreferences;
+    BottomNavigationView bottomNavigationView;
 
     // Activity properties
     User loggedInUser;
@@ -53,6 +55,7 @@ public class ProfileActivity extends AppCompatActivity {
         this.sharedPreferencesEditor = this.sharedPreferences.edit();
 
         bindViews();
+        initNavigation();
 
         populateUserDetails();
 
@@ -82,7 +85,7 @@ public class ProfileActivity extends AppCompatActivity {
     /**
      * Method definition to bind views
      */
-    private void bindViews(){
+    private void bindViews() {
         this.backButton = findViewById(R.id.IB_backArrow);
         this.username = findViewById(R.id.TV_username);
         this.editButton = findViewById(R.id.BTN_editDetails);
@@ -90,9 +93,33 @@ public class ProfileActivity extends AppCompatActivity {
         this.passwordInputLayout = findViewById(R.id.IL_password);
         this.toSystemPreferences = findViewById(R.id.TV_toSystemPreferences);
         this.logoutButton = findViewById(R.id.BTN_logout);
+        this.bottomNavigationView = findViewById(R.id.NV_bottomNavigation);
     }
 
-    private void populateUserDetails(){
+    private void initNavigation() {
+        this.bottomNavigationView.setSelectedItemId(R.id.bottom_profile);
+        this.bottomNavigationView.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+
+            if (id == R.id.bottom_home) {
+                startActivity(new Intent(this, HomeActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+                return true;
+            }else if (id == R.id.bottom_map) {
+                startActivity(new Intent(this, MapActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+                return true;
+            } else if (id == R.id.bottom_profile) {
+                return true;
+            }
+
+            return false;
+        });
+    }
+
+    private void populateUserDetails() {
         String username = this.sharedPreferences.getString(LOGGED_IN_USER, "");
         this.loggedInUser = username.equals("DGITH200") ? User.DGITH200 : User.ABART999;
 

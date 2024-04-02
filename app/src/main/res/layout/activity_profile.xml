@@ -36,9 +36,9 @@
         android:id="@+id/TV_activityTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/TV_name"
         android:layout_marginTop="18dp"
         android:layout_toStartOf="@id/IB_camera"
-        android:layout_below="@id/TV_name"
         android:layout_toEndOf="@id/IB_backArrow"
         android:fontFamily="@font/libre_franklin"
         android:text="@string/profile"
@@ -52,9 +52,9 @@
         android:id="@+id/IB_camera"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_below="@id/TV_name"
         android:layout_alignParentEnd="true"
         android:layout_margin="15dp"
-        android:layout_below="@id/TV_name"
         android:background="@color/transparent"
         android:clickable="true"
         android:contentDescription="@string/content_description"
@@ -63,6 +63,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@id/NV_bottomNavigation"
         android:layout_below="@id/IB_backArrow">
 
         <LinearLayout
@@ -308,5 +309,21 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/NV_bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginBottom="-65dp"
+        android:background="@drawable/bottom_navigation_background"
+        app:itemActiveIndicatorStyle="@color/transparent"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@drawable/navigation_item_selector"
+        app:itemPaddingTop="0dp"
+        app:itemRippleColor="@android:color/transparent"
+        app:labelVisibilityMode="unlabeled"
+        app:menu="@menu/bottom_navigation_menu" />
 
 </RelativeLayout>

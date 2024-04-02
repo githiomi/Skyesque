@@ -111,24 +111,23 @@ public class HomeActivity extends AppCompatActivity {
         this.bottomNavigationView = findViewById(R.id.NV_bottomNavigation);
     }
 
-    private void initNavigation(){
+    private void initNavigation() {
         this.bottomNavigationView.setSelectedItemId(R.id.bottom_home);
-
         this.bottomNavigationView.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
 
-            switch (item.getItemId()){
-                case R.id.bottom_home:
-                    return true;
-                case R.id.bottom_map:
-                    startActivity(new Intent(this, MapActivity.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
-                    return true;
-                case R.id.bottom_profile:
-                    startActivity(new Intent(this, ProfileActivity.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
-                    return true;
+            if (id == R.id.bottom_home)
+                return true;
+            else if (id == R.id.bottom_map) {
+                startActivity(new Intent(this, MapActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+                return true;
+            } else if (id == R.id.bottom_profile) {
+                startActivity(new Intent(this, ProfileActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+                return true;
             }
 
             return false;

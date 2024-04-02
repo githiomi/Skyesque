@@ -1,6 +1,5 @@
 package com.alu.skyesque;
 
-import static android.content.ContentValues.TAG;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static com.alu.skyesque.models.Constants.OBSERVATION_BASE_URL;
@@ -40,6 +39,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Name                 Daniel Githiomi
@@ -150,14 +151,24 @@ public class HomeActivity extends AppCompatActivity {
         return this.locations.indexOf(this.currentLocation);
     }
 
+    /**
+     * This is the async method to refresh the layout
+     */
     public void refreshLayout() {
-        while (true) {
-            new Handler().postDelayed(() -> {
-                Log.e(TAG, "refreshLayout: IN REFRESH LAYOUT");
-                this.toggleLoading();
-                this.getData(this.currentLocation);
-            }, 5000);
-        }
+        int delayInSeconds = 10;
+        int periodBetween = 10;
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                HomeActivity.this.runOnUiThread(() -> {
+                    toggleLoading();
+                    new Handler().postDelayed(() -> {
+                        getData(currentLocation);
+                    }, 2000);
+                    Toast.makeText(getApplicationContext(), "Refreshing. Please wait...", Toast.LENGTH_SHORT).show();
+                });
+            }
+        }, delayInSeconds * 1000, periodBetween * 1000);//put here time 1000 milliseconds=1 second
     }
 
     /**
@@ -253,6 +264,7 @@ public class HomeActivity extends AppCompatActivity {
         this.currentDate.setText(date);
 
         this.togglePageContent();
+        this.refreshLayout();
     }
 
     private String getDate() {

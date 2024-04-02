@@ -70,7 +70,7 @@ public class AuthenticationActivity extends AppCompatActivity {
             else if (username.isEmpty())
                 this.usernameInputLayout.setError("This is a required field.");
             else if (username.startsWith("d") || username.startsWith("a"))
-                this.usernameInputLayout.setError("Usernames must be in upper case.");
+                this.usernameInputLayout.setError("Username must be in upper case.");
             else {
                 this.usernameInputLayout.setError("This username does not exist");
                 Toast.makeText(this, "Invalid Credentials. Try again.", Toast.LENGTH_SHORT).show();

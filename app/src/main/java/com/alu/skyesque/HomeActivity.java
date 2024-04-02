@@ -54,6 +54,8 @@ public class HomeActivity extends AppCompatActivity {
     private final List<Location> locations = Constants.LOCATIONS;
     private Location currentLocation;
     WeatherDTO weatherData;
+    Thread dataThread;
+    Timer refreshTimer;
 
     // Views
     LottieAnimationView errorAnimation;
@@ -81,7 +83,8 @@ public class HomeActivity extends AppCompatActivity {
         initViews();
         initNavigation();
         this.currentLocation = this.locations.get(0);
-        this.getData(currentLocation);
+        this.dataThread = createDataThread();
+        this.dataThread.start();
 
         this.toProfile.setOnClickListener(v -> startActivity(new Intent(this, ProfileActivity.class)));
         this.toPrevious.setOnClickListener(v -> {
@@ -138,13 +141,13 @@ public class HomeActivity extends AppCompatActivity {
     private void goToPrevious() {
         int index = getIndex() - 1 < 0 ? this.locations.size() - 1 : getIndex() - 1;
         this.currentLocation = locations.get(index);
-        this.getData(currentLocation);
+        this.dataThread.start();
     }
 
     private void goToNext() {
         int index = getIndex() + 1 > this.locations.size() - 1 ? 0 : getIndex() + 1;
         this.currentLocation = locations.get(index);
-        this.getData(currentLocation);
+        this.dataThread.start();
     }
 
     private int getIndex() {
@@ -157,28 +160,36 @@ public class HomeActivity extends AppCompatActivity {
     public void refreshLayout() {
         int delayInSeconds = 10;
         int periodBetween = 10;
-        new Timer().scheduleAtFixedRate(new TimerTask() {
+        this.refreshTimer = new Timer();
+        this.refreshTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 HomeActivity.this.runOnUiThread(() -> {
                     toggleLoading();
-                    new Handler().postDelayed(() -> {
-                        getData(currentLocation);
-                    }, 2000);
-                    Toast.makeText(getApplicationContext(), "Refreshing. Please wait...", Toast.LENGTH_SHORT).show();
+                    startDataThread();
                 });
             }
         }, delayInSeconds * 1000, periodBetween * 1000);//put here time 1000 milliseconds=1 second
     }
 
-    /**
-     * Method definition to make a network call to retrieve data
-     *
-     * @param location the location to get the data
-     */
-    private void getData(Location location) {
+    private void startDataThread() {
+        if (this.dataThread != null) {
+            Toast.makeText(getApplicationContext(), "Refreshing. Please wait...", Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(() -> {
+                this.dataThread = createDataThread();
+                this.dataThread.start();
+            }, 2000);
+        }
 
-        new Thread(() -> {
+    }
+
+    /**
+     * Method definition to create the data retrieve thread
+     *
+     * @return the new data retrieve thread
+     */
+    private Thread createDataThread() {
+        return new Thread(() -> {
             StringBuilder result = new StringBuilder();
             URL url;
             URLConnection urlConnection;
@@ -186,7 +197,7 @@ public class HomeActivity extends AppCompatActivity {
             String inputLine;
 
             try {
-                Long townId = location.getLocationId();
+                Long townId = this.currentLocation.getLocationId();
                 url = new URL(OBSERVATION_BASE_URL + townId);
                 urlConnection = url.openConnection();
                 bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
@@ -213,7 +224,7 @@ public class HomeActivity extends AppCompatActivity {
             InputStream latestInputStream = new ByteArrayInputStream(String.valueOf(result).getBytes());
             weatherUnit = latestObservationParser.getWeatherUnit(latestInputStream);
 
-            WeatherDTO dto = HomeActivity.this.populateWeatherDTO(weatherUnit, location.getLocationName());
+            WeatherDTO dto = HomeActivity.this.populateWeatherDTO(weatherUnit, this.currentLocation.getLocationName());
 
             getSupportFragmentManager()
                     .beginTransaction()
@@ -225,13 +236,13 @@ public class HomeActivity extends AppCompatActivity {
                 this.displayData();
             });
 
-        }).start();
+        });
     }
 
     /**
      * Method to get data from response into usable DTO format
      *
-     * @param weatherUnit
+     * @param weatherUnit the weather object containing data
      * @return a weather data DTO object
      */
     private WeatherDTO populateWeatherDTO(WeatherUnit weatherUnit, String townName) {
@@ -316,5 +327,14 @@ public class HomeActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.FL_overviewDetails, OverviewFragment.newInstance(weatherData, currentLocation))
                 .commit();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        this.dataThread.interrupt();
+        this.dataThread = null;
+        this.refreshTimer.cancel();
+        this.refreshTimer = null;
     }
 }

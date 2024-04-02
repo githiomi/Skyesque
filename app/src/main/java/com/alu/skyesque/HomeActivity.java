@@ -29,6 +29,7 @@ import com.alu.skyesque.models.Location;
 import com.alu.skyesque.models.WeatherDTO;
 import com.alu.skyesque.models.WeatherUnit;
 import com.alu.skyesque.parsers.LatestObservationParser;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -51,6 +52,7 @@ public class HomeActivity extends AppCompatActivity {
     private WeatherUnit weatherUnit;
     private final List<Location> locations = Constants.LOCATIONS;
     private Location currentLocation;
+    WeatherDTO weatherData;
 
     // Views
     LottieAnimationView errorAnimation;
@@ -59,7 +61,8 @@ public class HomeActivity extends AppCompatActivity {
     ImageButton toProfile, toPrevious, toNext;
     TextView townName, currentDate, overview, details;
     FrameLayout overviewDetailsContainer;
-    WeatherDTO weatherData;
+    BottomNavigationView bottomNavigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +78,7 @@ public class HomeActivity extends AppCompatActivity {
 
         // Initialize the views
         initViews();
+        initNavigation();
         this.currentLocation = this.locations.get(0);
         this.getData(currentLocation);
 
@@ -104,6 +108,31 @@ public class HomeActivity extends AppCompatActivity {
         this.overview = findViewById(R.id.TV_overview);
         this.details = findViewById(R.id.TV_details);
         this.overviewDetailsContainer = findViewById(R.id.FL_overviewDetails);
+        this.bottomNavigationView = findViewById(R.id.NV_bottomNavigation);
+    }
+
+    private void initNavigation(){
+        this.bottomNavigationView.setSelectedItemId(R.id.bottom_home);
+
+        this.bottomNavigationView.setOnItemSelectedListener(item -> {
+
+            switch (item.getItemId()){
+                case R.id.bottom_home:
+                    return true;
+                case R.id.bottom_map:
+                    startActivity(new Intent(this, MapActivity.class));
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    finish();
+                    return true;
+                case R.id.bottom_profile:
+                    startActivity(new Intent(this, ProfileActivity.class));
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    finish();
+                    return true;
+            }
+
+            return false;
+        });
     }
 
     private void goToPrevious() {

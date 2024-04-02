@@ -44,4 +44,6 @@
     <string name="password">Password</string>
     <string name="weather_details">Weather Details</string>
     <string name="gcu_credentials">Daniel Githiomi - S2110911</string>
+    <string name="home">Home</string>
+    <string name="map">Map</string>
 </resources>

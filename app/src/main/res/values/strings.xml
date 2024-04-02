@@ -54,4 +54,7 @@
     <string name="weather_details">Weather Details</string>
     <string name="gcu_credentials">Daniel Githiomi - S2110911</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="home">Home</string>
+    <string name="map">Map</string>
+    <string name="title_activity_map">MapActivity</string>
 </resources>

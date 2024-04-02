@@ -5,6 +5,20 @@
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
 
-    <style name="Theme.Skyesque" parent="Base.Theme.Skyesque" />
+    <style name="Theme.Skyesque" parent="Base.Theme.Skyesque">
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
+    </style>
+
+    <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
+    </style>
+
+    <style name="BrandedSwitch.control" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/light_blue_gradient</item>
+        <item name="colorSwitchThumbNormal">@color/light_blue_card_background</item>
+    </style>
 
 </resources>

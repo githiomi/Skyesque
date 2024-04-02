@@ -14,6 +14,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
     // Views
@@ -74,8 +81,16 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(-34, 151)).title("Sydney, Australia Marker"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(-20, 57.5)).title("Port Louis, Mauritius Marker"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(-3, 37.4)).title("Mount Kilimanjaro, Tanzania Marker"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(0.16, 37)).title("Nairobi, Kenya Marker"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(-23, 21)).title("Kalahari Desert, Botswana Marker"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(27, 78)).title("Taj, Mahal, India Marker"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(40, 116.6)).title("Beijing, China Marker"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(-22, -43)).title("Rio de Janeiro, Brazil Marker"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(41, 12)).title("Rome, Italy Marker"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(29,31)).title("Cairo, Egypt Marker"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(-20, 57.5)));
     }
 }

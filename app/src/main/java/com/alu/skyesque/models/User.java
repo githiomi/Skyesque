@@ -10,8 +10,9 @@ package com.alu.skyesque.models;
  */
 public enum User {
 
-    DGITH200("DGITH200", "Daniel", "Githiomi", "Student", "daniel123", "dgithi200@caledonian.ac.uk"),
-    ABART999("ABART999", "Allan", "Bartolome", "Faculty", "allan321", "abart999@caledonian.ac.uk");
+    ABART999("ABART999", "Allan", "Bartolome", "Faculty", "allan321", "abart999@caledonian.ac.uk"),
+    GBOBB543("GBOBB543", "GCU", "Bobby", "Faculty", "bobby543", "gbobb@caledonian.ac.uk"),
+    DGITH200("DGITH200", "Daniel", "Githiomi", "Student", "daniel123", "dgithi200@caledonian.ac.uk");
 
     private String username;
     private String firstName;

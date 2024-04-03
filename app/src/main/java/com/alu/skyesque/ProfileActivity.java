@@ -121,7 +121,13 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void populateUserDetails() {
         String username = this.sharedPreferences.getString(LOGGED_IN_USER, "");
-        this.loggedInUser = username.equals("DGITH200") ? User.DGITH200 : User.ABART999;
+
+        if (username.equals("DGITH200"))
+            this.loggedInUser = User.DGITH200;
+        else if (username.equals("ABART999"))
+            this.loggedInUser = User.ABART999;
+        else if (username.equals("GBOBB543"))
+            this.loggedInUser = User.GBOBB543;
 
         String fullName = this.loggedInUser.getFirstName() + "\n" + this.loggedInUser.getLastName();
         this.username.setText(fullName);

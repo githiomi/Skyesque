@@ -67,6 +67,8 @@ public class AuthenticationActivity extends AppCompatActivity {
                 checkPassword(User.ABART999, password);
             else if (username.equals("DGITH200"))
                 checkPassword(User.DGITH200, password);
+            else if (username.equals("GBOBB543"))
+                checkPassword(User.GBOBB543, password);
             else if (username.isEmpty())
                 this.usernameInputLayout.setError("This is a required field.");
             else if (username.startsWith("d") || username.startsWith("a"))

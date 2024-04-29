@@ -32,6 +32,7 @@ import com.alu.skyesque.models.Constants;
 import com.alu.skyesque.models.DetailedWeatherDTO;
 import com.alu.skyesque.models.WeatherDTO;
 import com.alu.skyesque.parsers.ThreeDayForecastParser;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -61,6 +62,7 @@ public class WeeklyForecastActivity extends AppCompatActivity implements Forecas
     RelativeLayout heroSection;
     TextView location, temperature, summary;
     ImageView weatherVisual;
+    BottomNavigationView bottomNavigationView;
 
     // Activity Properties
     private WeatherDTO weatherData;
@@ -90,6 +92,7 @@ public class WeeklyForecastActivity extends AppCompatActivity implements Forecas
         this.locationId = getIntent().getLongExtra(LOCATION_ID, 0L);
 
         initViews();
+        initNavigation();
         changeHeroImage();
         get3DayForecast();
 
@@ -123,6 +126,32 @@ public class WeeklyForecastActivity extends AppCompatActivity implements Forecas
         this.weatherVisual = findViewById(R.id.IV_currentWeather);
         this.summary = findViewById(R.id.TV_weatherSummary);
         this.weeklyForecastRecyclerView = findViewById(R.id.RV_weeklyForecast);
+        this.bottomNavigationView = findViewById(R.id.NV_bottomNavigation);
+    }
+
+    private void initNavigation() {
+        this.bottomNavigationView.setSelectedItemId(R.id.bottom_home);
+        this.bottomNavigationView.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+
+            if (id == R.id.bottom_home) {
+                startActivity(new Intent(this, HomeActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+                return true;
+            } else if (id == R.id.bottom_map) {
+                startActivity(new Intent(this, MapActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+                return true;
+            } else if (id == R.id.bottom_profile) {
+                startActivity(new Intent(this, ProfileActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+                return true;
+            }
+            return false;
+        });
     }
 
     /**

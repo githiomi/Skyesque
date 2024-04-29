@@ -73,6 +73,7 @@ public class OverviewFragment extends Fragment {
             forecastIntent.putExtra(WEATHER_DETAILS_TRANSFER, weatherData);
             forecastIntent.putExtra(LOCATION_ID, locationId);
             requireActivity().startActivity(forecastIntent);
+            requireActivity().finish();
         });
 
         return view;

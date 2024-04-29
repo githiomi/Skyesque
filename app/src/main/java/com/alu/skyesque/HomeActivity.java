@@ -335,9 +335,11 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        this.dataThread.interrupt();
-        this.dataThread = null;
-        this.refreshTimer.cancel();
-        this.refreshTimer = null;
+        if (this.dataThread != null || this.refreshTimer != null) {
+            this.dataThread.interrupt();
+            this.dataThread = null;
+            this.refreshTimer.cancel();
+            this.refreshTimer = null;
+        }
     }
 }

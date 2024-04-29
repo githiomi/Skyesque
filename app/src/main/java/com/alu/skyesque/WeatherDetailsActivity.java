@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.alu.skyesque.models.Constants;
 import com.alu.skyesque.models.DetailedWeatherDTO;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -26,6 +27,7 @@ public class WeatherDetailsActivity extends AppCompatActivity {
 
     // Views
     ImageButton backButton;
+    BottomNavigationView bottomNavigationView;
     TextView townName, pinLocation, currentDate, currentTemperature, minMaxTemperature, currentState,
             windSpeedSummary, humiditySummary, pressureSummary, windDirection, uvIndex, rainfall, visibility;
 
@@ -45,6 +47,7 @@ public class WeatherDetailsActivity extends AppCompatActivity {
 
         // Bind views
         bindViews();
+        initNavigation();
 
         this.detailedWeatherDTO = getIntent().getParcelableExtra(Constants.WEATHER_DTO_TRANSFER);
         assert this.detailedWeatherDTO != null;
@@ -76,6 +79,32 @@ public class WeatherDetailsActivity extends AppCompatActivity {
         this.uvIndex = findViewById(R.id.TV_uvIndexDesc);
         this.rainfall = findViewById(R.id.TV_rainfallDesc);
         this.visibility = findViewById(R.id.TV_visibilityDesc);
+        this.bottomNavigationView = findViewById(R.id.NV_bottomNavigation);
+    }
+
+    private void initNavigation() {
+        this.bottomNavigationView.setSelectedItemId(R.id.bottom_home);
+        this.bottomNavigationView.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+
+            if (id == R.id.bottom_home) {
+                startActivity(new Intent(this, HomeActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+                return true;
+            } else if (id == R.id.bottom_map) {
+                startActivity(new Intent(this, MapActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+                return true;
+            } else if (id == R.id.bottom_profile) {
+                startActivity(new Intent(this, ProfileActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
+                return true;
+            }
+            return false;
+        });
     }
 
     private void populateData(DetailedWeatherDTO dto) {

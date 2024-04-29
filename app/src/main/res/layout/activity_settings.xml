@@ -2,7 +2,8 @@
 <!--Name                 Daniel Githiomi-->
 <!--Student ID           S2110911-->
 <!--Programme of Study   Computing - ALU Mauritius-->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -22,6 +23,7 @@
         android:textSize="12sp" />
 
     <RelativeLayout
+        android:id="@+id/topNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
@@ -55,7 +57,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="15dp">
+        android:layout_above="@id/NV_bottomNavigation"
+        android:layout_below="@id/topNavigation"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginBottom="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -560,4 +565,20 @@
 
     </ScrollView>
 
-</LinearLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/NV_bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginBottom="-65dp"
+        android:background="@drawable/bottom_navigation_background"
+        app:itemActiveIndicatorStyle="@color/transparent"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@drawable/navigation_item_selector"
+        app:itemPaddingTop="0dp"
+        app:itemRippleColor="@android:color/transparent"
+        app:labelVisibilityMode="unlabeled"
+        app:menu="@menu/bottom_navigation_menu" />
+
+</RelativeLayout>

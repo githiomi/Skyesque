@@ -41,6 +41,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Name                 Daniel Githiomi
@@ -66,7 +68,6 @@ public class HomeActivity extends AppCompatActivity {
     FrameLayout overviewDetailsContainer;
     BottomNavigationView bottomNavigationView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,10 +83,13 @@ public class HomeActivity extends AppCompatActivity {
         // Initialize the views
         initViews();
         initNavigation();
+
         this.currentLocation = this.locations.get(0);
         this.dataThread = createDataThread();
         this.dataThread.start();
+        this.refreshLayout();
 
+        // On Click Listeners
         this.toProfile.setOnClickListener(v -> startActivity(new Intent(this, ProfileActivity.class)));
         this.toPrevious.setOnClickListener(v -> {
             this.toggleLoading();
@@ -95,7 +99,6 @@ public class HomeActivity extends AppCompatActivity {
             this.toggleLoading();
             this.goToNext();
         });
-
         this.details.setOnClickListener(v -> switchToDetails());
         this.overview.setOnClickListener(v -> switchToOverview());
     }
@@ -133,7 +136,6 @@ public class HomeActivity extends AppCompatActivity {
                 finish();
                 return true;
             }
-
             return false;
         });
     }
@@ -141,12 +143,14 @@ public class HomeActivity extends AppCompatActivity {
     private void goToPrevious() {
         int index = getIndex() - 1 < 0 ? this.locations.size() - 1 : getIndex() - 1;
         this.currentLocation = locations.get(index);
+        this.dataThread = createDataThread();
         this.dataThread.start();
     }
 
     private void goToNext() {
         int index = getIndex() + 1 > this.locations.size() - 1 ? 0 : getIndex() + 1;
         this.currentLocation = locations.get(index);
+        this.dataThread = createDataThread();
         this.dataThread.start();
     }
 
@@ -158,13 +162,14 @@ public class HomeActivity extends AppCompatActivity {
      * This is the async method to refresh the layout
      */
     public void refreshLayout() {
-        int delayInSeconds = 10;
+        int delayInSeconds = 20;
         int periodBetween = 10;
         this.refreshTimer = new Timer();
         this.refreshTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 HomeActivity.this.runOnUiThread(() -> {
+                    System.out.println("Run function execute");
                     toggleLoading();
                     startDataThread();
                 });
@@ -180,7 +185,6 @@ public class HomeActivity extends AppCompatActivity {
                 this.dataThread.start();
             }, 2000);
         }
-
     }
 
     /**
@@ -275,7 +279,6 @@ public class HomeActivity extends AppCompatActivity {
         this.currentDate.setText(date);
 
         this.togglePageContent();
-        this.refreshLayout();
     }
 
     private String getDate() {
@@ -330,8 +333,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
         this.dataThread.interrupt();
         this.dataThread = null;
         this.refreshTimer.cancel();

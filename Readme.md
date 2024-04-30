@@ -62,7 +62,7 @@ __Slow internet connection can result in faulty rendering of animations__
 * Open the folder in your favourite editor, for example Android Studio, using the following syntax.
 * Set up a virtual device with __minimum API Level 24__
 * Enjoy the __SKYESQUE__ application.
-* Alternatively download and install the [.apk](app/skyesque.apk) file directly on your mobile device.
+* Alternatively download and install the [.apk](skyesque.apk) file directly on your mobile device.
 
 ## SUPPORT AND CONTACT INFORMATION
 

@@ -35,13 +35,13 @@ Valid login credentials:
 
 ## MINIMUM SYSTEM REQUIREMENTS
 
-* API 29 and above
+* API 24 and above
 * 4GB RAM or Higher
 * 16GB Internal storage or higher
 
 ## COMPATIBILITY
 
-Compatible with all Android mobile phone that meet the __minimum API level 29__ requirement.
+Compatible with all Android mobile phone that meet the __minimum API level 24__ requirement.
 
 ## TECHNOLOGIES USED
 
@@ -60,7 +60,7 @@ __Slow internet connection can result in faulty rendering of animations__
 
 * Git clone [this](https://www.github.com/skyesque) into your terminal.
 * Open the folder in your favourite editor, for example Android Studio, using the following syntax.
-* Set up a virtual device with __minimum API Level 29__
+* Set up a virtual device with __minimum API Level 24__
 * Enjoy the __SKYESQUE__ application.
 * Alternatively download and install the [.apk](app/skyesque.apk) file directly on your mobile device.
 

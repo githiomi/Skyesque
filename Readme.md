@@ -8,13 +8,16 @@ as possible.
 
 ## Authentication
 
-This application has been designed to be used as an internal application for Glasgow Caledonian University (GCU) students and staff.
+This application has been designed to be used as an internal application for Glasgow Caledonian
+University (GCU) students and staff.
 
-As such, it is required that to use the application, one must log in using their GCU credentials - __username__ and __password__
+As such, it is required that to use the application, one must log in using their GCU credentials - _
+_username__ and __password__
 
-Valid credentials:
+Valid login credentials:
 
 | Username  | Password  |
 |-----------|-----------|
 | DGITHI200 | daniel123 |
+| GBOBB543  | bobby543  |
 | ABART123  | allan321  |

@@ -60,7 +60,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         // Click Listeners
         this.loginButton.setOnClickListener(v -> {
 
-            String username = String.valueOf(this.usernameInputLayout.getEditText().getText());
+            String username = String.valueOf(this.usernameInputLayout.getEditText().getText()).toUpperCase();
             String password = String.valueOf(this.passwordInputLayout.getEditText().getText());
 
             if (username.equals("ABART999"))
@@ -71,8 +71,6 @@ public class AuthenticationActivity extends AppCompatActivity {
                 checkPassword(User.GBOBB543, password);
             else if (username.isEmpty())
                 this.usernameInputLayout.setError("This is a required field.");
-            else if (username.startsWith("d") || username.startsWith("a"))
-                this.usernameInputLayout.setError("Username must be in upper case.");
             else {
                 this.usernameInputLayout.setError("This username does not exist");
                 Toast.makeText(this, "Invalid Credentials. Try again.", Toast.LENGTH_SHORT).show();
